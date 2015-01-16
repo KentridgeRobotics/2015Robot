@@ -1,5 +1,8 @@
 package org.usfirst.frc.team3786.robot.commands;
 
+import org.usfirst.frc.team3786.robot.config.robot.RobotConfig;
+
+import sun.security.krb5.Config;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class LoadingCommand extends Command {
@@ -10,6 +13,7 @@ public class LoadingCommand extends Command {
 	}
 
 	protected void execute() {
+		
 		// TODO Auto-generated method stub
 
 	}
