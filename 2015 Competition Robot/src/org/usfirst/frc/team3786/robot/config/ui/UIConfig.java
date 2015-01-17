@@ -8,7 +8,7 @@ package org.usfirst.frc.team3786.robot.config.ui;
  *
  */
 public abstract class UIConfig {
-
+	
 	/**
 	 * Single location to change UIConfig type
 	 */
@@ -27,9 +27,12 @@ public abstract class UIConfig {
 		return instance;
 	}
 	
+	/**
+	 * @return The value to use for the Y component of driving
+	 */
 	public abstract double getDriveYValue();
 	public abstract double getDriveXValue();
-	public abstract double getDriveRotatValue();
+	public abstract double getDriveRotateValue();
 	
 	public abstract boolean getSnapCWButton();
 	public abstract boolean getSnapCCWButton();

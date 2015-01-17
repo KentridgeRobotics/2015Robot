@@ -1,12 +1,7 @@
 package org.usfirst.frc.team3786.robot.config.ui;
 
-public class CyborgUI extends UIConfig {
+public class GamePadUI extends UIConfig {
 
-	public CyborgUI()
-	{
-		
-	}
-	
 	@Override
 	public double getDriveYValue() {
 		// TODO Auto-generated method stub
@@ -67,5 +62,4 @@ public class CyborgUI extends UIConfig {
 		return false;
 	}
 
-	
 }

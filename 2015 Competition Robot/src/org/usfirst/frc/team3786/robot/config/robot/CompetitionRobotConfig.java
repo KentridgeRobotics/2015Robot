@@ -31,12 +31,70 @@ public class CompetitionRobotConfig extends RobotConfig {
 	
 	public CompetitionRobotConfig()
 	{
-		super(FRONT_RIGHT_MOTOR_CHANNEL, FRONT_LEFT_MOTOR_CHANNEL, 
-				BACK_RIGHT_MOTOR_CHANNEL, BACK_LEFT_MOTOR_CHANNEL,
-				ARM_MOTOR_CHANNEL, LIFTER_MOTOR_CHANNEL,
-				CHUTE_MOTOR_CHANNEL, POTENTIOMETER_CHANNEL,
-				X_OMNI_WHEEL_ENCODER, Y_OMNI_WHEEL_ENCODER,
-				LIFTER_ENCODER_CHANNEL, LASER,
-				FEED_SIGNAL_LIGHT);
+	}
+
+	@Override
+	public int getFRONT_RIGHT_MOTOR_CHANNEL() {
+		return FRONT_RIGHT_MOTOR_CHANNEL;
+	}
+
+	@Override
+	public int getFRONT_LEFT_MOTOR_CHANNEL() {
+		return FRONT_LEFT_MOTOR_CHANNEL;
+	}
+
+	@Override
+	public int getBACK_RIGHT_MOTOR_CHANNEL() {
+		return BACK_RIGHT_MOTOR_CHANNEL;
+	}
+
+	@Override
+	public int getBACK_LEFT_MOTOR_CHANNEL() {
+		return BACK_LEFT_MOTOR_CHANNEL;
+	}
+
+	@Override
+	public int getARM_MOTOR_CHANNEL() {
+		return ARM_MOTOR_CHANNEL;
+	}
+
+	@Override
+	public int getLIFTER_MOTOR_CHANNEL() {
+		return LIFTER_MOTOR_CHANNEL;
+	}
+
+	@Override
+	public int getCHUTE_MOTOR_CHANNEL() {
+		return CHUTE_MOTOR_CHANNEL;
+	}
+
+	@Override
+	public int getPOTENTIOMETER_CHANNEL() {
+		return POTENTIOMETER_CHANNEL;
+	}
+
+	@Override
+	public int getX_OMNI_WHEEL_ENCODER() {
+		return X_OMNI_WHEEL_ENCODER;
+	}
+
+	@Override
+	public int getY_OMNI_WHEEL_ENCODER() {
+		return Y_OMNI_WHEEL_ENCODER;
+	}
+
+	@Override
+	public int getLIFTER_ENCODER_CHANNEL() {
+		return LIFTER_ENCODER_CHANNEL;
+	}
+
+	@Override
+	public int getLASER() {
+		return LASER;
+	}
+
+	@Override
+	public int getFEED_SIGNAL_LIGHT() {
+		return FEED_SIGNAL_LIGHT;
 	}
 }
