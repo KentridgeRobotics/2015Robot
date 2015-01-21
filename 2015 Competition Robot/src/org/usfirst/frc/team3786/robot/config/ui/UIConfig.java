@@ -27,19 +27,49 @@ public abstract class UIConfig {
 		return instance;
 	}
 	
+	/**
+	 * @return The magnitude in the Y direction that the robot should move. [-1.0, 1.0]
+	 */
 	public abstract double getDriveYValue();
+	/**
+	 * @return The magnitude in the X direction that the robot should move. [-1.0,1.0]
+	 */
 	public abstract double getDriveXValue();
-	public abstract double getDriveRotatValue();
+	/**
+	 * @return The speed at which the robot should rotate. [-1.0, 1.0]
+	 */
+	public abstract double getDriveRotateValue();
 	
+	/**
+	 * @return If the robot should snap to the next CW right angle.
+	 */
 	public abstract boolean getSnapCWButton();
+	/**
+	 * @return If the robot should snap to the next CW right angle.
+	 */
 	public abstract boolean getSnapCCWButton();
 	
+	/**
+	 * @return The angle to which the robot should rotate and maintain in degrees.
+	 */
 	public abstract double getAngleToRotateTo();
 	
+	/**
+	 * @return If the arm should move to zero.
+	 */
 	public abstract boolean getArmToZeroButton();
 	
+	/**
+	 * @return If the robot should drop the stack.
+	 */
 	public abstract boolean getDropStackButton();
 	
+	/**
+	 * @return If the lifter should move up.
+	 */
 	public abstract boolean getLifterUpButton();
+	/**
+	 * @return If the lifter should move down.
+	 */
 	public abstract boolean getLifterDownButton();
 }
