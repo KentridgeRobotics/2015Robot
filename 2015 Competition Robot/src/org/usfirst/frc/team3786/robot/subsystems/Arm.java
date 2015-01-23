@@ -24,7 +24,9 @@ public class Arm extends Subsystem {
 		armMotor.enableControl();
 	}
 	
-	
+	/**
+	 * @return The singleton instance of the Arm
+	 */
 	public static Arm getInstance()
 	{
 		if (instance == null)
@@ -35,6 +37,9 @@ public class Arm extends Subsystem {
 		return instance;
 	}
 
+	/**
+	 * @param speed The speed at which to drive the arm on a scale of [-1.0, 1.0]
+	 */
 	public void moveArm(double speed)
 	{
 		armMotor.set(speed);

@@ -36,7 +36,9 @@ public class Wheels extends Subsystem {
 		backRight.enableControl();
 	}
 	
-	
+	/**
+	 * @return The singleton instance of the Wheels
+	 */
 	public static Wheels getInstance()
 	{
 		if (instance == null)
@@ -47,21 +49,33 @@ public class Wheels extends Subsystem {
 		return instance;
 	}
 	
+	/**
+	 * @param factor The speed, on a scale of [-1.0, 1.0], to run the front left motor
+	 */
 	public void setFrontLeft(double factor)
 	{
 		frontLeft.set(factor);
 	}
 	
+	/**
+	 * @param factor The speed, on a scale of [-1.0, 1.0], to run the front right motor
+	 */
 	public void setFrontRight(double factor)
 	{
 		frontRight.set(factor);
 	}
 	
+	/**
+	 * @param factor The speed, on a scale of [-1.0, 1.0], to run the back left motor
+	 */
 	public void setBackLeft(double factor)
 	{
 		backLeft.set(factor);
 	}
 	
+	/**
+	 * @param factor The speed, on a scale of [-1.0, 1.0], to run the back right motor
+	 */
 	public void setBackRight(double factor)
 	{
 		backRight.set(factor);

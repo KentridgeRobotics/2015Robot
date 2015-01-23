@@ -1,0 +1,47 @@
+package org.usfirst.frc.team3786.robot.commands.auto;
+
+import org.usfirst.frc.team3786.robot.commands.DropTotesCommand;
+import org.usfirst.frc.team3786.robot.subsystems.Arm;
+import org.usfirst.frc.team3786.robot.subsystems.Wheels;
+
+import edu.wpi.first.wpilibj.command.CommandGroup;
+
+/**
+ *
+ */
+public class AutonomousCommandGroup extends CommandGroup {
+    
+    public  AutonomousCommandGroup() {
+    	
+        // Add Commands here:
+        // e.g. addSequential(new Command1());
+        //      addSequential(new Command2());
+        // these will run in order.
+    	
+    	addParallel(new LiftToteCommand());
+    	
+    	addSequential(new DriveToNextToteCommand());
+    	addParallel(new LiftToteCommand());
+    	
+    	addSequential(new DriveToNextToteCommand());
+    	addParallel(new LiftToteCommand());
+    	
+    	addSequential(new DriveBackwardsCommand());
+    	addParallel(new DropTotesCommand());
+    	
+    	addSequential(new DriveBackwardsCommand());
+    	
+
+        // To run multiple commands at the same time,
+        // use addParallel()
+        // e.g. addParallel(new Command1());
+        //      addSequential(new Command2());
+        // Command1 and Command2 will run in parallel.
+
+        // A command group will require all of the subsystems that each member
+        // would require.
+        // e.g. if Command1 requires chassis, and Command2 requires arm,
+        // a CommandGroup containing them would require both the chassis and the
+        // arm.
+    }
+}

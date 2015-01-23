@@ -19,11 +19,14 @@ public class Lifter extends Subsystem {
 	{
 		lifterMotor = new CANJaguar(RobotConfig.get().getLIFTER_MOTOR_CHANNEL());
 		
-		lifterMotor.setPercentMode();
+		lifterMotor.setPositionMode(CANJaguar.kQuadEncoder, 360, RobotConfig.get().getLIFTER_P(), RobotConfig.get().getLIFTER_I(), RobotConfig.get().getLIFTER_D());
 		
 		lifterMotor.enableControl();
 	}
 	
+	/**
+	 * @return The singleton instance of the Lifter
+	 */
 	public static Lifter getInstance()
 	{
 		if (instance == null)
@@ -34,9 +37,21 @@ public class Lifter extends Subsystem {
 		return instance;
 	}
 	
-	public void moveLifter(double speed)
+	/**
+	 * Moves the lifter to a given position
+	 * @param position The position, in rotations, to move to.
+	 */
+	public void moveToPosition(double position)
 	{
-		lifterMotor.set(speed);
+		lifterMotor.set(position);
+	}
+	
+	/**
+	 * @return The current position of the lifter
+	 */
+	public double getPosition()
+	{
+		return lifterMotor.get();
 	}
 
     public void initDefaultCommand() {
