@@ -24,6 +24,16 @@ public class Wheels extends Subsystem {
 		frontRight = new CANJaguar(RobotConfig.get().getFRONT_RIGHT_MOTOR_CHANNEL());
 		backLeft = new CANJaguar(RobotConfig.get().getBACK_LEFT_MOTOR_CHANNEL());
 		backRight = new CANJaguar(RobotConfig.get().getBACK_RIGHT_MOTOR_CHANNEL());
+		
+		frontLeft.setPercentMode();
+		frontRight.setPercentMode();
+		backLeft.setPercentMode();
+		backRight.setPercentMode();
+		
+		frontLeft.enableControl();
+		frontRight.enableControl();
+		backLeft.enableControl();
+		backRight.enableControl();
 	}
 	
 	
