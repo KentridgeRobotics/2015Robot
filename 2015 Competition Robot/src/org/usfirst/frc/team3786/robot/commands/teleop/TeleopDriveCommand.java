@@ -20,7 +20,7 @@ public class TeleopDriveCommand extends Command {
 	}
 
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
+		//Teleop commands are never done
 		return false;
 	}
 

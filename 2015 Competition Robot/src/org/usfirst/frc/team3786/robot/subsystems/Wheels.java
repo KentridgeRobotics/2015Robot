@@ -52,7 +52,7 @@ public class Wheels extends Subsystem {
 	/**
 	 * @param factor The speed, on a scale of [-1.0, 1.0], to run the front left motor
 	 */
-	public void setFrontLeft(double factor)
+	private void setFrontLeft(double factor)
 	{
 		frontLeft.set(factor);
 	}
@@ -60,7 +60,7 @@ public class Wheels extends Subsystem {
 	/**
 	 * @param factor The speed, on a scale of [-1.0, 1.0], to run the front right motor
 	 */
-	public void setFrontRight(double factor)
+	private void setFrontRight(double factor)
 	{
 		frontRight.set(factor);
 	}
@@ -68,7 +68,7 @@ public class Wheels extends Subsystem {
 	/**
 	 * @param factor The speed, on a scale of [-1.0, 1.0], to run the back left motor
 	 */
-	public void setBackLeft(double factor)
+	private void setBackLeft(double factor)
 	{
 		backLeft.set(factor);
 	}
@@ -76,9 +76,67 @@ public class Wheels extends Subsystem {
 	/**
 	 * @param factor The speed, on a scale of [-1.0, 1.0], to run the back right motor
 	 */
-	public void setBackRight(double factor)
+	private void setBackRight(double factor)
 	{
 		backRight.set(factor);
+	}
+	
+	//Get encoder values
+	/**
+	 * @return The X position (in TBD units) of the robot from initial starting position.
+	 */
+	public double getX()
+	{
+		return 0.0;
+	}
+	
+	/**
+	 * @return The Y position (in TBD units) of the robot from initial starting position.
+	 */
+	public double getY()
+	{
+		return 0.0;
+	}
+	
+	
+	//Utility methods for drive
+	/**
+	 * Drives the robot based on a vector
+	 * (Values should be on a scale of [-1.0, 1.0])
+	 * @param x The X value of the vector
+	 * @param y The Y value of the vector
+	 * @param z The rotational speed
+	 */
+	public void drive(double x, double y, double z)
+	{
+		//TODO Place equations here
+	}
+	
+	/**
+	 * Drives the robot based upon raw motor factors
+	 * (Factors are on a scale of [-1.0, 1.0])
+	 * @param frontLeft The factor at which to run the front left motor
+	 * @param frontRight The factor at which to run the front right motor
+	 * @param backLeft The factor at which to run the backLeft motor
+	 * @param backRight The factor at which to run the backRight motor
+	 */
+	public void drive(double frontLeft, double frontRight, double backLeft, double backRight)
+	{
+		setFrontLeft(frontLeft);
+		setFrontRight(frontRight);
+		setBackLeft(backLeft);
+		setBackRight(backRight);
+	}
+	
+	/**
+	 * Stops the robot;
+	 */
+	public void stop()
+	{
+		setFrontLeft(0);
+		setFrontRight(0);
+		setBackLeft(0);
+		setBackRight(0);
 	}
 
     public void initDefaultCommand() {

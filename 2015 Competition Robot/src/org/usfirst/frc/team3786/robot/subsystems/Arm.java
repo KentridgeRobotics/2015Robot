@@ -19,6 +19,7 @@ public class Arm extends Subsystem {
 	{
 		armMotor = new CANJaguar(RobotConfig.get().getARM_MOTOR_CHANNEL());
 		
+		//TODO Determine if this should be Percent or Position mode
 		armMotor.setPercentMode();
 		
 		armMotor.enableControl();

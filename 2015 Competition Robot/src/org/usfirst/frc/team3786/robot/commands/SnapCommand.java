@@ -13,6 +13,8 @@ public class SnapCommand extends Command {
 	protected void execute() {
 		// TODO Auto-generated method stub
 
+		
+		//TODO Determine if this could cause concurrency issues
 	}
 
 	protected boolean isFinished() {
