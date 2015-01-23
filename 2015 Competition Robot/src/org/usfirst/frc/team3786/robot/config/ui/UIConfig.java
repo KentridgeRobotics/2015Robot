@@ -19,10 +19,9 @@ public abstract class UIConfig {
 		instance = new CyborgUI();
 	}
 	
-	protected UIConfig()
-	{		
-	}
-	
+	/**
+	 * @return The singleton instance of the UIConfig
+	 */
 	public static UIConfig get() {
 		return instance;
 	}

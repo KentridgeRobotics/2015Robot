@@ -23,6 +23,7 @@ public class CenterOnToteCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	//Finishes when robot is centered on tote
         return Vision.getInstance().isCentered();
     }
 

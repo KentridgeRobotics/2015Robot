@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveBackwardsCommand extends Command {
 
+	private final double distanceToTravel = 10;
+	
     public DriveBackwardsCommand() {
         requires(Wheels.getInstance());
     }
@@ -23,6 +25,7 @@ public class DriveBackwardsCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	//Should end after reaching distanceToTravel
         return false;
     }
 

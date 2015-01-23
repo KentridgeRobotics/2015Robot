@@ -25,7 +25,7 @@ public class DropTotesCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	//Waits for the lifter to reach a given position
+    	//Waits for the lifter to reach the down position
     	if (Lifter.getInstance().getPosition() <= downPosition)
     	{
     		return true;

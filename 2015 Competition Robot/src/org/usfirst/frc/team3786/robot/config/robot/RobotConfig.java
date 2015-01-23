@@ -20,6 +20,9 @@ public abstract class RobotConfig {
 		instance = new CompetitionRobotConfig();
 	}
 	
+	/**
+	 * @return The singleton instance of the config;
+	 */
 	public static RobotConfig get()
 	{		
 		return instance;

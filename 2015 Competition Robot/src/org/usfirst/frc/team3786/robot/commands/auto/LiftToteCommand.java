@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3786.robot.commands.auto;
 
 import org.usfirst.frc.team3786.robot.subsystems.Arm;
+import org.usfirst.frc.team3786.robot.subsystems.Lifter;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -11,6 +12,7 @@ public class LiftToteCommand extends Command {
 
     public LiftToteCommand() {
         requires(Arm.getInstance());
+        requires(Lifter.getInstance());
     }
 
     // Called just before this Command runs the first time
@@ -23,6 +25,7 @@ public class LiftToteCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	//Should end when tote picked up
         return false;
     }
 

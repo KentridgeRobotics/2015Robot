@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveToNextToteCommand extends Command {
 
+	private final double distanceToTravel = 10;
+	
     public DriveToNextToteCommand() {
         requires(Wheels.getInstance());
     }
@@ -23,6 +25,7 @@ public class DriveToNextToteCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	//Should stop when reached the distanceToTravel
         return false;
     }
 
