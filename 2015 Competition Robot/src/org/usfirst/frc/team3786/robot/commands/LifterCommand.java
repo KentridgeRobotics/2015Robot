@@ -1,11 +1,13 @@
 package org.usfirst.frc.team3786.robot.commands;
 
+import org.usfirst.frc.team3786.robot.subsystems.Lifter;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 public class LifterCommand extends Command {
 
 	protected void initialize() {
-		// TODO Auto-generated method stub
+		requires(Lifter.getInstance());
 
 	}
 

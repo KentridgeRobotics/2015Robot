@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3786.robot.subsystems;
 
+import org.usfirst.frc.team3786.robot.commands.ArmCommand;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -7,12 +9,26 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Arm extends Subsystem {
     
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+	private static Arm instance;
+	
+	private Arm()
+	{
+		
+	}
+	
+	
+	public static Arm getInstance()
+	{
+		if (instance == null)
+		{
+			instance = new Arm();
+		}
+		
+		return instance;
+	}
 
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+    	setDefaultCommand(new ArmCommand());
     }
 }
 

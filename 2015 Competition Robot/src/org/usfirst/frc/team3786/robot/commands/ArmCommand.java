@@ -1,12 +1,13 @@
 package org.usfirst.frc.team3786.robot.commands;
 
+import org.usfirst.frc.team3786.robot.subsystems.Arm;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ArmCommand extends Command {
 
 	protected void initialize() {
-		// TODO Auto-generated method stub
-
+		requires(Arm.getInstance());
 	}
 
 	protected void execute() {

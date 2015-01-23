@@ -1,12 +1,13 @@
 package org.usfirst.frc.team3786.robot.commands;
 
+import org.usfirst.frc.team3786.robot.subsystems.Wheels;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 public class DriveCommand extends Command {
 
 	protected void initialize() {
-		// TODO Auto-generated method stub
-
+		requires(Wheels.getInstance());
 	}
 
 	protected void execute() {
