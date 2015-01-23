@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3786.robot.subsystems;
 
-import org.usfirst.frc.team3786.robot.commands.ArmCommand;
+import org.usfirst.frc.team3786.robot.commands.teleop.TeleopArmCommand;
 import org.usfirst.frc.team3786.robot.config.robot.RobotConfig;
 
 import edu.wpi.first.wpilibj.CANJaguar;
@@ -41,7 +41,7 @@ public class Arm extends Subsystem {
 	}
 	
     public void initDefaultCommand() {
-    	setDefaultCommand(new ArmCommand());
+    	setDefaultCommand(new TeleopArmCommand());
     }
 }
 

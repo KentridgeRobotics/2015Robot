@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3786.robot.subsystems;
 
-import org.usfirst.frc.team3786.robot.commands.DriveCommand;
+import org.usfirst.frc.team3786.robot.commands.teleop.TeleopDriveCommand;
 import org.usfirst.frc.team3786.robot.config.robot.RobotConfig;
 
 import edu.wpi.first.wpilibj.CANJaguar;
@@ -68,7 +68,7 @@ public class Wheels extends Subsystem {
 	}
 
     public void initDefaultCommand() {
-        setDefaultCommand(new DriveCommand());
+        setDefaultCommand(new TeleopDriveCommand());
     }
 }
 

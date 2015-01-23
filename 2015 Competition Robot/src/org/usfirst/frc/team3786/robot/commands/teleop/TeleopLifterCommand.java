@@ -1,14 +1,14 @@
-package org.usfirst.frc.team3786.robot.commands;
+package org.usfirst.frc.team3786.robot.commands.teleop;
 
 import org.usfirst.frc.team3786.robot.subsystems.Lifter;
-import org.usfirst.frc.team3786.robot.subsystems.Wheels;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class AutonomousCommand extends Command {
+public class TeleopLifterCommand extends Command {
 
 	protected void initialize() {
-		//TODO Auto-generated method stub
+		requires(Lifter.getInstance());
+
 	}
 
 	protected void execute() {

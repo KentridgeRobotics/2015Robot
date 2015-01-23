@@ -1,13 +1,17 @@
-package org.usfirst.frc.team3786.robot.commands;
+package org.usfirst.frc.team3786.robot.commands.teleop;
 
-import org.usfirst.frc.team3786.robot.subsystems.Arm;
+import org.usfirst.frc.team3786.robot.subsystems.Wheels;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ArmCommand extends Command {
+public class TeleopDriveCommand extends Command {
 
+	public TeleopDriveCommand()
+	{
+		requires(Wheels.getInstance());
+	}
+	
 	protected void initialize() {
-		requires(Arm.getInstance());
 	}
 
 	protected void execute() {

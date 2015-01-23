@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3786.robot.subsystems;
 
-import org.usfirst.frc.team3786.robot.commands.LifterCommand;
+import org.usfirst.frc.team3786.robot.commands.teleop.TeleopLifterCommand;
 import org.usfirst.frc.team3786.robot.config.robot.RobotConfig;
 
 import edu.wpi.first.wpilibj.CANJaguar;
@@ -40,7 +40,7 @@ public class Lifter extends Subsystem {
 	}
 
     public void initDefaultCommand() {
-        setDefaultCommand(new LifterCommand());
+        setDefaultCommand(new TeleopLifterCommand());
     }
 }
 

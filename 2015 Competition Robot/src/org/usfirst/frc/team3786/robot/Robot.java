@@ -1,6 +1,10 @@
 
 package org.usfirst.frc.team3786.robot;
 
+import org.usfirst.frc.team3786.robot.subsystems.Arm;
+import org.usfirst.frc.team3786.robot.subsystems.Lifter;
+import org.usfirst.frc.team3786.robot.subsystems.Wheels;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -25,7 +29,11 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
-        // instantiate the command used for the autonomous period
+		
+		//Instantiate subsystems
+		Arm.getInstance();
+		Lifter.getInstance();
+		Wheels.getInstance();
     }
 	
 	public void disabledPeriodic() {
