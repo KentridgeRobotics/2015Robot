@@ -1,25 +1,23 @@
-package org.usfirst.frc.team3786.robot.commands;
+package org.usfirst.frc.team3786.robot.commands.teleop;
 
-import org.usfirst.frc.team3786.robot.config.robot.RobotConfig;
+import org.usfirst.frc.team3786.robot.subsystems.Lifter;
 
-import sun.security.krb5.Config;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class LoadingCommand extends Command {
+public class TeleopLifterCommand extends Command {
 
 	protected void initialize() {
-		// TODO Auto-generated method stub
+		requires(Lifter.getInstance());
 
 	}
 
 	protected void execute() {
-		
 		// TODO Auto-generated method stub
 
 	}
 
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
+		//Teleop commands are never done
 		return false;
 	}
 

@@ -20,6 +20,9 @@ public abstract class RobotConfig {
 		instance = new CompetitionRobotConfig();
 	}
 	
+	/**
+	 * @return The singleton instance of the config;
+	 */
 	public static RobotConfig get()
 	{		
 		return instance;
@@ -86,10 +89,19 @@ public abstract class RobotConfig {
 	public abstract int getY_OMNI_WHEEL_ENCODER();
 
 	/**
-	 * Get the channel that the lifter's encoder is on.
-	 * @return The encoder channel.
+	 * @return The P value for the Lifter's PID.
 	 */
-	public abstract int getLIFTER_ENCODER_CHANNEL();
+	public abstract double getLIFTER_P();
+	
+	/**
+	 * @return The I value for the Lifter's PID.
+	 */
+	public abstract double getLIFTER_I();
+	
+	/**
+	 * @return The D value for the Lifter's PID.
+	 */
+	public abstract double getLIFTER_D();
 
 	/**
 	 * Get the channel that the laser is on.

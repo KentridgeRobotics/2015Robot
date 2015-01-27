@@ -1,12 +1,17 @@
-package org.usfirst.frc.team3786.robot.commands;
+package org.usfirst.frc.team3786.robot.commands.teleop;
+
+import org.usfirst.frc.team3786.robot.subsystems.Wheels;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class AutonomousCommand extends Command {
+public class TeleopDriveCommand extends Command {
 
+	public TeleopDriveCommand()
+	{
+		requires(Wheels.getInstance());
+	}
+	
 	protected void initialize() {
-		// TODO Auto-generated method stub
-
 	}
 
 	protected void execute() {
@@ -15,7 +20,7 @@ public class AutonomousCommand extends Command {
 	}
 
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
+		//Teleop commands are never done
 		return false;
 	}
 
