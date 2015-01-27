@@ -26,6 +26,8 @@ public class CompetitionRobotConfig extends RobotConfig {
 	//RG Feed Signal light
 	private static final int FEED_SIGNAL_LIGHT = 22;
 	
+	//Gyro
+	private static final int GYRO_CHANNEL = 23;	
 	
 	//PID values
 	private static final double LIFTER_P = 0;
@@ -107,5 +109,10 @@ public class CompetitionRobotConfig extends RobotConfig {
 	@Override
 	public int getFEED_SIGNAL_LIGHT() {
 		return FEED_SIGNAL_LIGHT;
+	}
+
+	@Override
+	public int getGYRO_CHANNEL() {
+		return GYRO_CHANNEL;
 	}
 }

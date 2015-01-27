@@ -4,6 +4,9 @@ import org.usfirst.frc.team3786.robot.commands.teleop.TeleopDriveCommand;
 import org.usfirst.frc.team3786.robot.config.robot.RobotConfig;
 
 import edu.wpi.first.wpilibj.CANJaguar;
+import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.Gyro;
+import edu.wpi.first.wpilibj.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -13,10 +16,14 @@ public class Wheels extends Subsystem {
     
 	private static Wheels instance;
 	
+	private static final double DEAD_ZONE = 0.15;
+	
 	private CANJaguar frontLeft;
 	private CANJaguar frontRight;
 	private CANJaguar backLeft;
 	private CANJaguar backRight;
+	
+	private Gyro gyro;
 	
 	private Wheels()
 	{
@@ -109,7 +116,30 @@ public class Wheels extends Subsystem {
 	 */
 	public void drive(double x, double y, double z)
 	{
-		//TODO Place equations here
+		double theta = Math.toRadians(gyro.getAngle());
+        
+        double cosineTheta = Math.cos(theta);
+        double sineTheta = Math.sin(theta);
+
+        //Dead zones
+        if (Math.abs(x) < DEAD_ZONE)
+        {
+            x = 0;
+        }
+        if (Math.abs(y) < DEAD_ZONE)
+        {
+            y = 0;
+        }
+        if (Math.abs(z) < DEAD_ZONE)
+        {
+            z = 0;
+        }
+		double frontLeftFactor = (x * (sineTheta + cosineTheta)) + (y * (cosineTheta - sineTheta)) - z;
+        double frontRightFactor = (x * (sineTheta - cosineTheta)) + (y * (sineTheta + cosineTheta)) + z;
+        double backLeftFactor = (x * (sineTheta - cosineTheta)) + (y * (sineTheta + cosineTheta)) - z;
+        double backRightFactor = (x * (sineTheta + cosineTheta)) + (y * (cosineTheta - sineTheta)) + z;
+        
+        drive(frontLeftFactor, frontRightFactor, backLeftFactor, backRightFactor);
 	}
 	
 	/**
@@ -120,7 +150,7 @@ public class Wheels extends Subsystem {
 	 * @param backLeft The factor at which to run the backLeft motor
 	 * @param backRight The factor at which to run the backRight motor
 	 */
-	public void drive(double frontLeft, double frontRight, double backLeft, double backRight)
+	private void drive(double frontLeft, double frontRight, double backLeft, double backRight)
 	{
 		setFrontLeft(frontLeft);
 		setFrontRight(frontRight);
@@ -137,6 +167,14 @@ public class Wheels extends Subsystem {
 		setFrontRight(0);
 		setBackLeft(0);
 		setBackRight(0);
+	}
+	
+	/**
+	 * @return The current angle of the gyro. (In degrees)
+	 */
+	public double getGryoAngle()
+	{
+		return gyro.getAngle();
 	}
 
     public void initDefaultCommand() {

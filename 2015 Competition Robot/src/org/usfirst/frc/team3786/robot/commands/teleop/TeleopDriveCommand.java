@@ -1,11 +1,12 @@
 package org.usfirst.frc.team3786.robot.commands.teleop;
 
+import org.usfirst.frc.team3786.robot.config.ui.UIConfig;
 import org.usfirst.frc.team3786.robot.subsystems.Wheels;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 public class TeleopDriveCommand extends Command {
-
+	
 	public TeleopDriveCommand()
 	{
 		requires(Wheels.getInstance());
@@ -15,8 +16,12 @@ public class TeleopDriveCommand extends Command {
 	}
 
 	protected void execute() {
-		// TODO Auto-generated method stub
-
+		
+		double xVal = UIConfig.get().getDriveXValue();
+		double yVal = UIConfig.get().getDriveYValue();
+		double zVal = UIConfig.get().getDriveRotateValue();
+			
+		Wheels.getInstance().drive(xVal, yVal, zVal);
 	}
 
 	protected boolean isFinished() {
@@ -25,13 +30,12 @@ public class TeleopDriveCommand extends Command {
 	}
 
 	protected void end() {
-		// TODO Auto-generated method stub
-
+		//This should never be called
 	}
 
 	protected void interrupted() {
-		// TODO Auto-generated method stub
-
+		//This should not happen, but just in case
+		Wheels.getInstance().stop();
 	}
 
 }
