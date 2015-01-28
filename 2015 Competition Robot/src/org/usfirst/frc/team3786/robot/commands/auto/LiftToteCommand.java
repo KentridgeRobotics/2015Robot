@@ -8,8 +8,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class LiftToteCommand extends Command {
 
+public class LiftToteCommand extends Command {
+	
+	public double armPosition; //TBD, arm position to start lifter to get crate
+	
     public LiftToteCommand() {
         requires(Arm.getInstance());
         requires(Lifter.getInstance());
@@ -21,6 +24,11 @@ public class LiftToteCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Arm.getInstance().moveArm(1);
+    	if(Arm.getInstance().getPosition() >= 0.5)
+    	{
+    		Lifter.getInstance().moveToPosition(1);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

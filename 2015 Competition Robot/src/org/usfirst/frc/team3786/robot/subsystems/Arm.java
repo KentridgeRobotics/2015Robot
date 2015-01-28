@@ -49,5 +49,20 @@ public class Arm extends Subsystem {
     public void initDefaultCommand() {
     	setDefaultCommand(new TeleopArmCommand());
     }
+    
+    public double getPosition()
+    {
+    	//TODO get position of arm for when to start lifter
+    	return 0;
+    }
+    /**
+     * Determines if arm is moving
+     * @return
+     */
+    public boolean isMoving()
+    {
+    	//TODO check if moving
+    	return false;
+    }
 }
 
