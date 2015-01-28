@@ -1,6 +1,9 @@
 
 package org.usfirst.frc.team3786.robot;
 
+import org.usfirst.frc.team3786.robot.commands.teleop.TeleopArmCommand;
+import org.usfirst.frc.team3786.robot.commands.teleop.TeleopDriveCommand;
+import org.usfirst.frc.team3786.robot.commands.teleop.TeleopLifterCommand;
 import org.usfirst.frc.team3786.robot.subsystems.Arm;
 import org.usfirst.frc.team3786.robot.subsystems.Lifter;
 import org.usfirst.frc.team3786.robot.subsystems.Wheels;
@@ -19,16 +22,13 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Robot extends IterativeRobot {
 
-	public static OI oi;
-
-    Command autonomousCommand;
+    Command autonomousCommandGroup;
 
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
-		oi = new OI();
 		
 		//Instantiate subsystems
 		Arm.getInstance();
@@ -41,8 +41,11 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-        // schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
+        // schedule the autonomous command group
+        if (autonomousCommandGroup != null)
+        {
+        	autonomousCommandGroup.start();	
+        }
     }
 
     /**
@@ -57,7 +60,14 @@ public class Robot extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        if (autonomousCommand != null) autonomousCommand.cancel();
+        if (autonomousCommandGroup != null)
+        {
+        	autonomousCommandGroup.cancel();
+        }
+        
+        Scheduler.getInstance().add(new TeleopDriveCommand());
+        Scheduler.getInstance().add(new TeleopArmCommand());
+        Scheduler.getInstance().add(new TeleopLifterCommand());
     }
 
     /**
@@ -65,7 +75,7 @@ public class Robot extends IterativeRobot {
      * You can use it to reset subsystems before shutting down.
      */
     public void disabledInit(){
-
+    	Wheels.getInstance().stop();
     }
 
     /**
