@@ -4,9 +4,7 @@ import org.usfirst.frc.team3786.robot.commands.teleop.TeleopDriveCommand;
 import org.usfirst.frc.team3786.robot.config.robot.RobotConfig;
 
 import edu.wpi.first.wpilibj.CANJaguar;
-import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Gyro;
-import edu.wpi.first.wpilibj.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -17,6 +15,7 @@ public class Wheels extends Subsystem {
 	private static Wheels instance;
 	
 	private static final double DEAD_ZONE = 0.15;
+	private static final double ROTATION_DEAD_ZONE = 0.15;
 	
 	private CANJaguar frontLeft;
 	private CANJaguar frontRight;
@@ -24,6 +23,13 @@ public class Wheels extends Subsystem {
 	private CANJaguar backRight;
 	
 	private Gyro gyro;
+	
+	private double desiredAngle;
+	private double rotateSpeed;
+	
+	private boolean shouldStickToAngle;
+	
+	private boolean shouldRotate;
 	
 	private Wheels()
 	{
@@ -134,12 +140,73 @@ public class Wheels extends Subsystem {
         {
             z = 0;
         }
+        
+        //Adjust the rotation of the robot to rotate to given angle (Overrides manual control for now)
+        if (shouldRotate || shouldStickToAngle)
+        {
+	        int direction = determineRotateDirection(cosineTheta, sineTheta, desiredAngle);
+	        if (direction > 0)
+	        {
+	        	z = rotateSpeed;
+	        }
+	        else if (direction < 0)
+	        {
+	        	z = rotateSpeed;
+	        }
+	        else
+	        {
+	        	shouldRotate = false;
+	        	z = 0;
+	        }
+        }
+        
 		double frontLeftFactor = (x * (sineTheta + cosineTheta)) + (y * (cosineTheta - sineTheta)) - z;
         double frontRightFactor = (x * (sineTheta - cosineTheta)) + (y * (sineTheta + cosineTheta)) + z;
         double backLeftFactor = (x * (sineTheta - cosineTheta)) + (y * (sineTheta + cosineTheta)) - z;
         double backRightFactor = (x * (sineTheta + cosineTheta)) + (y * (cosineTheta - sineTheta)) + z;
         
         drive(frontLeftFactor, frontRightFactor, backLeftFactor, backRightFactor);
+	}
+	
+	/**
+	 * Rotates the robot to a given angle
+	 * @param angle The angle to rotate to in degrees
+	 * @param speed The speed at which to rotate [-1.0, 1.0]
+	 * @param stickToAngle If the robot should hold at the given angle
+	 */
+	public void rotateToAngle(double angle, double speed)
+	{
+		this.desiredAngle = angle;
+		this.rotateSpeed = speed;
+		this.shouldRotate = true;
+	}
+	
+	/**
+	 * @return If the robot is currently sticking to it's angle
+	 */
+	public boolean isStickingToAngle()
+	{
+		return shouldStickToAngle;
+	}
+	
+	/**
+	 * Tells the robot to stay at whatever angle it is currently at
+	 */
+	public void stickToAngle()
+	{
+		this.shouldStickToAngle = true;
+		if (!this.shouldRotate)
+		{
+			this.desiredAngle = gyro.getAngle();
+		}
+	}
+	
+	/**
+	 * If the robot is sticking to an angle, this will release that lock
+	 */
+	public void unstickFromAngle()
+	{
+		this.shouldStickToAngle = false;
 	}
 	
 	/**
@@ -179,6 +246,68 @@ public class Wheels extends Subsystem {
 
     public void initDefaultCommand() {
         setDefaultCommand(new TeleopDriveCommand());
+    }
+    
+    /**
+     * Determines which direction is the most efficient for the robot to rotate in.
+     * @param currentCosine The cosine of the current angle
+     * @param currentSine The sine of the current angle
+     * @param desiredAngle The angle to rotate to
+     * @return Positive if clockwise, negative if counterclockwise, zero if at angle
+     */
+    private int determineRotateDirection(double currentCosine, double currentSine, double desiredAngle)
+    {
+    	 
+    	 //Determine if within tolerances
+    	 double cosineDif = Math.abs(currentCosine - Math.cos(Math.toRadians(desiredAngle)));
+    	 double sineDif = Math.abs(currentSine - Math.sin(Math.toRadians(desiredAngle)));;
+    	 if (cosineDif <= ROTATION_DEAD_ZONE && sineDif <= ROTATION_DEAD_ZONE)
+    	 {
+    		 return 0;
+    	 }
+    	 
+         if (currentCosine >= 0)
+         {
+         	//First or fourth quadrant
+         	if (currentSine >= 0)
+         	{
+         		//First quadrant
+         		if (currentCosine <= Math.cos(Math.toRadians(desiredAngle)))
+ 	        	{
+ 		        	return 1;
+ 		        }
+         	}
+         	else
+         	{
+         		//Fourth quadrant
+         		if (currentCosine >= Math.cos(Math.toRadians(desiredAngle)))
+         		{
+         			return 1;
+         		}
+         	}
+         }
+         else
+         {
+         	//Second or third quadrant
+         	if (currentSine >= 0)
+         	{
+         		//Second quadrant
+         		if (currentCosine >= Math.cos(Math.toRadians(desiredAngle)))
+         		{
+         			return 1;
+         		}
+         	}
+         	else
+         	{
+         		//ThirdQuadrant
+         		if (currentCosine <= Math.cos(Math.toRadians(desiredAngle)))
+         		{
+         			return 1;
+         		}
+         	}
+         }
+         
+         return -1;
     }
 }
 

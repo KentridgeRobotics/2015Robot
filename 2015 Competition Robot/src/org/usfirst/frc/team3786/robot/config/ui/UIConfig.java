@@ -38,15 +38,16 @@ public abstract class UIConfig {
 	 * @return The speed at which the robot should rotate. [-1.0, 1.0]
 	 */
 	public abstract double getDriveRotateValue();
+
+	/**
+	 * @return If the robot should snap to the angle given by getAngleToRotateTo()
+	 */
+	public abstract boolean getSnapButton();
 	
 	/**
-	 * @return If the robot should snap to the next CW right angle.
+	 * @return If the robot should maintain its current angle
 	 */
-	public abstract boolean getSnapCWButton();
-	/**
-	 * @return If the robot should snap to the next CW right angle.
-	 */
-	public abstract boolean getSnapCCWButton();
+	public abstract boolean getRetainAngleButton();
 	
 	/**
 	 * @return The angle to which the robot should rotate and maintain in degrees.
