@@ -45,5 +45,7 @@ public class DriveBackwardsCommand extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+		//This should not happen, but just in case
+		Wheels.getInstance().stop();
     }
 }
