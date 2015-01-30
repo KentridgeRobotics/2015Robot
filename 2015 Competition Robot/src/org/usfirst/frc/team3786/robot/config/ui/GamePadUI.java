@@ -42,11 +42,6 @@ public class GamePadUI extends UIConfig {
 	}
 
 	@Override
-	public boolean getSnapButton() {
-		return STICK.getRawButton(SNAP_BUTTON);
-	}
-
-	@Override
 	public boolean getRetainAngleButton() {
 		return STICK.getRawButton(RETAIN_ANGLE_BUTTON);
 	}

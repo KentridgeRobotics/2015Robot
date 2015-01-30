@@ -36,7 +36,10 @@ public class TeleopDriveCommand extends Command {
 			}
 		}
 		//Rotates the robot to the given angle from the UI
-		Wheels.getInstance().rotateToAngle(UIConfig.get().getAngleToRotateTo(), 1);
+		if (UIConfig.get().getAngleToRotateTo() != -1)
+		{
+			Wheels.getInstance().rotateToAngle(UIConfig.get().getAngleToRotateTo(), 1);
+		}
 	}
 
 	protected boolean isFinished() {

@@ -311,5 +311,79 @@ public class Wheels extends Subsystem {
          
          return -1;
     }
+    
+    /**
+     * Determines what angle to robot should snap to from the standard 90 degree angles
+     * @param isClockwise Whether or not the rotation is in the clockwise direction
+     * @return The angle to snap to (in degrees)
+     */
+    public double determineSnapAngle(boolean isClockwise)
+    {
+    	double currentAngle = gyro.getAngle();
+    	double currentCosine = Math.cos(Math.toRadians(currentAngle));
+    	double currentSine = Math.sin(Math.toRadians(currentAngle));
+
+	   	if ((currentCosine <= ROTATION_DEAD_ZONE && 1 - currentSine <= ROTATION_DEAD_ZONE) || (currentSine <= ROTATION_DEAD_ZONE && 1 - currentCosine <= ROTATION_DEAD_ZONE))
+	   	{
+	   		return currentAngle;
+	   	}
+   	 
+        if (currentCosine >= 0)
+        {
+        	//First or fourth quadrant
+        	if (currentSine >= 0)
+        	{
+        		//First quadrant
+        		if (isClockwise)
+	        	{
+		        	return 0;
+		        }
+        		else
+        		{
+        			return 90;
+        		}
+        	}
+        	else
+        	{
+        		//Fourth quadrant
+        		if (isClockwise)
+        		{
+        			return 270;
+        		}
+        		else
+        		{
+        			return 0;
+        		}
+        	}
+        }
+        else
+        {
+        	//Second or third quadrant
+        	if (currentSine >= 0)
+        	{
+        		//Second quadrant
+        		if (isClockwise)
+        		{
+        			return 90;
+        		}
+        		else
+        		{
+        			return 180;
+        		}
+        	}
+        	else
+        	{
+        		//ThirdQuadrant
+        		if (isClockwise)
+        		{
+        			return 180;
+        		}
+        		else
+        		{
+        			return 270;
+        		}
+        	}
+        }
+    }
 }
 
