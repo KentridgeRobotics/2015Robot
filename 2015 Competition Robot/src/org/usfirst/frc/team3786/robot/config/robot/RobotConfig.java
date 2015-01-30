@@ -17,7 +17,7 @@ public abstract class RobotConfig {
 	
 	static
 	{
-		instance = new CompetitionRobotConfig();
+		instance = new RaveBotConfig();
 	}
 	
 	/**

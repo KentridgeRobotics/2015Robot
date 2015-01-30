@@ -40,7 +40,7 @@ public class CyborgUI extends UIConfig {
 
 	@Override
 	public double getDriveXValue() {
-		return STICK.getX();
+		return -STICK.getX();
 	}
 
 	@Override

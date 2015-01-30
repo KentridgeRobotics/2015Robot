@@ -47,6 +47,8 @@ public class Wheels extends Subsystem {
 		frontRight.enableControl();
 		backLeft.enableControl();
 		backRight.enableControl();
+		
+		gyro = new Gyro(RobotConfig.get().getGYRO_CHANNEL());
 	}
 	
 	/**

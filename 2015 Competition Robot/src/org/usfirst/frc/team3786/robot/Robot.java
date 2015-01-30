@@ -31,8 +31,8 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		
 		//Instantiate subsystems
-		Arm.getInstance();
-		Lifter.getInstance();
+//		Arm.getInstance();
+//		Lifter.getInstance();
 		Wheels.getInstance();
     }
 	
@@ -66,8 +66,8 @@ public class Robot extends IterativeRobot {
         }
         
         Scheduler.getInstance().add(new TeleopDriveCommand());
-        Scheduler.getInstance().add(new TeleopArmCommand());
-        Scheduler.getInstance().add(new TeleopLifterCommand());
+//        Scheduler.getInstance().add(new TeleopArmCommand());
+//        Scheduler.getInstance().add(new TeleopLifterCommand());
     }
 
     /**
