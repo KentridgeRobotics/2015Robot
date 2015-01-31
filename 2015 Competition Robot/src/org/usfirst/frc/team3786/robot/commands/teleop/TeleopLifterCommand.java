@@ -7,8 +7,8 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class TeleopLifterCommand extends Command {
 	public double position = Lifter.getInstance().getPosition();
-	public double lowest = 0; // TBD
-	public double highest = 1; // TBD
+	private final double lowest = 0; // TBD
+	private final double highest = 1; // TBD
 	protected void initialize() {
 		requires(Lifter.getInstance());
 		
