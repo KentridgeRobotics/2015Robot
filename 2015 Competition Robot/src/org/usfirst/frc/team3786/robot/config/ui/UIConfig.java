@@ -71,4 +71,16 @@ public abstract class UIConfig {
 	 * @return If the lifter should move down.
 	 */
 	public abstract boolean getLifterDownButton();
+	
+	/**
+	 * 
+	 * @return If the arm should move up.
+	 */
+	public abstract boolean getArmUpButton();
+	
+	/**
+	 * 
+	 * @return If the arm should move down.
+	 */
+	public abstract boolean getArmDownButton();
 }

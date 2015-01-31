@@ -20,6 +20,8 @@ public class GamePadUI extends UIConfig {
 	private final int NINETY_DEGREES_BTN = 2;
 	private final int ONE_EIGHTY_BTN = 1;
 	private final int TWO_SEVENTY_BTN = 3;
+	private final int ARM_UP_BTN = 9; //TODO find a new button for this
+	private final int ARM_DOWN_BTN = 10; //TODO find a new button for this
 	
 	public GamePadUI()
 	{
@@ -82,7 +84,17 @@ public class GamePadUI extends UIConfig {
 	public boolean getArmToZeroButton() {
 		return STICK.getRawButton(ARM_TO_ZERO_BUTTON);
 	}
-
+	
+	@Override
+	public boolean getArmUpButton() {
+		return STICK.getRawButton(ARM_UP_BTN);
+	}
+	
+	@Override
+	public boolean getArmDownButton() {
+		return STICK.getRawButton(ARM_DOWN_BTN);
+	}
+	
 	@Override
 	public boolean getDropStackButton() {
 		return STICK.getRawButton(DROP_STACK_BUTTON);

@@ -21,7 +21,8 @@ public class CyborgUI extends UIConfig {
 	private final int DROP_STACK_BUTTON = 2;
 	private final int LIFT_UP_BUTTON = 5;
 	private final int LIFT_DOWN_BUTTON = 6;
-	
+	private final int ARM_UP_BTN = 7; //TBD
+	private final int ARM_DOWN_BTN = 8; //TBD
 	//Rotation to snap to
 	
 	
@@ -67,7 +68,17 @@ public class CyborgUI extends UIConfig {
 	public boolean getArmToZeroButton() {
 		return STICK.getRawButton(ARM_TO_ZERO_BTN);
 	}
-
+	
+	@Override
+	public boolean getArmUpButton() {
+		return STICK.getRawButton(ARM_UP_BTN);
+	}
+	
+	@Override
+	public boolean getArmDownButton() {
+		return STICK.getRawButton(ARM_DOWN_BTN);
+	}
+	
 	@Override
 	public boolean getDropStackButton() {
 		return STICK.getRawButton(DROP_STACK_BUTTON);

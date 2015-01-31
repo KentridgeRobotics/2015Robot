@@ -41,9 +41,9 @@ public class Arm extends Subsystem {
 	/**
 	 * @param speed The speed at which to drive the arm on a scale of [-1.0, 1.0]
 	 */
-	public void moveArm(double speed)
+	public void moveArm(double position)
 	{
-		armMotor.set(speed);
+		armMotor.set(position);
 	}
 	
     public void initDefaultCommand() {
@@ -57,7 +57,7 @@ public class Arm extends Subsystem {
     }
     /**
      * Determines if arm is moving
-     * @return
+     * @return true if moving, false if not
      */
     public boolean isMoving()
     {

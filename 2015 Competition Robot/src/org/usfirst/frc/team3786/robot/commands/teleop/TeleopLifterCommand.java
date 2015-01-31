@@ -9,6 +9,7 @@ public class TeleopLifterCommand extends Command {
 	public double position = Lifter.getInstance().getPosition();
 	private final double lowest = 0; // TBD
 	private final double highest = 1; // TBD
+	
 	protected void initialize() {
 		requires(Lifter.getInstance());
 		
@@ -28,7 +29,7 @@ public class TeleopLifterCommand extends Command {
 		if(UIConfig.get().getLifterDownButton())
 		{
 			position -= .01;
-			if(position > lowest)
+			if(position < lowest)
 			{
 				position = lowest;
 			}
