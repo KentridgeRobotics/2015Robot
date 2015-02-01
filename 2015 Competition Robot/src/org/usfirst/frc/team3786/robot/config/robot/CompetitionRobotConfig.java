@@ -18,7 +18,7 @@ public class CompetitionRobotConfig extends RobotConfig {
 	private static final int X_OMNI_WHEEL_ENCODER = 18;
 	private static final int Y_OMNI_WHEEL_ENCODER = 19;
 	
-	//Limit Switches
+	private static final int ENCODER_CODES_PER_REV = 360;
 	
 	//Tote detector
 	private static final int LASER = 21;
@@ -31,6 +31,9 @@ public class CompetitionRobotConfig extends RobotConfig {
 	private static final double LIFTER_P = 0;
 	private static final double LIFTER_I = 0;
 	private static final double LIFTER_D = 0;
+	private static final double ARM_P = 0;
+	private static final double ARM_I = 0;
+	private static final double ARM_D = 0;
 
 	@Override
 	public int getFRONT_RIGHT_MOTOR_CHANNEL() {
@@ -107,5 +110,25 @@ public class CompetitionRobotConfig extends RobotConfig {
 	@Override
 	public int getFEED_SIGNAL_LIGHT() {
 		return FEED_SIGNAL_LIGHT;
+	}
+
+	@Override
+	public double getARM_P() {
+		return ARM_P;
+	}
+
+	@Override
+	public double getARM_I() {
+		return ARM_I;
+	}
+
+	@Override
+	public double getARM_D() {
+		return ARM_D;
+	}
+
+	@Override
+	public int getENCODER_CODES_PER_REV() {
+		return ENCODER_CODES_PER_REV;
 	}
 }

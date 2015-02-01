@@ -15,14 +15,18 @@ public class Arm extends Subsystem {
 	
 	private CANJaguar armMotor;
 	
+	private double currentPosition;
+	
 	private Arm()
 	{
 		armMotor = new CANJaguar(RobotConfig.get().getARM_MOTOR_CHANNEL());
 		
-		//TODO Determine if this should be Percent or Position mode
-		armMotor.setPercentMode();
+		armMotor.setPositionMode(CANJaguar.kQuadEncoder, RobotConfig.get().getENCODER_CODES_PER_REV(), RobotConfig.get().getARM_P(), RobotConfig.get().getARM_I(), RobotConfig.get().getARM_D());
 		
 		armMotor.enableControl();
+		
+		//This may need to be changed based upon starting position of the arm.
+		currentPosition = 0;
 	}
 	
 	/**
@@ -39,7 +43,7 @@ public class Arm extends Subsystem {
 	}
 
 	/**
-	 * @param speed The speed at which to drive the arm on a scale of [-1.0, 1.0]
+	 * @param position The position to drive the arm to.
 	 */
 	public void moveArm(double position)
 	{
@@ -50,9 +54,11 @@ public class Arm extends Subsystem {
     	setDefaultCommand(new TeleopArmCommand());
     }
     
+    /**
+     * @return The current position of the arm.
+     */
     public double getPosition()
     {
-    	//TODO get position of arm for when to start lifter
     	return 0;
     }
     /**
@@ -61,8 +67,11 @@ public class Arm extends Subsystem {
      */
     public boolean isMoving()
     {
-    	//TODO check if moving
-    	return false;
+    	if (currentPosition == armMotor.get())
+    	{
+    		return false;
+    	}
+    	return true;
     }
 }
 

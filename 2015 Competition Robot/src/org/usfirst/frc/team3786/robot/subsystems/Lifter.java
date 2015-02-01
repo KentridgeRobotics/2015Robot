@@ -19,7 +19,7 @@ public class Lifter extends Subsystem {
 	{
 		lifterMotor = new CANJaguar(RobotConfig.get().getLIFTER_MOTOR_CHANNEL());
 		
-		lifterMotor.setPositionMode(CANJaguar.kQuadEncoder, 360, RobotConfig.get().getLIFTER_P(), RobotConfig.get().getLIFTER_I(), RobotConfig.get().getLIFTER_D());
+		lifterMotor.setPositionMode(CANJaguar.kQuadEncoder, RobotConfig.get().getENCODER_CODES_PER_REV(), RobotConfig.get().getLIFTER_P(), RobotConfig.get().getLIFTER_I(), RobotConfig.get().getLIFTER_D());
 		
 		lifterMotor.enableControl();
 	}

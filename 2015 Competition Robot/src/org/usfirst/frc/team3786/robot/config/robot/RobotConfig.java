@@ -102,6 +102,21 @@ public abstract class RobotConfig {
 	 * @return The D value for the Lifter's PID.
 	 */
 	public abstract double getLIFTER_D();
+	
+	/**
+	 * @return The P value for the Arm's PID.
+	 */
+	public abstract double getARM_P();
+	
+	/**
+	 * @return The I value for the Arm's PID.
+	 */
+	public abstract double getARM_I();
+	
+	/**
+	 * @return The D value for the Arm's PID.
+	 */
+	public abstract double getARM_D();
 
 	/**
 	 * Get the channel that the laser is on.
@@ -114,4 +129,10 @@ public abstract class RobotConfig {
 	 * @return The signal light channel.
 	 */
 	public abstract int getFEED_SIGNAL_LIGHT();
+	
+	/**
+	 * Get the number of codes per revolution for the encoders.
+	 * @return
+	 */
+	public abstract int getENCODER_CODES_PER_REV();
 }

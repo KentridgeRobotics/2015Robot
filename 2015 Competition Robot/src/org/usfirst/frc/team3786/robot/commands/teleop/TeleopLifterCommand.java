@@ -6,36 +6,40 @@ import org.usfirst.frc.team3786.robot.subsystems.Lifter;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class TeleopLifterCommand extends Command {
-	public double position = Lifter.getInstance().getPosition();
-	private final double lowest = 0; // TBD
-	private final double highest = 1; // TBD
+	
+	private final double LOWEST_POSITION = 0; // TBD
+	private final double HIGHEST_POSITION = 1; // TBD
+	private final double SPEED = 0.1;
+	
+	public double currentPosition;
 	
 	protected void initialize() {
 		requires(Lifter.getInstance());
-		
+		currentPosition = Lifter.getInstance().getPosition();
 	}
 
 	protected void execute() {
-		// TODO Auto-generated method stub
-		if(UIConfig.get().getLifterUpButton())
+		
+		if (UIConfig.get().getLifterUpButton())
 		{
-			position += .01;
-			if(position > highest)
+			currentPosition += SPEED;
+			if(currentPosition > HIGHEST_POSITION)
 			{
-				position = highest;
+				currentPosition = HIGHEST_POSITION;
 			}
-			Lifter.getInstance().moveToPosition(position);
+			Lifter.getInstance().moveToPosition(currentPosition);
 		}
-		if(UIConfig.get().getLifterDownButton())
+		if (UIConfig.get().getLifterDownButton())
 		{
-			position -= .01;
-			if(position < lowest)
+			currentPosition -= .01;
+			if(currentPosition < LOWEST_POSITION)
 			{
-				position = lowest;
+				currentPosition = LOWEST_POSITION;
 			}
-			Lifter.getInstance().moveToPosition(position);
+			Lifter.getInstance().moveToPosition(currentPosition);
 		}
 		
+		currentPosition = Lifter.getInstance().getPosition();
 	}
 
 	protected boolean isFinished() {
@@ -44,13 +48,10 @@ public class TeleopLifterCommand extends Command {
 	}
 
 	protected void end() {
-		// TODO Auto-generated method stub
 	
 	}
 
 	protected void interrupted() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
