@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3786.robot.config.ui;
 
-import org.usfirst.frc.team3786.robot.config.robot.RobotConfig;
 import org.usfirst.frc.team3786.robot.subsystems.Wheels;
 
 import edu.wpi.first.wpilibj.Joystick;

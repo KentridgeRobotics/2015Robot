@@ -1,11 +1,7 @@
 
 package org.usfirst.frc.team3786.robot;
 
-import org.usfirst.frc.team3786.robot.commands.teleop.TeleopArmCommand;
 import org.usfirst.frc.team3786.robot.commands.teleop.TeleopDriveCommand;
-import org.usfirst.frc.team3786.robot.commands.teleop.TeleopLifterCommand;
-import org.usfirst.frc.team3786.robot.subsystems.Arm;
-import org.usfirst.frc.team3786.robot.subsystems.Lifter;
 import org.usfirst.frc.team3786.robot.subsystems.Wheels;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
