@@ -50,7 +50,7 @@ public class CyborgUI extends UIConfig {
 
 	@Override
 	public double getDriveRotateValue() {
-		return STICK.getAxis(ROTATION_AXIS);
+		return -STICK.getAxis(ROTATION_AXIS);
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import org.usfirst.frc.team3786.robot.config.robot.RobotConfig;
 import edu.wpi.first.wpilibj.CANJaguar;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -15,7 +16,7 @@ public class Wheels extends Subsystem {
 	private static Wheels instance;
 	
 	private static final double DEAD_ZONE = 0.15;
-	private static final double ROTATION_DEAD_ZONE = 0.15;
+	private static final double ROTATION_DEAD_ZONE = 0.05;
 	
 	private CANJaguar frontLeft;
 	private CANJaguar frontRight;
@@ -26,6 +27,7 @@ public class Wheels extends Subsystem {
 	
 	private double desiredAngle;
 	private double rotateSpeed;
+	private int rotationDir;
 	
 	private boolean shouldStickToAngle;
 	
@@ -143,25 +145,24 @@ public class Wheels extends Subsystem {
             z = 0;
         }
         
-        //Adjust the rotation of the robot to rotate to given angle (Overrides manual control for now)
+        //Adjust the rotation of the robot to rotate to given angle
+        shouldRotate = shouldRotate(Math.cos(Math.toRadians(getGyroAngle())), Math.sin(Math.toRadians(getGyroAngle())), desiredAngle);
         if (shouldRotate || shouldStickToAngle)
         {
-	        int direction = determineRotateDirection(cosineTheta, sineTheta, desiredAngle);
-	        if (direction > 0)
+	        SmartDashboard.putNumber("Desired Angle", desiredAngle);
+	        SmartDashboard.putNumber("Rotation Dir", rotationDir);
+	        if (rotationDir > 0)
 	        {
-	        	z = rotateSpeed;
+	        	z += factorRotationSpeed(rotateSpeed, desiredAngle, gyro.getAngle());
 	        }
-	        else if (direction < 0)
+	        else if (rotationDir < 0)
 	        {
-	        	z = rotateSpeed;
+	        	z += factorRotationSpeed(-rotateSpeed, desiredAngle, gyro.getAngle());
 	        }
-	        else
-	        {
-	        	shouldRotate = false;
-	        	z = 0;
-	        }
+	        SmartDashboard.putNumber("Z Value", z);
         }
         
+        SmartDashboard.putNumber("Gyro", gyro.getAngle());
 		double frontLeftFactor = (x * (sineTheta + cosineTheta)) + (y * (cosineTheta - sineTheta)) - z;
         double frontRightFactor = (x * (sineTheta - cosineTheta)) + (y * (sineTheta + cosineTheta)) + z;
         double backLeftFactor = (x * (sineTheta - cosineTheta)) + (y * (sineTheta + cosineTheta)) - z;
@@ -178,6 +179,8 @@ public class Wheels extends Subsystem {
 	 */
 	public void rotateToAngle(double angle, double speed)
 	{
+        rotationDir = determineRotateDirection(Math.sin(Math.toRadians(gyro.getAngle())), Math.cos(Math.toRadians(gyro.getAngle())), angle);
+		SmartDashboard.putNumber("Rotation Speed", speed);
 		this.desiredAngle = angle;
 		this.rotateSpeed = speed;
 		this.shouldRotate = true;
@@ -241,7 +244,7 @@ public class Wheels extends Subsystem {
 	/**
 	 * @return The current angle of the gyro. (In degrees)
 	 */
-	public double getGryoAngle()
+	public double getGyroAngle()
 	{
 		return gyro.getAngle();
 	}
@@ -259,15 +262,6 @@ public class Wheels extends Subsystem {
      */
     private int determineRotateDirection(double currentCosine, double currentSine, double desiredAngle)
     {
-    	 
-    	 //Determine if within tolerances
-    	 double cosineDif = Math.abs(currentCosine - Math.cos(Math.toRadians(desiredAngle)));
-    	 double sineDif = Math.abs(currentSine - Math.sin(Math.toRadians(desiredAngle)));;
-    	 if (cosineDif <= ROTATION_DEAD_ZONE && sineDif <= ROTATION_DEAD_ZONE)
-    	 {
-    		 return 0;
-    	 }
-    	 
          if (currentCosine >= 0)
          {
          	//First or fourth quadrant
@@ -278,11 +272,19 @@ public class Wheels extends Subsystem {
  	        	{
  		        	return 1;
  		        }
+         		else
+         		{
+         			return -1;
+         		}
          	}
          	else
          	{
          		//Fourth quadrant
-         		if (currentCosine >= Math.cos(Math.toRadians(desiredAngle)))
+         		if (currentCosine <= Math.cos(Math.toRadians(desiredAngle)))
+         		{
+         			return -1;
+         		}
+         		else
          		{
          			return 1;
          		}
@@ -294,23 +296,48 @@ public class Wheels extends Subsystem {
          	if (currentSine >= 0)
          	{
          		//Second quadrant
-         		if (currentCosine >= Math.cos(Math.toRadians(desiredAngle)))
+         		if (currentCosine <= Math.cos(Math.toRadians(desiredAngle)))
+         		{
+         			return -1;
+         		}
+         		else
          		{
          			return 1;
          		}
          	}
          	else
          	{
-         		//ThirdQuadrant
+         		//Third Quadrant
          		if (currentCosine <= Math.cos(Math.toRadians(desiredAngle)))
+         		{
+         			return -1;
+         		}
+         		else
          		{
          			return 1;
          		}
          	}
          }
-         
-         return -1;
     }
+
+    /**
+     * Determines if the robot should keep rotating
+     * @param currentCosine The current cosine of the angle
+     * @param currentSine The current sine of the angle
+     * @param desiredAngle The angle to rotate to
+     * @return If the robot should keep rotating
+     */
+	private boolean shouldRotate(double currentCosine, double currentSine, double desiredAngle) {
+		//Determine if within tolerances
+    	 double cosineDif = Math.abs(currentCosine - Math.cos(Math.toRadians(desiredAngle)));
+    	 double sineDif = Math.abs(currentSine - Math.sin(Math.toRadians(desiredAngle)));;
+    	 if (cosineDif <= ROTATION_DEAD_ZONE && sineDif <= ROTATION_DEAD_ZONE)
+    	 {
+    		 rotationDir = 0;
+    		 return false;
+    	 }
+    	 return true;
+	}
     
     /**
      * Determines what angle to robot should snap to from the standard 90 degree angles
@@ -334,7 +361,7 @@ public class Wheels extends Subsystem {
         	if (currentSine >= 0)
         	{
         		//First quadrant
-        		if (isClockwise)
+        		if (!isClockwise)
 	        	{
 		        	return 0;
 		        }
@@ -346,7 +373,7 @@ public class Wheels extends Subsystem {
         	else
         	{
         		//Fourth quadrant
-        		if (isClockwise)
+        		if (!isClockwise)
         		{
         			return 270;
         		}
@@ -362,7 +389,7 @@ public class Wheels extends Subsystem {
         	if (currentSine >= 0)
         	{
         		//Second quadrant
-        		if (isClockwise)
+        		if (!isClockwise)
         		{
         			return 90;
         		}
@@ -374,7 +401,7 @@ public class Wheels extends Subsystem {
         	else
         	{
         		//ThirdQuadrant
-        		if (isClockwise)
+        		if (!isClockwise)
         		{
         			return 180;
         		}
@@ -384,6 +411,28 @@ public class Wheels extends Subsystem {
         		}
         	}
         }
+    }
+    
+    private double factorRotationSpeed(double speed, double desiredAngle, double currentAngle)
+    {
+    	double angleDif = Math.abs(desiredAngle - currentAngle);
+    	
+    	if (angleDif <= 5)
+    	{
+    		return 0;
+    	}
+    	else if (angleDif <= 10)
+    	{
+    		return speed * 0.1;
+    	}
+    	else if (angleDif <= 20)
+    	{
+    		return speed * 0.5;
+    	}
+    	else
+    	{
+    		return speed;
+    	}
     }
 }
 
