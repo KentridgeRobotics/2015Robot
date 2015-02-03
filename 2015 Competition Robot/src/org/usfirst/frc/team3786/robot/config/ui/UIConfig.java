@@ -16,7 +16,7 @@ public abstract class UIConfig {
 	
 	static
 	{
-		instance = new CyborgUI();
+		instance = new GamePadUI();
 	}
 	
 	/**

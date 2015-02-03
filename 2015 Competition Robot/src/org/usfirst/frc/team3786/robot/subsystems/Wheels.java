@@ -16,7 +16,7 @@ public class Wheels extends Subsystem {
 	private static Wheels instance;
 	
 	private static final double DEAD_ZONE = 0.15;
-	private static final double ROTATION_DEAD_ZONE = 0.05;
+	private static final double ROTATION_DEAD_ZONE = 0.15;
 	
 	private CANJaguar frontLeft;
 	private CANJaguar frontRight;
@@ -157,7 +157,7 @@ public class Wheels extends Subsystem {
 	        }
 	        else if (rotationDir < 0)
 	        {
-	        	z += factorRotationSpeed(-rotateSpeed, desiredAngle, gyro.getAngle());
+	        	z -= factorRotationSpeed(rotateSpeed, desiredAngle, gyro.getAngle());
 	        }
 	        SmartDashboard.putNumber("Z Value", z);
         }
@@ -261,14 +261,24 @@ public class Wheels extends Subsystem {
      * @return Positive if clockwise, negative if counterclockwise, zero if at angle
      */
     private int determineRotateDirection(double currentCosine, double currentSine, double desiredAngle)
-    {
+    {    	
+    	double desiredCosine = Math.cos(Math.toRadians(desiredAngle));
+    	
+    	double temp = currentCosine;
+    	currentCosine = currentSine;
+    	currentSine = temp;
+    	
+    	SmartDashboard.putNumber("Desired Cosine", desiredCosine);
+    	SmartDashboard.putNumber("Current Cosine", currentCosine);
+    	
          if (currentCosine >= 0)
          {
          	//First or fourth quadrant
          	if (currentSine >= 0)
          	{
          		//First quadrant
-         		if (currentCosine <= Math.cos(Math.toRadians(desiredAngle)))
+         		SmartDashboard.putString("Quadrant", "First");
+         		if (currentCosine <= desiredCosine)
  	        	{
  		        	return 1;
  		        }
@@ -280,7 +290,8 @@ public class Wheels extends Subsystem {
          	else
          	{
          		//Fourth quadrant
-         		if (currentCosine <= Math.cos(Math.toRadians(desiredAngle)))
+         		SmartDashboard.putString("Quadrant", "Fourth");
+         		if (currentCosine <= desiredCosine)
          		{
          			return -1;
          		}
@@ -296,7 +307,8 @@ public class Wheels extends Subsystem {
          	if (currentSine >= 0)
          	{
          		//Second quadrant
-         		if (currentCosine <= Math.cos(Math.toRadians(desiredAngle)))
+         		SmartDashboard.putString("Quadrant", "Second");
+         		if (currentCosine >= desiredCosine)
          		{
          			return -1;
          		}
@@ -308,7 +320,8 @@ public class Wheels extends Subsystem {
          	else
          	{
          		//Third Quadrant
-         		if (currentCosine <= Math.cos(Math.toRadians(desiredAngle)))
+         		SmartDashboard.putString("Quadrant", "Third");
+         		if (currentCosine <= desiredCosine)
          		{
          			return -1;
          		}
@@ -423,7 +436,7 @@ public class Wheels extends Subsystem {
     	}
     	else if (angleDif <= 10)
     	{
-    		return speed * 0.1;
+    		return speed * 0.3;
     	}
     	else if (angleDif <= 20)
     	{

@@ -1,17 +1,17 @@
 package org.usfirst.frc.team3786.robot.config.ui;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class GamePadUI extends UIConfig {
 
 	//Gamepad
 	private final int JOYSTICK_CHANNEL = 0;
-	private final int SECOND_STICK_X = 4;
-	private final int SECOND_STICK_Y = 5;
+	private final int SECOND_STICK_X = 5;
+	private final int SECOND_STICK_Y = 4;
 	private final Joystick STICK;
 	
 	//Buttons
-	private final int SNAP_BUTTON = 5;
 	private final int RETAIN_ANGLE_BUTTON = 6;
 	private final int ARM_TO_ZERO_BUTTON = 8;
 	private final int DROP_STACK_BUTTON = 7;
@@ -33,7 +33,7 @@ public class GamePadUI extends UIConfig {
 
 	@Override
 	public double getDriveXValue() {
-		return STICK.getX();
+		return -STICK.getX();
 	}
 
 	@Override
@@ -65,10 +65,14 @@ public class GamePadUI extends UIConfig {
 			return 270;
 		}
 		
-		double XVal = STICK.getRawAxis(SECOND_STICK_X);
-		double YVal = -STICK.getRawAxis(SECOND_STICK_Y);
+		
+		
+		double XVal = -STICK.getRawAxis(SECOND_STICK_X);
+		double YVal = STICK.getRawAxis(SECOND_STICK_Y);
+		
 		
 		double angle = Math.toDegrees(Math.atan2(YVal, XVal));
+		SmartDashboard.putNumber("Gamepad Angle", angle);
 		
 		return angle;
 	}
