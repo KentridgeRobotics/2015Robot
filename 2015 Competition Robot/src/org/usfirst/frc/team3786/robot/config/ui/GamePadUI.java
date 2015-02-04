@@ -11,6 +11,8 @@ public class GamePadUI extends UIConfig {
 	private final int SECOND_STICK_Y = 4;
 	private final Joystick STICK;
 	
+	private final double DEAD_ZONE = 0.15;
+	
 	//Buttons
 	private final int RETAIN_ANGLE_BUTTON = 6;
 	private final int ARM_TO_ZERO_BUTTON = 8;
@@ -69,6 +71,11 @@ public class GamePadUI extends UIConfig {
 		
 		double XVal = -STICK.getRawAxis(SECOND_STICK_X);
 		double YVal = STICK.getRawAxis(SECOND_STICK_Y);
+		
+		if (Math.abs(XVal) <= DEAD_ZONE && Math.abs(YVal) <= DEAD_ZONE)
+		{
+			return -1;
+		}
 		
 		
 		double angle = Math.toDegrees(Math.atan2(YVal, XVal));

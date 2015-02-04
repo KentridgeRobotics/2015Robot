@@ -263,42 +263,31 @@ public class Wheels extends Subsystem {
     private int determineRotateDirection(double currentCosine, double currentSine, double desiredAngle)
     {    	
     	double desiredCosine = Math.cos(Math.toRadians(desiredAngle));
+    	double desiredSine = Math.sin(Math.toRadians(desiredAngle));
     	
     	double temp = currentCosine;
     	currentCosine = currentSine;
     	currentSine = temp;
     	
+    	int startingQuadrant = 0;
+    	int angleQuadrant = 0;
+    	
     	SmartDashboard.putNumber("Desired Cosine", desiredCosine);
     	SmartDashboard.putNumber("Current Cosine", currentCosine);
     	
+    	//Will become unnecessary, debug purposes right now.
          if (currentCosine >= 0)
          {
          	//First or fourth quadrant
          	if (currentSine >= 0)
          	{
          		//First quadrant
-         		SmartDashboard.putString("Quadrant", "First");
-         		if (currentCosine <= desiredCosine)
- 	        	{
- 		        	return 1;
- 		        }
-         		else
-         		{
-         			return -1;
-         		}
+         		startingQuadrant = 1;         		
          	}
          	else
          	{
          		//Fourth quadrant
-         		SmartDashboard.putString("Quadrant", "Fourth");
-         		if (currentCosine <= desiredCosine)
-         		{
-         			return -1;
-         		}
-         		else
-         		{
-         			return 1;
-         		}
+         		startingQuadrant = 4;
          	}
          }
          else
@@ -307,29 +296,91 @@ public class Wheels extends Subsystem {
          	if (currentSine >= 0)
          	{
          		//Second quadrant
-         		SmartDashboard.putString("Quadrant", "Second");
-         		if (currentCosine >= desiredCosine)
-         		{
-         			return -1;
-         		}
-         		else
-         		{
-         			return 1;
-         		}
+         		startingQuadrant = 2;
          	}
          	else
          	{
          		//Third Quadrant
-         		SmartDashboard.putString("Quadrant", "Third");
-         		if (currentCosine <= desiredCosine)
-         		{
-         			return -1;
-         		}
-         		else
-         		{
-         			return 1;
-         		}
+         		startingQuadrant = 3;
          	}
+         }
+         
+         SmartDashboard.putNumber("Starting Quadrant", startingQuadrant);
+         
+         if (desiredCosine >= 0)
+         {
+         	//First or fourth quadrant
+         	if (desiredSine >= 0)
+         	{
+         		//First quadrant
+         		angleQuadrant = 1;         		
+         	}
+         	else
+         	{
+         		//Fourth quadrant
+         		angleQuadrant = 4;
+         	}
+         }
+         else
+         {
+         	//Second or third quadrant
+         	if (desiredSine >= 0)
+         	{
+         		//Second quadrant
+         		angleQuadrant = 2;
+         	}
+         	else
+         	{
+         		//Third Quadrant
+         		angleQuadrant = 3;
+         	}
+         }
+         
+         SmartDashboard.putNumber("Angle Quadrant", angleQuadrant);
+         
+         if (desiredSine > 0 && currentSine > 0)
+         {
+        	 if(currentCosine < desiredCosine)
+        	 {
+        		 return 1;
+        	 }
+        	 else
+        	 {
+        		 return -1;
+        	 }
+         }
+         else if (desiredSine < 0 && currentSine < 0)
+         {
+        	 if (currentCosine < desiredCosine)
+        	 {
+        		 return -1;
+        	 }
+        	 else
+        	 {
+        		 return 1;
+        	 }
+         }
+         else if (desiredCosine > 0 && currentCosine > 0)
+         {
+        	 if (currentSine < desiredSine)
+        	 {
+        		 return -1;
+        	 }
+        	 else
+        	 {
+        		 return 1;
+        	 }
+         }
+         else
+         {
+        	 if (currentSine < desiredSine)
+        	 {
+        		 return 1;
+        	 }
+        	 else
+        	 {
+        		 return -1;
+        	 }
          }
     }
 
