@@ -4,6 +4,8 @@ import org.usfirst.frc.team3786.robot.commands.teleop.TeleopDriveCommand;
 import org.usfirst.frc.team3786.robot.config.robot.RobotConfig;
 
 import edu.wpi.first.wpilibj.CANJaguar;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,6 +26,9 @@ public class Wheels extends Subsystem {
 	private CANJaguar backRight;
 	
 	private Gyro gyro;
+	
+	private Encoder xEncoder;
+	private Encoder yEncoder;
 	
 	private double desiredAngle;
 	private double rotateSpeed;
@@ -51,6 +56,10 @@ public class Wheels extends Subsystem {
 		backRight.enableControl();
 		
 		gyro = new Gyro(RobotConfig.get().getGYRO_CHANNEL());
+		xEncoder = new Encoder(0, 0, false, EncodingType.k4X); //TODO Update channels
+		yEncoder = new Encoder(0, 0, false, EncodingType.k4X); //TODO Update channels
+		
+//		xEncoder.setDistancePerPulse(distancePerPulse);
 	}
 	
 	/**
@@ -104,7 +113,7 @@ public class Wheels extends Subsystem {
 	 */
 	public double getX()
 	{
-		return 0.0;
+		return xEncoder.getDistance();
 	}
 	
 	/**
@@ -112,7 +121,7 @@ public class Wheels extends Subsystem {
 	 */
 	public double getY()
 	{
-		return 0.0;
+		return yEncoder.getDistance();
 	}
 	
 	
@@ -169,6 +178,15 @@ public class Wheels extends Subsystem {
         double backRightFactor = (x * (sineTheta + cosineTheta)) + (y * (cosineTheta - sineTheta)) + z;
         
         drive(frontLeftFactor, frontRightFactor, backLeftFactor, backRightFactor);
+	}
+	
+	/**
+	 * @param xDist The distance in the x direction to drive the robot.
+	 * @param yDist The distance in the y direction to drive the robot.
+	 */
+	public void driveDistance(double xDist, double yDist)
+	{
+		
 	}
 	
 	/**
