@@ -114,4 +114,9 @@ public abstract class RobotConfig {
 	 * @return The signal light channel.
 	 */
 	public abstract int getFEED_SIGNAL_LIGHT();
+
+	/**
+	 * @return The channel of the gyro
+	 */
+	public abstract int getGYRO_CHANNEL();
 }

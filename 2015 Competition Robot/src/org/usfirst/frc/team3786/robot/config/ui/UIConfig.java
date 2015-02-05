@@ -71,4 +71,6 @@ public abstract class UIConfig {
 	 * @return If the lifter should move down.
 	 */
 	public abstract boolean getLifterDownButton();
+
+	public abstract boolean getRetainAngleButton();
 }

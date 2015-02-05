@@ -99,4 +99,10 @@ public class GamePadUI extends UIConfig {
 		return false;
 	}
 
+	@Override
+	public boolean getRetainAngleButton() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

@@ -83,5 +83,11 @@ public class CyborgUI extends UIConfig {
 		return STICK.getRawButton(LIFT_DOWN_BUTTON);
 	}
 
+	@Override
+	public boolean getRetainAngleButton() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	
 }
