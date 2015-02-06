@@ -19,6 +19,7 @@ public class Wheels extends Subsystem {
 	
 	private static final double DEAD_ZONE = 0.15;
 	private static final double ROTATION_DEAD_ZONE = 0.15;
+	private static final double ENCODER_DISTANCE_PER_PULSE = 1 / 360.0;
 	
 	private CANJaguar frontLeft;
 	private CANJaguar frontRight;
@@ -59,7 +60,7 @@ public class Wheels extends Subsystem {
 		xEncoder = new Encoder(0, 0, false, EncodingType.k4X); //TODO Update channels
 		yEncoder = new Encoder(0, 0, false, EncodingType.k4X); //TODO Update channels
 		
-//		xEncoder.setDistancePerPulse(distancePerPulse);
+		xEncoder.setDistancePerPulse(ENCODER_DISTANCE_PER_PULSE);
 	}
 	
 	/**
