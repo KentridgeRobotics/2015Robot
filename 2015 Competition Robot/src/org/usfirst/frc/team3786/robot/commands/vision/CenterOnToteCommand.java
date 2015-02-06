@@ -26,6 +26,7 @@ public class CenterOnToteCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	distance = uSonic.getRangeInches();
+    	double moveDist = Vision.getInstance().distanceToCenter(distance);
     }
 
     // Make this return true when this Command no longer needs to run execute()

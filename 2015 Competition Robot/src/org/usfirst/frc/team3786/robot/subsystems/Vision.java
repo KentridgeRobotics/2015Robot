@@ -30,6 +30,19 @@ public class Vision extends Subsystem {
 	}
 	
 	/**
+	 * @param distance The distance that the tote is from the camera (TBD Units)
+	 * @return The distance to travel in order to center (TBD Units)
+	 */
+	public double distanceToCenter(double distance)
+	{
+		//Determine angle off center
+		double angleOffCenter = 0;
+		
+		
+		return distance * Math.tan(Math.toRadians(angleOffCenter));
+	}
+	
+	/**
 	 * @return If the robot is centered on a tote
 	 */
 	public boolean isCentered()
