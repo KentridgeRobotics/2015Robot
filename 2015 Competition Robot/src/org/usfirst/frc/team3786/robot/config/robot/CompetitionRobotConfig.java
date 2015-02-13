@@ -11,14 +11,14 @@ public class CompetitionRobotConfig extends RobotConfig {
 	private static final int LIFTER_MOTOR_CHANNEL = 15;
 	private static final int CHUTE_MOTOR_CHANNEL = 16;
 	
-	//Potentiometer
-	private static final int POTENTIOMETER_CHANNEL = 17;
-	
-	//Omni-wheels for X-Y distance
+	//Encoders
+	private static final int ARM_ENCODER_CHANNEL = 0;
 	private static final int X_OMNI_WHEEL_ENCODER = 18;
 	private static final int Y_OMNI_WHEEL_ENCODER = 19;
 	
-	//Limit Switches
+	//Camera
+	private static final int LIGHTS_CHANNEL = 0;
+	private static final int CAMERA_OFFSET = 0;
 	
 	//Tote detector
 	private static final int LASER = 21;
@@ -33,6 +33,10 @@ public class CompetitionRobotConfig extends RobotConfig {
 	private static final double LIFTER_P = 0;
 	private static final double LIFTER_I = 0;
 	private static final double LIFTER_D = 0;
+
+	private static final double ARM_P = 0;
+	private static final double ARM_I = 0;
+	private static final double ARM_D = 0;
 
 	@Override
 	public int getFRONT_RIGHT_MOTOR_CHANNEL() {
@@ -67,11 +71,6 @@ public class CompetitionRobotConfig extends RobotConfig {
 	@Override
 	public int getCHUTE_MOTOR_CHANNEL() {
 		return CHUTE_MOTOR_CHANNEL;
-	}
-
-	@Override
-	public int getPOTENTIOMETER_CHANNEL() {
-		return POTENTIOMETER_CHANNEL;
 	}
 
 	@Override
@@ -114,5 +113,35 @@ public class CompetitionRobotConfig extends RobotConfig {
 	@Override
 	public int getGYRO_CHANNEL() {
 		return GYRO_CHANNEL;
+	}
+
+	@Override
+	public int getLIGHT_CHANNEL() {
+		return LIGHTS_CHANNEL;
+	}
+
+	@Override
+	public double getCAMERA_OFF_SET() {
+		return CAMERA_OFFSET;
+	}
+
+	@Override
+	public int getARM_ENCODER_CHANNEL() {
+		return ARM_ENCODER_CHANNEL;
+	}
+
+	@Override
+	public double getARM_P() {
+		return ARM_P;
+	}
+
+	@Override
+	public double getARM_I() {
+		return ARM_I;
+	}
+
+	@Override
+	public double getARM_D() {
+		return ARM_D;
 	}
 }

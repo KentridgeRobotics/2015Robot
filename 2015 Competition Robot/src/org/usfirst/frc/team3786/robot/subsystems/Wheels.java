@@ -28,8 +28,8 @@ public class Wheels extends Subsystem {
 	
 	private Gyro gyro;
 	
-	private Encoder xEncoder;
-	private Encoder yEncoder;
+//	private Encoder xEncoder;
+//	private Encoder yEncoder;
 	
 	private double desiredAngle;
 	private double rotateSpeed;
@@ -57,10 +57,10 @@ public class Wheels extends Subsystem {
 		backRight.enableControl();
 		
 		gyro = new Gyro(RobotConfig.get().getGYRO_CHANNEL());
-		xEncoder = new Encoder(0, 0, false, EncodingType.k4X); //TODO Update channels
-		yEncoder = new Encoder(0, 0, false, EncodingType.k4X); //TODO Update channels
-		
-		xEncoder.setDistancePerPulse(ENCODER_DISTANCE_PER_PULSE);
+//		xEncoder = new Encoder(0, 0, false, EncodingType.k4X); //TODO Update channels
+//		yEncoder = new Encoder(0, 0, false, EncodingType.k4X); //TODO Update channels
+//		
+//		xEncoder.setDistancePerPulse(ENCODER_DISTANCE_PER_PULSE);
 	}
 	
 	/**
@@ -109,21 +109,21 @@ public class Wheels extends Subsystem {
 	}
 	
 	//Get encoder values
-	/**
-	 * @return The X position (in TBD units) of the robot from initial starting position.
-	 */
-	public double getX()
-	{
-		return xEncoder.getDistance();
-	}
-	
-	/**
-	 * @return The Y position (in TBD units) of the robot from initial starting position.
-	 */
-	public double getY()
-	{
-		return yEncoder.getDistance();
-	}
+//	/**
+//	 * @return The X position (in TBD units) of the robot from initial starting position.
+//	 */
+//	public double getX()
+//	{
+//		return xEncoder.getDistance();
+//	}
+//	
+//	/**
+//	 * @return The Y position (in TBD units) of the robot from initial starting position.
+//	 */
+//	public double getY()
+//	{
+//		return yEncoder.getDistance();
+//	}
 	
 	
 	//Utility methods for drive
@@ -140,6 +140,11 @@ public class Wheels extends Subsystem {
         
         double cosineTheta = Math.cos(theta);
         double sineTheta = Math.sin(theta);
+        
+        //Swap x and y while inverting
+        double temp = x;
+        x = y;
+        y = temp;
 
         //Dead zones
         if (Math.abs(x) < DEAD_ZONE)
@@ -172,22 +177,21 @@ public class Wheels extends Subsystem {
 	        SmartDashboard.putNumber("Z Value", z);
         }
         
+        //Invert z value
+        z *= -1;
+        
         SmartDashboard.putNumber("Gyro", gyro.getAngle());
-		double frontLeftFactor = (x * (sineTheta + cosineTheta)) + (y * (cosineTheta - sineTheta)) - z;
-        double frontRightFactor = (x * (sineTheta - cosineTheta)) + (y * (sineTheta + cosineTheta)) + z;
-        double backLeftFactor = (x * (sineTheta - cosineTheta)) + (y * (sineTheta + cosineTheta)) - z;
-        double backRightFactor = (x * (sineTheta + cosineTheta)) + (y * (cosineTheta - sineTheta)) + z;
+		double backLeftFactor = (x * (sineTheta + cosineTheta)) + (y * (cosineTheta - sineTheta)) - z;
+        double frontLeftFactor = (x * (sineTheta - cosineTheta)) + (y * (sineTheta + cosineTheta)) + z;
+        double backRightFactor = (x * (sineTheta - cosineTheta)) + (y * (sineTheta + cosineTheta)) - z;
+        double frontRightFactor = (x * (sineTheta + cosineTheta)) + (y * (cosineTheta - sineTheta)) + z;
+        
+        
+        //Invert front motors
+        frontLeftFactor *= -1;
+        frontRightFactor *= -1;
         
         drive(frontLeftFactor, frontRightFactor, backLeftFactor, backRightFactor);
-	}
-	
-	/**
-	 * @param xDist The distance in the x direction to drive the robot.
-	 * @param yDist The distance in the y direction to drive the robot.
-	 */
-	public void driveDistance(double xDist, double yDist)
-	{
-		
 	}
 	
 	/**
@@ -198,7 +202,7 @@ public class Wheels extends Subsystem {
 	 */
 	public void rotateToAngle(double angle, double speed)
 	{
-        rotationDir = determineRotateDirection(Math.sin(Math.toRadians(gyro.getAngle())), Math.cos(Math.toRadians(gyro.getAngle())), angle);
+        rotationDir = -determineRotateDirection(Math.sin(Math.toRadians(gyro.getAngle())), Math.cos(Math.toRadians(gyro.getAngle())), angle);
 		SmartDashboard.putNumber("Rotation Speed", speed);
 		this.desiredAngle = angle;
 		this.rotateSpeed = speed;
@@ -506,9 +510,13 @@ public class Wheels extends Subsystem {
     	}
     	else if (angleDif <= 10)
     	{
-    		return speed * 0.3;
+    		return speed * 0.15;
     	}
     	else if (angleDif <= 20)
+    	{
+    		return speed * 0.3;
+    	}
+    	else if (angleDif <= 30)
     	{
     		return speed * 0.5;
     	}

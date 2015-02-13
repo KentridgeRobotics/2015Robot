@@ -9,24 +9,46 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class LiftToteCommand extends Command {
-
+	
     public LiftToteCommand() {
         requires(Arm.getInstance());
         requires(Lifter.getInstance());
     }
+    
+    private boolean isFinished = false;
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	isFinished = false;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if (Arm.getInstance().getPosition() < Arm.getLIFT_POSITION())
+    	{
+    		Arm.getInstance().moveArm(Arm.getLIFT_POSITION());
+    	}
+    	else if (Lifter.getInstance().getPosition() > Lifter.getAUTO_GRAB_POSITION())
+    	{
+    		Lifter.getInstance().moveToPosition(Lifter.getAUTO_GRAB_POSITION());
+    	}
+    	else if (Lifter.getInstance().getPosition() < Lifter.getAUTO_CLEAR_POSITION())
+    	{
+    		Lifter.getInstance().moveToPosition(Lifter.getAUTO_CLEAR_POSITION());
+    	}
+    	else if (Arm.getInstance().getPosition() > Arm.getDOWN_POSITION())
+    	{
+    		Arm.getInstance().moveArm(Arm.getDOWN_POSITION());
+    	}
+    	else
+    	{
+    		isFinished = true;
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	//Should end when tote picked up
-        return false;
+        return isFinished;
     }
 
     // Called once after isFinished returns true

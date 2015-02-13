@@ -21,9 +21,11 @@ public class CyborgUI extends UIConfig {
 	private final int DROP_STACK_BUTTON = 2;
 	private final int LIFT_UP_BUTTON = 5;
 	private final int LIFT_DOWN_BUTTON = 6;
+	private final int ARM_UP_BUTTON = 5;
+	private final int ARM_DOWN_BUTTON = 6;
 	
 	//Rotation to snap to
-	
+	private final int RETAIN_ANGLE_BUTTON = 2;
 	
 	//Instance vars
 	private final Joystick STICK;
@@ -85,8 +87,17 @@ public class CyborgUI extends UIConfig {
 
 	@Override
 	public boolean getRetainAngleButton() {
-		// TODO Auto-generated method stub
-		return false;
+		return STICK.getRawButton(RETAIN_ANGLE_BUTTON);
+	}
+
+	@Override
+	public boolean getArmUpButton() {
+		return STICK.getRawButton(ARM_UP_BUTTON);
+	}
+
+	@Override
+	public boolean getArmDownButton() {
+		return STICK.getRawButton(ARM_DOWN_BUTTON);
 	}
 
 	

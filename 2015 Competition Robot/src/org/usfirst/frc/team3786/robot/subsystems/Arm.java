@@ -15,12 +15,15 @@ public class Arm extends Subsystem {
 	
 	private CANJaguar armMotor;
 	
+	private static final double UP_POSITION = 1;
+	private static final double DOWN_POSITION = 0;
+	private static final double LIFT_POSITION = 0.5;
+	
 	private Arm()
 	{
 		armMotor = new CANJaguar(RobotConfig.get().getARM_MOTOR_CHANNEL());
-		
-		//TODO Determine if this should be Percent or Position mode
-		armMotor.setPercentMode();
+
+		armMotor.setPositionMode(CANJaguar.kQuadEncoder, RobotConfig.get().getARM_ENCODER_CHANNEL(), RobotConfig.get().getARM_P(), RobotConfig.get().getARM_I(), RobotConfig.get().getARM_D());
 		
 		armMotor.enableControl();
 	}
@@ -39,11 +42,40 @@ public class Arm extends Subsystem {
 	}
 
 	/**
-	 * @param speed The speed at which to drive the arm on a scale of [-1.0, 1.0]
+	 * @param position The position to drive the arm to
 	 */
-	public void moveArm(double speed)
+	public void moveArm(double position)
 	{
-		armMotor.set(speed);
+		armMotor.set(position);
+	}
+	
+	//TODO Needs work
+	public void zero()
+	{
+		armMotor.set(0);
+	}
+	
+	/**
+	 * @return The current position of the arm
+	 */
+	public double getPosition()
+	{
+		return armMotor.get();
+	}
+	
+	public static double getUP_POSITION()
+	{
+		return UP_POSITION;
+	}
+	
+	public static double getDOWN_POSITION()
+	{
+		return DOWN_POSITION;
+	}
+	
+	public static double getLIFT_POSITION()
+	{
+		return LIFT_POSITION;
 	}
 	
     public void initDefaultCommand() {

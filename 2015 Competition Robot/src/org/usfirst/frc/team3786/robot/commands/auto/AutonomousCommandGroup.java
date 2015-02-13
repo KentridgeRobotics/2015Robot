@@ -2,15 +2,21 @@ package org.usfirst.frc.team3786.robot.commands.auto;
 
 import org.usfirst.frc.team3786.robot.commands.DropTotesCommand;
 import org.usfirst.frc.team3786.robot.commands.vision.CenterOnToteCommand;
+import org.usfirst.frc.team3786.robot.subsystems.Vision;
+import org.usfirst.frc.team3786.robot.subsystems.Wheels;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
 public class AutonomousCommandGroup extends CommandGroup {
-    
+	
     public  AutonomousCommandGroup() {
+    	
+    	requires(Wheels.getInstance());
+    	requires(Vision.getInstance());
     	
         // Add Commands here:
         // e.g. addSequential(new Command1());
@@ -24,21 +30,23 @@ public class AutonomousCommandGroup extends CommandGroup {
     	addSequential(new DriveToNextToteCommand());
     	//Center on tote
     	addSequential(new CenterOnToteCommand());
-    	//Pick up 2nd tote when centered
-    	addParallel(new LiftToteCommand());
+    	addSequential(new CenterOnToteCommand());
     	
+    	//Pick up 2nd tote when centered
+//    	addParallel(new LiftToteCommand());
     	//Move to next tote
     	addSequential(new DriveToNextToteCommand());
-    	//Center
+    	//Center twice for verification
+    	addSequential(new CenterOnToteCommand());
     	addSequential(new CenterOnToteCommand());
     	//Pick up last tote
     	addParallel(new LiftToteCommand());
     	
     	//Move backwards into the auto zone
     	addSequential(new DriveBackwardsCommand());
-    	//Begin dropping totes
+//    	//Begin dropping totes
     	addParallel(new DropTotesCommand());
-    	//Move away from totes
+//    	//Move away from totes
     	addSequential(new DriveBackwardsCommand());
     	
 
@@ -53,5 +61,11 @@ public class AutonomousCommandGroup extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+    }
+    
+    @Override
+    public void end()
+    {
+    	System.out.println("Group Ended");
     }
 }

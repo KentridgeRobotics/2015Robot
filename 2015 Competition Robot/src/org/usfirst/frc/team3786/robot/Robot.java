@@ -1,7 +1,9 @@
 
 package org.usfirst.frc.team3786.robot;
 
+import org.usfirst.frc.team3786.robot.commands.auto.AutonomousCommandGroup;
 import org.usfirst.frc.team3786.robot.commands.teleop.TeleopDriveCommand;
+import org.usfirst.frc.team3786.robot.subsystems.Vision;
 import org.usfirst.frc.team3786.robot.subsystems.Wheels;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -18,7 +20,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Robot extends IterativeRobot {
 
-    Command autonomousCommandGroup;
+    Command autonomousCommandGroup = new AutonomousCommandGroup();
 
     /**
      * This function is run when the robot is first started up and should be
@@ -37,6 +39,7 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
+    	
         // schedule the autonomous command group
         if (autonomousCommandGroup != null)
         {
@@ -56,10 +59,18 @@ public class Robot extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
+    	
+    	System.out.println("Teleop init");
+    	System.out.println("Auto Command Group: " + autonomousCommandGroup);
         if (autonomousCommandGroup != null)
         {
         	autonomousCommandGroup.cancel();
+        	System.out.println("Auto Cancelled");
         }
+        
+        System.out.println("Auto Command Group is Cancelled: " + autonomousCommandGroup.isCanceled());
+        
+        Vision.getInstance().setLights(false);
         
         Scheduler.getInstance().add(new TeleopDriveCommand());
 //        Scheduler.getInstance().add(new TeleopArmCommand());

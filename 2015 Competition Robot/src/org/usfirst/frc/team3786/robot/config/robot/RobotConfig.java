@@ -17,7 +17,7 @@ public abstract class RobotConfig {
 	
 	static
 	{
-		instance = new CompetitionRobotConfig();
+		instance = new PracticeRobotConfig();
 	}
 	
 	/**
@@ -71,12 +71,6 @@ public abstract class RobotConfig {
 	public abstract int getCHUTE_MOTOR_CHANNEL();
 
 	/**
-	 * Get the channel that the potentiometer is on.
-	 * @return The potentiometer channel.
-	 */
-	public abstract int getPOTENTIOMETER_CHANNEL();
-
-	/**
 	 * Get the channel that the X value omni-wheel's encoder is on.
 	 * @return The encoder channel.
 	 */
@@ -102,6 +96,21 @@ public abstract class RobotConfig {
 	 * @return The D value for the Lifter's PID.
 	 */
 	public abstract double getLIFTER_D();
+	
+	/**
+	 * @return The P value for the Arm's PID.
+	 */
+	public abstract double getARM_P();
+	
+	/**
+	 * @return The I value for the Arm's PID.
+	 */
+	public abstract double getARM_I();
+	
+	/**
+	 * @return The D value for the Arm's PID.
+	 */
+	public abstract double getARM_D();
 
 	/**
 	 * Get the channel that the laser is on.
@@ -119,4 +128,13 @@ public abstract class RobotConfig {
 	 * @return The channel of the gyro
 	 */
 	public abstract int getGYRO_CHANNEL();
+	
+	/**
+	 * @return The channel that the relay for the lights is on.
+	 */
+	public abstract int getLIGHT_CHANNEL();
+	
+	public abstract double getCAMERA_OFF_SET();
+	
+	public abstract int getARM_ENCODER_CHANNEL();
 }

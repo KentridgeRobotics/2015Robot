@@ -16,7 +16,7 @@ public abstract class UIConfig {
 	
 	static
 	{
-		instance = new CyborgUI();
+		instance = new GamePadUI();
 	}
 	
 	/**
@@ -57,6 +57,10 @@ public abstract class UIConfig {
 	 * @return If the arm should move to zero.
 	 */
 	public abstract boolean getArmToZeroButton();
+	
+	public abstract boolean getArmUpButton();
+	
+	public abstract boolean getArmDownButton();
 	
 	/**
 	 * @return If the robot should drop the stack.

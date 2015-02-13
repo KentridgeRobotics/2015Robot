@@ -6,6 +6,6 @@ public class LoadingCommandGroup extends CommandGroup {
 
 	public LoadingCommandGroup()
 	{
-		//This should handle when robot is in loading area
+		
 	}
 }

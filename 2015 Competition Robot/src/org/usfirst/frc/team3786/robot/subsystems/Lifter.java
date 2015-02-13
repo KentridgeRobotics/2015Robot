@@ -14,6 +14,12 @@ public class Lifter extends Subsystem {
 	private static Lifter instance;
 	
 	private CANJaguar lifterMotor;
+	
+	private static final double AUTO_CLEAR_POSITION = 5;
+	private static final double AUTO_GRAB_POSITION = 4;
+	private static final double DOWN_POSITION = 0;
+	private static final double LOAD_CLEAR_POSITION = 3;
+	private static final double LOAD_GRAB_POSITION = 2;
 
 	private Lifter()
 	{
@@ -52,6 +58,31 @@ public class Lifter extends Subsystem {
 	public double getPosition()
 	{
 		return lifterMotor.get();
+	}
+	
+	public static double getAUTO_CLEAR_POSITION()
+	{
+		return AUTO_CLEAR_POSITION;
+	}
+	
+	public static double getAUTO_GRAB_POSITION()
+	{
+		return AUTO_GRAB_POSITION;
+	}
+	
+	public static double getDOWN_POSITION()
+	{
+		return DOWN_POSITION;
+	}
+	
+	public static double getLOAD_CLEAR_POSITION()
+	{
+		return LOAD_CLEAR_POSITION;
+	}
+	
+	public static double getLOAD_GRAB_POSITION()
+	{
+		return LOAD_GRAB_POSITION;
 	}
 
     public void initDefaultCommand() {
