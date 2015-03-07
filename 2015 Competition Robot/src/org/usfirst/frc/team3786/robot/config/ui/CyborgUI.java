@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3786.robot.config.ui;
 
+import org.usfirst.frc.team3786.robot.subsystems.Wheels;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
 
@@ -11,93 +13,110 @@ import edu.wpi.first.wpilibj.Joystick.AxisType;
 public class CyborgUI extends UIConfig {
 	
 	//Joystick information
-	private final int JOYSTICK_CHANNEL = 0;
+	private final int CYBORG_CHANNEL = 0;
+	private final int JOYSTICK_CHANNEL = 1;
 	private final AxisType ROTATION_AXIS = AxisType.kThrottle;
 	
-	//Buttons
-	private final int SNAP_CW_BUTTON = 4;
-	private final int SNAP_CCW_BUTTON = 3;
-	private final int ARM_TO_ZERO_BTN = 1;
+	//Cyborg Buttons
+	private final int CLOCKWISE_BUTTON = 4;
+	private final int COUNTER_CLOCKWISE_BUTTON = 3;
+	
+	//Joystick Buttons
+	private final int ARM_TO_ZERO_BTN = 3;
 	private final int DROP_STACK_BUTTON = 2;
-	private final int LIFT_UP_BUTTON = 5;
-	private final int LIFT_DOWN_BUTTON = 6;
-	private final int ARM_UP_BUTTON = 5;
-	private final int ARM_DOWN_BUTTON = 6;
+	private final int LIFT_UP_BUTTON = 11;
+	private final int LIFT_DOWN_BUTTON = 10;
+	private final int ARM_UP_BUTTON = 6;
+	private final int ARM_DOWN_BUTTON = 7;
+	
 	
 	//Rotation to snap to
 	private final int RETAIN_ANGLE_BUTTON = 2;
 	
 	//Instance vars
-	private final Joystick STICK;
+	private final Joystick CYBORG;
+	private final Joystick JOYSTICK;
 	
 	public CyborgUI()
 	{
-		STICK = new Joystick(JOYSTICK_CHANNEL);
+		CYBORG = new Joystick(CYBORG_CHANNEL);
+		JOYSTICK = new Joystick(JOYSTICK_CHANNEL);
 	}
 
 	@Override
 	public double getDriveYValue() {
-		return STICK.getY();
+		return CYBORG.getY();
 	}
 
 	@Override
 	public double getDriveXValue() {
-		return STICK.getX();
+		return CYBORG.getX();
 	}
 
 	@Override
 	public double getDriveRotateValue() {
-		return STICK.getAxis(ROTATION_AXIS);
+		return CYBORG.getAxis(ROTATION_AXIS);
 	}
 
 	@Override
 	public boolean getSnapCWButton() {
-		return STICK.getRawButton(SNAP_CW_BUTTON);
+		return CYBORG.getRawButton(CLOCKWISE_BUTTON);
 	}
 
 	@Override
 	public boolean getSnapCCWButton() {
-		return STICK.getRawButton(SNAP_CCW_BUTTON);
+		return CYBORG.getRawButton(COUNTER_CLOCKWISE_BUTTON);
 	}
 
 	@Override
 	public double getAngleToRotateTo() {		
-		return -1;
+		if (CYBORG.getRawButton(CLOCKWISE_BUTTON))
+		{
+			return Wheels.getInstance().determineSnapAngle(true);
+		}
+		else if (CYBORG.getRawButton(COUNTER_CLOCKWISE_BUTTON))
+		{
+			return Wheels.getInstance().determineSnapAngle(false);
+		}
+		else
+		{
+			return -1;
+		}
 	}
 
 	@Override
 	public boolean getArmToZeroButton() {
-		return STICK.getRawButton(ARM_TO_ZERO_BTN);
+		return JOYSTICK.getRawButton(ARM_TO_ZERO_BTN);
 	}
 
 	@Override
 	public boolean getDropStackButton() {
-		return STICK.getRawButton(DROP_STACK_BUTTON);
+		return JOYSTICK.getRawButton(DROP_STACK_BUTTON);
 	}
 
 	@Override
 	public boolean getLifterUpButton() {
-		return STICK.getRawButton(LIFT_UP_BUTTON);
+		return JOYSTICK.getRawButton(LIFT_UP_BUTTON);
 	}
 
 	@Override
 	public boolean getLifterDownButton() {
-		return STICK.getRawButton(LIFT_DOWN_BUTTON);
+		return JOYSTICK.getRawButton(LIFT_DOWN_BUTTON);
 	}
 
 	@Override
 	public boolean getRetainAngleButton() {
-		return STICK.getRawButton(RETAIN_ANGLE_BUTTON);
+		return CYBORG.getRawButton(RETAIN_ANGLE_BUTTON);
 	}
 
 	@Override
 	public boolean getArmUpButton() {
-		return STICK.getRawButton(ARM_UP_BUTTON);
+		return JOYSTICK.getRawButton(ARM_UP_BUTTON);
 	}
 
 	@Override
 	public boolean getArmDownButton() {
-		return STICK.getRawButton(ARM_DOWN_BUTTON);
+		return JOYSTICK.getRawButton(ARM_DOWN_BUTTON);
 	}
 
 	

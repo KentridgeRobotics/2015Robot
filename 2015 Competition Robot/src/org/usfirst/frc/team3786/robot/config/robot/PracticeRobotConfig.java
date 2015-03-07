@@ -8,7 +8,8 @@ public class PracticeRobotConfig extends RobotConfig {
 	private static final int BACK_RIGHT_MOTOR_CHANNEL = 15;
 	private static final int BACK_LEFT_MOTOR_CHANNEL = 17;
 	private static final int ARM_MOTOR_CHANNEL = 18;
-	private static final int LIFTER_MOTOR_CHANNEL = 23;
+	private static final int LIFTER_MOTOR_CHANNEL_LEFT = 23;
+	private static final int LIFTER_MOTOR_CHANNEL_RIGHT = 14;
 	private static final int CHUTE_MOTOR_CHANNEL = 0;
 	
 	//Encoders
@@ -18,7 +19,7 @@ public class PracticeRobotConfig extends RobotConfig {
 	
 	//Camera
 	private static final int LIGHTS_CHANNEL = 0;
-	private static final double CAMERA_OFFSET = 19.5;
+	private static final double CAMERA_OFFSET = 20;
 	
 	//Tote detector
 	private static final int LASER = 21;
@@ -64,10 +65,15 @@ public class PracticeRobotConfig extends RobotConfig {
 	}
 
 	@Override
-	public int getLIFTER_MOTOR_CHANNEL() {
-		return LIFTER_MOTOR_CHANNEL;
+	public int getLIFTER_MOTOR_CHANNEL_LEFT() {
+		return LIFTER_MOTOR_CHANNEL_LEFT;
 	}
 
+	@Override
+	public int getLIFTER_MOTOR_CHANNEL_RIGHT() {
+		return LIFTER_MOTOR_CHANNEL_RIGHT;
+	}
+	
 	@Override
 	public int getCHUTE_MOTOR_CHANNEL() {
 		return CHUTE_MOTOR_CHANNEL;

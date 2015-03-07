@@ -3,13 +3,14 @@ package org.usfirst.frc.team3786.robot.config.robot;
 
 public class CompetitionRobotConfig extends RobotConfig {
 
-	private static final int FRONT_RIGHT_MOTOR_CHANNEL = 10;
-	private static final int FRONT_LEFT_MOTOR_CHANNEL = 11;
-	private static final int BACK_RIGHT_MOTOR_CHANNEL = 12;
-	private static final int BACK_LEFT_MOTOR_CHANNEL = 13;
-	private static final int ARM_MOTOR_CHANNEL = 14;
-	private static final int LIFTER_MOTOR_CHANNEL = 15;
-	private static final int CHUTE_MOTOR_CHANNEL = 16;
+	private static final int FRONT_RIGHT_MOTOR_CHANNEL = 24;
+	private static final int FRONT_LEFT_MOTOR_CHANNEL = 12;
+	private static final int BACK_RIGHT_MOTOR_CHANNEL = 22;
+	private static final int BACK_LEFT_MOTOR_CHANNEL = 9;
+	private static final int ARM_MOTOR_CHANNEL = 11;
+	private static final int LIFTER_MOTOR_CHANNEL_LEFT = 20;
+	private static final int LIFTER_MOTOR_CHANNEL_RIGHT = 13;
+	private static final int CHUTE_MOTOR_CHANNEL = 0;
 	
 	//Encoders
 	private static final int ARM_ENCODER_CHANNEL = 0;
@@ -27,7 +28,7 @@ public class CompetitionRobotConfig extends RobotConfig {
 	private static final int FEED_SIGNAL_LIGHT = 22;
 	
 	//Gyro
-	private static final int GYRO_CHANNEL = 23;	
+	private static final int GYRO_CHANNEL = 0;	
 	
 	//PID values
 	private static final double LIFTER_P = 0;
@@ -64,10 +65,16 @@ public class CompetitionRobotConfig extends RobotConfig {
 	}
 
 	@Override
-	public int getLIFTER_MOTOR_CHANNEL() {
-		return LIFTER_MOTOR_CHANNEL;
+	public int getLIFTER_MOTOR_CHANNEL_LEFT() {
+		return LIFTER_MOTOR_CHANNEL_LEFT;
 	}
 
+	@Override
+	public int getLIFTER_MOTOR_CHANNEL_RIGHT() {
+		return LIFTER_MOTOR_CHANNEL_RIGHT;
+	}
+
+	
 	@Override
 	public int getCHUTE_MOTOR_CHANNEL() {
 		return CHUTE_MOTOR_CHANNEL;

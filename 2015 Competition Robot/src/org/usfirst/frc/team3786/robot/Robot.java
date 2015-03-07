@@ -2,7 +2,10 @@
 package org.usfirst.frc.team3786.robot;
 
 import org.usfirst.frc.team3786.robot.commands.auto.AutonomousCommandGroup;
+import org.usfirst.frc.team3786.robot.commands.auto.TimeKeeper;
 import org.usfirst.frc.team3786.robot.commands.teleop.TeleopDriveCommand;
+import org.usfirst.frc.team3786.robot.subsystems.Arm;
+import org.usfirst.frc.team3786.robot.subsystems.Lifter;
 import org.usfirst.frc.team3786.robot.subsystems.Vision;
 import org.usfirst.frc.team3786.robot.subsystems.Wheels;
 
@@ -20,7 +23,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Robot extends IterativeRobot {
 
-    Command autonomousCommandGroup = new AutonomousCommandGroup();
+	TimeKeeper tkc = new TimeKeeper();
+    Command autonomousCommandGroup = new AutonomousCommandGroup(tkc);
 
     /**
      * This function is run when the robot is first started up and should be
@@ -43,6 +47,7 @@ public class Robot extends IterativeRobot {
         // schedule the autonomous command group
         if (autonomousCommandGroup != null)
         {
+        	tkc.reset();
         	autonomousCommandGroup.start();	
         }
     }
@@ -68,9 +73,7 @@ public class Robot extends IterativeRobot {
         	System.out.println("Auto Cancelled");
         }
         
-        System.out.println("Auto Command Group is Cancelled: " + autonomousCommandGroup.isCanceled());
-        
-        Vision.getInstance().setLights(false);
+//        Vision.getInstance().setLights(false);
         
         Scheduler.getInstance().add(new TeleopDriveCommand());
 //        Scheduler.getInstance().add(new TeleopArmCommand());

@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class AutonomousCommandGroup extends CommandGroup {
 	
-    public  AutonomousCommandGroup() {
+    public  AutonomousCommandGroup(TimeKeeper tkc) {
     	
     	requires(Wheels.getInstance());
     	requires(Vision.getInstance());
@@ -23,11 +23,16 @@ public class AutonomousCommandGroup extends CommandGroup {
         //      addSequential(new Command2());
         // these will run in order.
     	
+    	//Begin time keeping
+    	new Thread(tkc).start(); //This instance will need to be kept elsewhere soon
+    	
+    	addParallel(new TimeKeeperCommand(tkc));
+    	
     	//Pick up first tote
-    	addParallel(new LiftToteCommand());
+//    	addParallel(new LiftToteCommand());
     	
     	//Move while picking up to rough area
-    	addSequential(new DriveToNextToteCommand());
+//    	addSequential(new DriveToNextToteCommand());
     	//Center on tote
     	addSequential(new CenterOnToteCommand());
     	addSequential(new CenterOnToteCommand());
@@ -35,19 +40,19 @@ public class AutonomousCommandGroup extends CommandGroup {
     	//Pick up 2nd tote when centered
 //    	addParallel(new LiftToteCommand());
     	//Move to next tote
-    	addSequential(new DriveToNextToteCommand());
+//    	addSequential(new DriveToNextToteCommand());
     	//Center twice for verification
-    	addSequential(new CenterOnToteCommand());
-    	addSequential(new CenterOnToteCommand());
+//    	addSequential(new CenterOnToteCommand());
+//    	addSequential(new CenterOnToteCommand());
     	//Pick up last tote
-    	addParallel(new LiftToteCommand());
+//    	addParallel(new LiftToteCommand());
     	
     	//Move backwards into the auto zone
-    	addSequential(new DriveBackwardsCommand());
+//    	addSequential(new DriveBackwardsCommand());
 //    	//Begin dropping totes
-    	addParallel(new DropTotesCommand());
+//    	addParallel(new DropTotesCommand());
 //    	//Move away from totes
-    	addSequential(new DriveBackwardsCommand());
+//    	addSequential(new DriveBackwardsCommand());
     	
 
         // To run multiple commands at the same time,

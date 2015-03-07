@@ -12,10 +12,10 @@ public class GamePadUI extends UIConfig {
 	private final Joystick STICK;
 	
 	//Buttons
-	private final int SNAP_CW_BUTTON = 5;
-	private final int SNAP_CCW_BUTTON = 6;
-	private final int ARM_TO_ZERO_BUTTON = 8;
-	private final int DROP_STACK_BUTTON = 7;
+	private final int CLOCKWISE_BUTTON = 6;
+	private final int COUNTER_CLOCKWISE_BUTTON = 5;
+	private final int ARM_TO_ZERO_BUTTON = 7;
+	private final int DROP_STACK_BUTTON = 8;
 	
 	private final int ZERO_DEGREES_BTN = 1;
 	private final int NINETY_DEGREES_BTN = 3;
@@ -23,12 +23,13 @@ public class GamePadUI extends UIConfig {
 	private final int TWO_SEVENTY_BTN = 2;
 	
 	private final int LIFTER_UP_BUTTON = 1;
+	
 	private final int LIFTER_DOWN_BUTTON = 2;
 
 	private final int ARM_UP_BUTTON = 1;
 	private final int ARM_DOWN_BUTTON = 2;
 	
-	private final int RETAIN_ANGLE_BUTTON = 8;
+	private final int RETAIN_ANGLE_BUTTON = 10;
 	
 	public GamePadUI()
 	{
@@ -52,12 +53,12 @@ public class GamePadUI extends UIConfig {
 
 	@Override
 	public boolean getSnapCWButton() {
-		return STICK.getRawButton(SNAP_CW_BUTTON);
+		return STICK.getRawButton(CLOCKWISE_BUTTON);
 	}
 
 	@Override
 	public boolean getSnapCCWButton() {
-		return STICK.getRawButton(SNAP_CCW_BUTTON);
+		return STICK.getRawButton(COUNTER_CLOCKWISE_BUTTON);
 	}
 
 	@Override

@@ -12,6 +12,11 @@ public class TeleopLifterCommand extends Command {
 
 	}
 	
+	public TeleopLifterCommand()
+	{
+		initialize();
+	}
+	
 	private static final double INCREMENT = 0.01;
 
 	protected void execute() {

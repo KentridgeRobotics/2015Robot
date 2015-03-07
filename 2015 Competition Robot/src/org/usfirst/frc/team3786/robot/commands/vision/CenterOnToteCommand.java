@@ -62,6 +62,7 @@ public class CenterOnToteCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Vision.getInstance().setLights(false);
     }
 
     // Called when another command which requires one or more of the same

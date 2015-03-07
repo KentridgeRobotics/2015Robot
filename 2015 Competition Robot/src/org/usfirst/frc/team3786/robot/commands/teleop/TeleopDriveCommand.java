@@ -4,6 +4,7 @@ import org.usfirst.frc.team3786.robot.config.ui.UIConfig;
 import org.usfirst.frc.team3786.robot.subsystems.Wheels;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TeleopDriveCommand extends Command {
 	
@@ -13,9 +14,15 @@ public class TeleopDriveCommand extends Command {
 	}
 	
 	protected void initialize() {
+		SmartDashboard.putBoolean("resetGyro", false);
 	}
 
 	protected void execute() {
+		
+		if (SmartDashboard.getBoolean("resetGyro"))
+		{
+			Wheels.getInstance().resetGyro();
+		}
 		
 		double xVal = UIConfig.get().getDriveXValue();
 		double yVal = UIConfig.get().getDriveYValue();
@@ -38,7 +45,7 @@ public class TeleopDriveCommand extends Command {
 		//Rotates the robot to the given angle from the UI
 		if (UIConfig.get().getAngleToRotateTo() != -1)
 		{
-			Wheels.getInstance().rotateToAngle(UIConfig.get().getAngleToRotateTo(), .25);
+			Wheels.getInstance().rotateToAngle(UIConfig.get().getAngleToRotateTo(), .35);
 		}
 	}
 

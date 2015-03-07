@@ -27,7 +27,7 @@ public class Vision extends Subsystem {
 	
 	private Relay lights;
 	
-	private final double PIXLE_DEAD_ZONE = 5;
+	private final double PIXEL_DEAD_ZONE = 5;
 	
 	//A structure to hold measurements of a particle
 	public class ParticleReport implements Comparator<ParticleReport>, Comparable<ParticleReport>{
@@ -113,6 +113,7 @@ public class Vision extends Subsystem {
 		if (on)
 		{
 			lights.set(Value.kForward);
+			
 		}
 		else
 		{
@@ -162,7 +163,7 @@ public class Vision extends Subsystem {
 		SmartDashboard.putNumber("Masked particles", numParticles);
 
 		//Send masked image to dashboard to assist in tweaking mask.
-		CameraServer.getInstance().setImage(binaryFrame);
+//		CameraServer.getInstance().setImage(binaryFrame);
 
 		//filter out small particles
 		float areaMin = (float)SmartDashboard.getNumber("Area min %", AREA_MINIMUM);
@@ -240,11 +241,11 @@ public class Vision extends Subsystem {
 		int direction = 0;
 		
 		
-		if (middleOfParticles < IMAGE_WIDTH/2 - PIXLE_DEAD_ZONE + RobotConfig.get().getCAMERA_OFF_SET())
+		if (middleOfParticles < IMAGE_WIDTH/2 - PIXEL_DEAD_ZONE + RobotConfig.get().getCAMERA_OFF_SET())
 		{
 			direction = -1;
 		}
-		else if (middleOfParticles > IMAGE_WIDTH/2 + PIXLE_DEAD_ZONE + RobotConfig.get().getCAMERA_OFF_SET()) 
+		else if (middleOfParticles > IMAGE_WIDTH/2 + PIXEL_DEAD_ZONE + RobotConfig.get().getCAMERA_OFF_SET()) 
 		{
 			direction = 1;
 		}
@@ -302,7 +303,15 @@ public class Vision extends Subsystem {
 	}
 
     public void initDefaultCommand() {
-        setDefaultCommand(null);
+//        setDefaultCommand(null);
+    }
+    
+    /**
+     * @return Ultrasonic vals
+     */
+    public double getDistance()
+    {
+    	return 0.0;
     }
 }
 

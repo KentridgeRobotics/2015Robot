@@ -10,6 +10,12 @@ public class TeleopArmCommand extends Command {
 	protected void initialize() {
 		requires(Arm.getInstance());
 	}
+	
+	public TeleopArmCommand()
+	{
+		initialize();
+	}
+	
 
 	private static final double INCREMENT = 0.01;
 	

@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveToNextToteCommand extends Command {
 
-	private final double distanceToTravel = 50;//10;
+	private final double distanceToTravel = 55;//10;
 	private double initialPosition;
 	private double distanceTraveled;
 	

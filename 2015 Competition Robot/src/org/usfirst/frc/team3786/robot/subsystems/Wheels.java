@@ -18,7 +18,7 @@ public class Wheels extends Subsystem {
 	private static Wheels instance;
 	
 	private static final double DEAD_ZONE = 0.15;
-	private static final double ROTATION_DEAD_ZONE = 0.15;
+	private static final double ROTATION_DEAD_ZONE = 0.1;//.05;
 	private static final double ENCODER_DISTANCE_PER_PULSE = 1 / 360.0;
 	
 	private CANJaguar frontLeft;
@@ -41,10 +41,10 @@ public class Wheels extends Subsystem {
 	
 	private Wheels()
 	{
+		backRight = new CANJaguar(RobotConfig.get().getBACK_RIGHT_MOTOR_CHANNEL());
 		frontLeft = new CANJaguar(RobotConfig.get().getFRONT_LEFT_MOTOR_CHANNEL());
 		frontRight = new CANJaguar(RobotConfig.get().getFRONT_RIGHT_MOTOR_CHANNEL());
 		backLeft = new CANJaguar(RobotConfig.get().getBACK_LEFT_MOTOR_CHANNEL());
-		backRight = new CANJaguar(RobotConfig.get().getBACK_RIGHT_MOTOR_CHANNEL());
 		
 		frontLeft.setPercentMode();
 		frontRight.setPercentMode();
@@ -61,6 +61,14 @@ public class Wheels extends Subsystem {
 //		yEncoder = new Encoder(0, 0, false, EncodingType.k4X); //TODO Update channels
 //		
 //		xEncoder.setDistancePerPulse(ENCODER_DISTANCE_PER_PULSE);
+	}
+	
+	/**
+	 * Resets the gyro to 0;
+	 */
+	public void resetGyro()
+	{
+		gyro.reset();
 	}
 	
 	/**
@@ -198,7 +206,6 @@ public class Wheels extends Subsystem {
 	 * Rotates the robot to a given angle
 	 * @param angle The angle to rotate to in degrees
 	 * @param speed The speed at which to rotate [-1.0, 1.0]
-	 * @param stickToAngle If the robot should hold at the given angle
 	 */
 	public void rotateToAngle(double angle, double speed)
 	{
@@ -508,10 +515,10 @@ public class Wheels extends Subsystem {
     	{
     		return 0;
     	}
-    	else if (angleDif <= 10)
-    	{
-    		return speed * 0.15;
-    	}
+//    	else if (angleDif <= 10)
+//    	{
+//    		return speed * 0.2;
+//    	}
     	else if (angleDif <= 20)
     	{
     		return speed * 0.3;

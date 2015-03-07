@@ -18,6 +18,7 @@ public abstract class RobotConfig {
 	static
 	{
 		instance = new PracticeRobotConfig();
+	//	instance = new CompetitionRobotConfig();
 	}
 	
 	/**
@@ -59,10 +60,16 @@ public abstract class RobotConfig {
 	public abstract int getARM_MOTOR_CHANNEL();
 
 	/**
-	 * Get the channel that the lifter motor is on.
-	 * @return The motor channel.
+	 * Get the channel that the left lifter motor is on.
+	 * @return The left lifter motor channel.
 	 */
-	public abstract int getLIFTER_MOTOR_CHANNEL();
+	public abstract int getLIFTER_MOTOR_CHANNEL_LEFT();
+	
+	/**
+	 * Get the channel that the left lifter motor is on.
+	 * @return The left lifter motor channel.
+	 */
+	public abstract int getLIFTER_MOTOR_CHANNEL_RIGHT();
 
 	/**
 	 * Get the channel that the chute motor is on.
@@ -134,6 +141,9 @@ public abstract class RobotConfig {
 	 */
 	public abstract int getLIGHT_CHANNEL();
 	
+	/**
+	 * @return The number of pixels the camera is off by.
+	 */
 	public abstract double getCAMERA_OFF_SET();
 	
 	public abstract int getARM_ENCODER_CHANNEL();
