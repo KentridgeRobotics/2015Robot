@@ -22,29 +22,29 @@ public class TeleopArmCommand extends Command {
 	private static final double INCREMENT = 10;
 	
 	protected void execute() {
-//		if (UIConfig.get().getArmToUpButton())
-//		{
-//			Arm.getInstance().moveArmToUpPosition();
-//			return;
-//		}
+		if (UIConfig.get().getArmToUpButton())
+		{
+			Arm.getInstance().moveArmToUpPosition();
+			return;
+		}
 		
-//		if (UIConfig.get().getArmDownButton() && UIConfig.get().getArmUpButton())
-//		{
-//			return;
-//		}
-//		
-//		if (UIConfig.get().getArmDownButton())
-//		{
-//			Arm.getInstance().moveArm(Arm.getInstance().getPosition() - INCREMENT);
-//		}
-//		else if (UIConfig.get().getArmUpButton())
-//		{
-//			Arm.getInstance().moveArm(Arm.getInstance().getPosition() + INCREMENT);
-//		}
+		if (UIConfig.get().getArmDownButton() && UIConfig.get().getArmUpButton())
+		{
+			return;
+		}
+		
+		if (UIConfig.get().getArmDownButton())
+		{
+			Arm.getInstance().moveArm(Arm.getInstance().getPosition() - INCREMENT);
+		}
+		else if (UIConfig.get().getArmUpButton())
+		{
+			Arm.getInstance().moveArm(Arm.getInstance().getPosition() + INCREMENT);
+		}
 		
 //		SmartDashboard.putNumber("Current Position", Arm.getInstance().getPosition());
 		
-		Arm.getInstance().moveArm(SmartDashboard.getNumber("Position"));
+//		Arm.getInstance().moveArm(SmartDashboard.getNumber("Position"));
 	}
 
 	protected boolean isFinished() {
