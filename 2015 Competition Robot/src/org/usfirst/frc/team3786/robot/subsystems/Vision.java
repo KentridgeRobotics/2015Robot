@@ -13,6 +13,7 @@ import com.ni.vision.NIVision.ImageType;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Relay.Direction;
 import edu.wpi.first.wpilibj.Relay.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -28,6 +29,8 @@ public class Vision extends Subsystem {
 	private Relay lights;
 	
 	private final double PIXEL_DEAD_ZONE = 5;
+	
+	private SerialPort mxpPort = new SerialPort(9600, SerialPort.Port.kMXP, 8, SerialPort.Parity.kNone);
 	
 	//A structure to hold measurements of a particle
 	public class ParticleReport implements Comparator<ParticleReport>, Comparable<ParticleReport>{
@@ -113,7 +116,6 @@ public class Vision extends Subsystem {
 		if (on)
 		{
 			lights.set(Value.kForward);
-			
 		}
 		else
 		{
@@ -207,24 +209,6 @@ public class Vision extends Subsystem {
 			{
 				return 0;
 			}
-			
-//			//This exampgele only scores the largest particle. Extending to score all particles and choosing the desired one is left as an exercise
-//			//for the reader. Note that the long and short side scores expect a single tote and will not work for a stack of 2 or more totes.
-//			//Modification of the code to accommodate 2 or more stacked totes is left as an exercise for the reader.
-//			scores.Trapezoid = TrapezoidScore(particles.elementAt(0));
-//			SmartDashboard.putNumber("Trapezoid", scores.Trapezoid);
-//			scores.LongAspect = LongSideScore(particles.elementAt(0));
-//			SmartDashboard.putNumber("Long Aspect", scores.LongAspect);
-//			scores.ShortAspect = ShortSideScore(particles.elementAt(0));
-//			SmartDashboard.putNumber("Short Aspect", scores.ShortAspect);
-//			scores.AreaToConvexHullArea = ConvexHullAreaScore(particles.elementAt(0));
-//			SmartDashboard.putNumber("Convex Hull Area", scores.AreaToConvexHullArea);
-//			boolean isTote = scores.Trapezoid > SCORE_MIN && (scores.LongAspect > SCORE_MIN || scores.ShortAspect > SCORE_MIN) && scores.AreaToConvexHullArea > SCORE_MIN;
-//			boolean isLong = scores.LongAspect > scores.ShortAspect;
-//
-//			//Send distance and tote status to dashboard. The bounding rect, particularly the horizontal center (left - right) may be useful for rotating/driving towards a tote
-//			SmartDashboard.putBoolean("IsTote", isTote);
-//			SmartDashboard.putNumber("Distance", computeDistance(binaryFrame, particles.elementAt(0), isLong));
 		} else {
 			return 0;
 		}
@@ -307,11 +291,33 @@ public class Vision extends Subsystem {
     }
     
     /**
-     * @return Ultrasonic vals
+     * @return Ultrasonic distance in inches (-1 if invalid)
      */
     public double getDistance()
     {
-    	return 0.0;
+    	mxpPort.readString();
+		String read = mxpPort.readString();
+		
+		double inches = -1;
+		
+		try
+		{
+			int mm = Integer.parseInt(read.replace("R", "").trim());
+			
+			inches = mm/25.4;
+		
+		}
+		catch(NumberFormatException nfe)
+		{
+			//ignored
+		}
+		
+		SmartDashboard.putString("Ultrasonic Read", read);
+		
+		//Clear buffer
+		mxpPort.reset();
+		
+		return inches;
     }
 }
 

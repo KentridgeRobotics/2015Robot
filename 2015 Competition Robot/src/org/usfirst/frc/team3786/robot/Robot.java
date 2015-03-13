@@ -3,7 +3,9 @@ package org.usfirst.frc.team3786.robot;
 
 import org.usfirst.frc.team3786.robot.commands.auto.AutonomousCommandGroup;
 import org.usfirst.frc.team3786.robot.commands.auto.TimeKeeper;
+import org.usfirst.frc.team3786.robot.commands.teleop.TeleopArmCommand;
 import org.usfirst.frc.team3786.robot.commands.teleop.TeleopDriveCommand;
+import org.usfirst.frc.team3786.robot.commands.teleop.TeleopLifterCommand;
 import org.usfirst.frc.team3786.robot.subsystems.Arm;
 import org.usfirst.frc.team3786.robot.subsystems.Lifter;
 import org.usfirst.frc.team3786.robot.subsystems.Vision;
@@ -33,7 +35,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		
 		//Instantiate subsystems
-//		Arm.getInstance();
+		Arm.getInstance();
 //		Lifter.getInstance();
 		Wheels.getInstance();
     }
@@ -76,8 +78,8 @@ public class Robot extends IterativeRobot {
 //        Vision.getInstance().setLights(false);
         
         Scheduler.getInstance().add(new TeleopDriveCommand());
-//        Scheduler.getInstance().add(new TeleopArmCommand());
-//        Scheduler.getInstance().add(new TeleopLifterCommand());
+        Scheduler.getInstance().add(new TeleopArmCommand());
+        Scheduler.getInstance().add(new TeleopLifterCommand());
     }
 
     /**

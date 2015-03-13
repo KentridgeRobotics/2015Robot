@@ -21,14 +21,16 @@ public class Lifter extends Subsystem {
 	private static final double DOWN_POSITION = 0;
 	private static final double LOAD_CLEAR_POSITION = 3;
 	private static final double LOAD_GRAB_POSITION = 2;
+	
+	private static final int ENCODER_CODES_PER_REV = 7;
 
 	private Lifter()
 	{
 		leftLifterMotor = new CANJaguar(RobotConfig.get().getLIFTER_MOTOR_CHANNEL_LEFT());
 		rightLifterMotor = new CANJaguar(RobotConfig.get().getLIFTER_MOTOR_CHANNEL_RIGHT());
 		
-		leftLifterMotor.setPositionMode(CANJaguar.kQuadEncoder, 360, RobotConfig.get().getLIFTER_P(), RobotConfig.get().getLIFTER_I(), RobotConfig.get().getLIFTER_D());
-		rightLifterMotor.setPositionMode(CANJaguar.kQuadEncoder, 360, RobotConfig.get().getLIFTER_P(), RobotConfig.get().getLIFTER_I(), RobotConfig.get().getLIFTER_D());
+		leftLifterMotor.setPositionMode(CANJaguar.kQuadEncoder, ENCODER_CODES_PER_REV, RobotConfig.get().getLIFTER_P(), RobotConfig.get().getLIFTER_I(), RobotConfig.get().getLIFTER_D());
+		rightLifterMotor.setPositionMode(CANJaguar.kQuadEncoder, ENCODER_CODES_PER_REV, RobotConfig.get().getLIFTER_P(), RobotConfig.get().getLIFTER_I(), RobotConfig.get().getLIFTER_D());
 		
 		leftLifterMotor.enableControl();
 		rightLifterMotor.enableControl();
@@ -62,7 +64,7 @@ public class Lifter extends Subsystem {
 	 */
 	public double getPosition()
 	{
-		return leftLifterMotor.get();
+		return rightLifterMotor.get();
 	}
 	
 	public static double getAUTO_CLEAR_POSITION()

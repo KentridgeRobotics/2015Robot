@@ -19,14 +19,14 @@ public class DriveToNextToteCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	initialPosition = 
+//    	initialPosition = Wheels.getInstance().getX();
     	distanceTraveled = 0;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-//    	
-//    	distanceTraveled = Wheels.getInstance().getY() - initialPosition;
+    	
+//    	distanceTraveled = Wheels.getInstance().getX() - initialPosition;
     	
     	if (distanceTraveled <= distanceToTravel / 10)
         {

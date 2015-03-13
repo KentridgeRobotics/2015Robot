@@ -4,6 +4,7 @@ import org.usfirst.frc.team3786.robot.config.ui.UIConfig;
 import org.usfirst.frc.team3786.robot.subsystems.Arm;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TeleopArmCommand extends Command {
 
@@ -14,31 +15,36 @@ public class TeleopArmCommand extends Command {
 	public TeleopArmCommand()
 	{
 		initialize();
+		SmartDashboard.putNumber("Position", 0);
 	}
 	
 
-	private static final double INCREMENT = 0.01;
+	private static final double INCREMENT = 10;
 	
 	protected void execute() {
-		if (UIConfig.get().getArmToZeroButton())
-		{
-			Arm.getInstance().zero();
-			return;
-		}
+//		if (UIConfig.get().getArmToUpButton())
+//		{
+//			Arm.getInstance().moveArmToUpPosition();
+//			return;
+//		}
 		
-		if (UIConfig.get().getArmDownButton() && UIConfig.get().getArmUpButton())
-		{
-			return;
-		}
+//		if (UIConfig.get().getArmDownButton() && UIConfig.get().getArmUpButton())
+//		{
+//			return;
+//		}
+//		
+//		if (UIConfig.get().getArmDownButton())
+//		{
+//			Arm.getInstance().moveArm(Arm.getInstance().getPosition() - INCREMENT);
+//		}
+//		else if (UIConfig.get().getArmUpButton())
+//		{
+//			Arm.getInstance().moveArm(Arm.getInstance().getPosition() + INCREMENT);
+//		}
 		
-		if (UIConfig.get().getArmDownButton())
-		{
-			Arm.getInstance().moveArm(Arm.getInstance().getPosition() - INCREMENT);
-		}
-		else if (UIConfig.get().getArmUpButton())
-		{
-			Arm.getInstance().moveArm(Arm.getInstance().getPosition() + INCREMENT);
-		}
+//		SmartDashboard.putNumber("Current Position", Arm.getInstance().getPosition());
+		
+		Arm.getInstance().moveArm(SmartDashboard.getNumber("Position"));
 	}
 
 	protected boolean isFinished() {

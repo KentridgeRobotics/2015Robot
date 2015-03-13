@@ -85,7 +85,7 @@ public class CyborgUI extends UIConfig {
 	}
 
 	@Override
-	public boolean getArmToZeroButton() {
+	public boolean getArmToUpButton() {
 		return JOYSTICK.getRawButton(ARM_TO_ZERO_BTN);
 	}
 
@@ -117,6 +117,30 @@ public class CyborgUI extends UIConfig {
 	@Override
 	public boolean getArmDownButton() {
 		return JOYSTICK.getRawButton(ARM_DOWN_BUTTON);
+	}
+
+	@Override
+	public boolean getRightStationButton() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean getLeftStationButton() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public double getAlternateDriveX() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double getAlternateDriveY() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	

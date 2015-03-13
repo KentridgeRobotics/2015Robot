@@ -4,16 +4,16 @@ package org.usfirst.frc.team3786.robot.config.robot;
 public class PracticeRobotConfig extends RobotConfig {
 
 	private static final int FRONT_RIGHT_MOTOR_CHANNEL = 16;
-	private static final int FRONT_LEFT_MOTOR_CHANNEL = 5;
-	private static final int BACK_RIGHT_MOTOR_CHANNEL = 15;
-	private static final int BACK_LEFT_MOTOR_CHANNEL = 17;
+	private static final int FRONT_LEFT_MOTOR_CHANNEL = 14;
+	private static final int BACK_RIGHT_MOTOR_CHANNEL = 5;
+	private static final int BACK_LEFT_MOTOR_CHANNEL = 23;
 	private static final int ARM_MOTOR_CHANNEL = 18;
-	private static final int LIFTER_MOTOR_CHANNEL_LEFT = 23;
-	private static final int LIFTER_MOTOR_CHANNEL_RIGHT = 14;
+	private static final int LIFTER_MOTOR_CHANNEL_LEFT = 17;
+	private static final int LIFTER_MOTOR_CHANNEL_RIGHT = 15;
 	private static final int CHUTE_MOTOR_CHANNEL = 0;
 	
 	//Encoders
-	private static final int ARM_ENCODER_CHANNEL = 0;
+	private static final int ARM_ENCODER_CODES_PER_REV = 360;
 	private static final int X_OMNI_WHEEL_ENCODER = 18;
 	private static final int Y_OMNI_WHEEL_ENCODER = 19;
 	
@@ -31,13 +31,13 @@ public class PracticeRobotConfig extends RobotConfig {
 	private static final int GYRO_CHANNEL = 0;	
 	
 	//PID values
-	private static final double LIFTER_P = 0;
+	private static final double LIFTER_P = 10;
 	private static final double LIFTER_I = 0;
 	private static final double LIFTER_D = 0;
-
-	private static final double ARM_P = 0;
-	private static final double ARM_I = 0;
-	private static final double ARM_D = 0;
+                                              //3 Tote	|	2 Tote	|	1 Tote	|	W/O tote 	| Quickly     
+	private static final double ARM_P = 2000; //	|				|	1000	|	4000  		|	2000
+	private static final double ARM_I = 0;    //	|				|	0		|	0			|	1
+	private static final double ARM_D = 2;    //	|				|	2
 	
 	@Override
 	public int getFRONT_RIGHT_MOTOR_CHANNEL() {
@@ -132,8 +132,8 @@ public class PracticeRobotConfig extends RobotConfig {
 	}
 
 	@Override
-	public int getARM_ENCODER_CHANNEL() {
-		return ARM_ENCODER_CHANNEL;
+	public int getARM_ENCODER_CODES_PER_REV() {
+		return ARM_ENCODER_CODES_PER_REV;
 	}
 
 	@Override

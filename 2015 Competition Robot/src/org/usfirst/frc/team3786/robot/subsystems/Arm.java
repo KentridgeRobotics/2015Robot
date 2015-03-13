@@ -5,6 +5,7 @@ import org.usfirst.frc.team3786.robot.config.robot.RobotConfig;
 
 import edu.wpi.first.wpilibj.CANJaguar;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -17,13 +18,15 @@ public class Arm extends Subsystem {
 	
 	private static final double UP_POSITION = 1;
 	private static final double DOWN_POSITION = 0;
-	private static final double LIFT_POSITION = 0.5;
+	private static final double LIFT_POSITION = -113;
 	
 	private Arm()
 	{
 		armMotor = new CANJaguar(RobotConfig.get().getARM_MOTOR_CHANNEL());
 
-		armMotor.setPositionMode(CANJaguar.kQuadEncoder, RobotConfig.get().getARM_ENCODER_CHANNEL(), RobotConfig.get().getARM_P(), RobotConfig.get().getARM_I(), RobotConfig.get().getARM_D());
+		armMotor.setPositionMode(CANJaguar.kQuadEncoder, RobotConfig.get().getARM_ENCODER_CODES_PER_REV(), RobotConfig.get().getARM_P(), RobotConfig.get().getARM_I(), RobotConfig.get().getARM_D());
+		
+//		armMotor.disableSoftPositionLimits();
 		
 		armMotor.enableControl();
 	}
@@ -42,25 +45,28 @@ public class Arm extends Subsystem {
 	}
 
 	/**
-	 * @param position The position to drive the arm to
+	 * @param position The position to drive the arm to in degrees
 	 */
 	public void moveArm(double position)
 	{
+		position /= 360.0;
+		
+		System.out.println("Setting to: " + position);
+		
 		armMotor.set(position);
 	}
 	
-	//TODO Needs work
-	public void zero()
+	public void moveArmToUpPosition()
 	{
-		armMotor.set(0);
+		armMotor.set(UP_POSITION);
 	}
 	
 	/**
-	 * @return The current position of the arm
+	 * @return The current position of the arm in degrees
 	 */
 	public double getPosition()
 	{
-		return armMotor.get();
+		return armMotor.getPosition() * 360.0;
 	}
 	
 	public static double getUP_POSITION()

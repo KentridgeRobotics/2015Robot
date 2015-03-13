@@ -146,5 +146,5 @@ public abstract class RobotConfig {
 	 */
 	public abstract double getCAMERA_OFF_SET();
 	
-	public abstract int getARM_ENCODER_CHANNEL();
+	public abstract int getARM_ENCODER_CODES_PER_REV();
 }

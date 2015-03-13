@@ -56,7 +56,7 @@ public abstract class UIConfig {
 	/**
 	 * @return If the arm should move to zero.
 	 */
-	public abstract boolean getArmToZeroButton();
+	public abstract boolean getArmToUpButton();
 	
 	public abstract boolean getArmUpButton();
 	
@@ -77,4 +77,24 @@ public abstract class UIConfig {
 	public abstract boolean getLifterDownButton();
 
 	public abstract boolean getRetainAngleButton();
+	
+	/**
+	 * @return If should use alternate control for right station
+	 */
+	public abstract boolean getRightStationButton();
+	
+	/**
+	 * @return If should use alternate control for left station
+	 */
+	public abstract boolean getLeftStationButton();
+	
+	/**
+	 * @return The X componenet of the alternate drive
+	 */
+	public abstract double getAlternateDriveX();
+	
+	/**
+	 * @return The Y component of the alternate drive
+	 */
+	public abstract double getAlternateDriveY();
 }

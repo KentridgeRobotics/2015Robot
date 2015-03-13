@@ -28,8 +28,29 @@ public class TeleopDriveCommand extends Command {
 		double yVal = UIConfig.get().getDriveYValue();
 		double zVal = UIConfig.get().getDriveRotateValue();
 		
-		//Drive the robot based on UI (May need some work to avoid conflicts)
-		Wheels.getInstance().drive(xVal, yVal, zVal);
+		if (UIConfig.get().getRightStationButton())
+		{
+			//Alternate drive overrides standard drive if used
+			xVal = UIConfig.get().getAlternateDriveX();
+			yVal = UIConfig.get().getAlternateDriveY();
+			
+			System.out.println("Alt X: " + xVal);
+			System.out.println("Alt Y: " + yVal);
+			
+			Wheels.getInstance().driveWithoutGyro(-xVal, -yVal, zVal); //TODO TEST
+		}
+		else if (UIConfig.get().getLeftStationButton())
+		{
+			xVal = UIConfig.get().getAlternateDriveX();
+			yVal = UIConfig.get().getAlternateDriveY();
+			
+			Wheels.getInstance().driveWithoutGyro(-xVal, yVal, zVal); //TODO TEST
+		}
+		else
+		{
+			//Drive the robot based on UI (May need some work to avoid conflicts)
+			Wheels.getInstance().drive(xVal, yVal, zVal);
+		}
 		
 		if (UIConfig.get().getRetainAngleButton())
 		{

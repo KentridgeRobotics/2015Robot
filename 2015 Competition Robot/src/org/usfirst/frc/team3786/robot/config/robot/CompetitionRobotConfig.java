@@ -133,7 +133,7 @@ public class CompetitionRobotConfig extends RobotConfig {
 	}
 
 	@Override
-	public int getARM_ENCODER_CHANNEL() {
+	public int getARM_ENCODER_CODES_PER_REV() {
 		return ARM_ENCODER_CHANNEL;
 	}
 

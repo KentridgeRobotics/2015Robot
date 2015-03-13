@@ -202,6 +202,66 @@ public class Wheels extends Subsystem {
         drive(frontLeftFactor, frontRightFactor, backLeftFactor, backRightFactor);
 	}
 	
+	public void driveWithoutGyro(double x, double y, double z)
+	{
+		double theta = 0;
+        
+        double cosineTheta = Math.cos(theta);
+        double sineTheta = Math.sin(theta);
+        
+        //Swap x and y while inverting
+        double temp = x;
+        x = y;
+        y = temp;
+
+        //Dead zones
+        if (Math.abs(x) < DEAD_ZONE)
+        {
+            x = 0;
+        }
+        if (Math.abs(y) < DEAD_ZONE)
+        {
+            y = 0;
+        }
+        if (Math.abs(z) < DEAD_ZONE)
+        {
+            z = 0;
+        }
+        
+        //Adjust the rotation of the robot to rotate to given angle
+        shouldRotate = shouldRotate(Math.cos(Math.toRadians(getGyroAngle())), Math.sin(Math.toRadians(getGyroAngle())), desiredAngle);
+        if (shouldRotate || shouldStickToAngle)
+        {
+	        SmartDashboard.putNumber("Desired Angle", desiredAngle);
+	        SmartDashboard.putNumber("Rotation Dir", rotationDir);
+	        if (rotationDir > 0)
+	        {
+	        	z += factorRotationSpeed(rotateSpeed, desiredAngle, gyro.getAngle());
+	        }
+	        else if (rotationDir < 0)
+	        {
+	        	z -= factorRotationSpeed(rotateSpeed, desiredAngle, gyro.getAngle());
+	        }
+	        SmartDashboard.putNumber("Z Value", z);
+        }
+        
+        //Invert z value
+        z *= -1;
+        
+        SmartDashboard.putNumber("Gyro", gyro.getAngle());
+		double backLeftFactor = (x * (sineTheta + cosineTheta)) + (y * (cosineTheta - sineTheta)) - z;
+        double frontLeftFactor = (x * (sineTheta - cosineTheta)) + (y * (sineTheta + cosineTheta)) + z;
+        double backRightFactor = (x * (sineTheta - cosineTheta)) + (y * (sineTheta + cosineTheta)) - z;
+        double frontRightFactor = (x * (sineTheta + cosineTheta)) + (y * (cosineTheta - sineTheta)) + z;
+        
+        
+        //Invert front motors
+        frontLeftFactor *= -1;
+        frontRightFactor *= -1;
+        
+        drive(frontLeftFactor, frontRightFactor, backLeftFactor, backRightFactor);
+	}
+	
 	/**
 	 * Rotates the robot to a given angle
 	 * @param angle The angle to rotate to in degrees
