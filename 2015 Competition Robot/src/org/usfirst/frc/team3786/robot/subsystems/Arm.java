@@ -20,6 +20,9 @@ public class Arm extends Subsystem {
 	private static final double DOWN_POSITION = 0;
 	private static final double LIFT_POSITION = -113;
 	
+	private static final double DROP_INCREMENT = 12;
+	private static final double STEP_POSITION = 60;
+	
 	private Arm()
 	{
 		armMotor = new CANJaguar(RobotConfig.get().getARM_MOTOR_CHANNEL());
@@ -87,5 +90,13 @@ public class Arm extends Subsystem {
     public void initDefaultCommand() {
     	setDefaultCommand(new TeleopArmCommand());
     }
+
+	public static double getDROP_INCREMENT() {
+		return DROP_INCREMENT;
+	}
+
+	public static double getSTEP_POSITION() {
+		return STEP_POSITION;
+	}
 }
 

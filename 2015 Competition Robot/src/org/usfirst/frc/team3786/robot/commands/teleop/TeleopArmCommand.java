@@ -27,6 +27,14 @@ public class TeleopArmCommand extends Command {
 			Arm.getInstance().moveArmToUpPosition();
 			return;
 		}
+		else if (UIConfig.get().getArmToStepButton())
+		{
+			Arm.getInstance().moveArm(Arm.getSTEP_POSITION());
+		}
+		else if (UIConfig.get().getArmDropButton())
+		{
+			Arm.getInstance().moveArm(Arm.getInstance().getPosition() - Arm.getDROP_INCREMENT());
+		}
 		
 		if (UIConfig.get().getArmDownButton() && UIConfig.get().getArmUpButton())
 		{

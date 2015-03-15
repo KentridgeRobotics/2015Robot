@@ -97,4 +97,14 @@ public abstract class UIConfig {
 	 * @return The Y component of the alternate drive
 	 */
 	public abstract double getAlternateDriveY();
+	
+	/**
+	 * @return If the arm should move to step height
+	 */
+	public abstract boolean getArmToStepButton();
+	
+	/**
+	 * @return If the arm should move the drop amount
+	 */
+	public abstract boolean getArmDropButton();
 }

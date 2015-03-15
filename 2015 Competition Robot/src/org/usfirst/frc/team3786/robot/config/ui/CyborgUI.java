@@ -143,5 +143,17 @@ public class CyborgUI extends UIConfig {
 		return 0;
 	}
 
+	@Override
+	public boolean getArmToStepButton() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean getArmDropButton() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	
 }

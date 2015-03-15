@@ -192,4 +192,16 @@ public class GamePadUI extends UIConfig {
 		}
 		return Math.cos(Math.toRadians(GAMEPAD.getPOV(0)));
 	}
+
+	@Override
+	public boolean getArmToStepButton() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean getArmDropButton() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
