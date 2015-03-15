@@ -28,6 +28,11 @@ public class TeleopLifterCommand extends Command {
 			return;
 		}
 		
+		if (UIConfig.get().getLifterStackButton())
+		{
+			Lifter.getInstance().stack();
+		}
+		
 		if (UIConfig.get().getLifterUpButton())
 		{
 			Lifter.getInstance().moveToPosition(Lifter.getInstance().getPosition() + INCREMENT);

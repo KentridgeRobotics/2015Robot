@@ -1,7 +1,5 @@
 package org.usfirst.frc.team3786.robot.commands.auto;
 
-import org.usfirst.frc.team3786.robot.subsystems.Wheels;
-
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -9,9 +7,12 @@ public class TimeKeeperCommand extends Command {
 
 	private TimeKeeper keeper;
 	
-	public TimeKeeperCommand(TimeKeeper tk)
+	private Command[] toInterrupt;
+	
+	public TimeKeeperCommand(TimeKeeper tk, Command... toInterrupt)
 	{
 		keeper = tk;
+		this.toInterrupt = toInterrupt;
 		System.out.println("Keeper constructed");
 	}
 	
@@ -28,11 +29,14 @@ public class TimeKeeperCommand extends Command {
 	}
 
 	protected void end() {
-		
+		for (Command c : toInterrupt)
+		{
+			System.out.println("Interrupting: " + c.getName());
+			c.cancel();
+		}
 	}
 
 	protected void interrupted() {
-		// TODO Auto-generated method stub
 		System.out.println("Keeper interrupt");
 	}
 

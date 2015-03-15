@@ -13,6 +13,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class AutonomousCommandGroup extends CommandGroup {
 	
+	LiftToteCommand lift = new LiftToteCommand();
+	DriveToNextToteCommand drive = new DriveToNextToteCommand();
+	
+	DriveBackwardsCommand driveBack = new DriveBackwardsCommand();
+	
+	DropTotesCommand drop = new DropTotesCommand();
+	
+	CenterOnToteCommand center = new CenterOnToteCommand();
+	
     public  AutonomousCommandGroup(TimeKeeper tkc) {
     	
     	requires(Wheels.getInstance());
@@ -26,33 +35,33 @@ public class AutonomousCommandGroup extends CommandGroup {
     	//Begin time keeping
     	new Thread(tkc).start(); //This instance will need to be kept elsewhere soon
     	
-    	addParallel(new TimeKeeperCommand(tkc));
+    	addParallel(new TimeKeeperCommand(tkc, lift, drive, center));
     	
     	//Pick up first tote
-//    	addParallel(new LiftToteCommand());
+    	addParallel(lift);
     	
     	//Move while picking up to rough area
-//    	addSequential(new DriveToNextToteCommand());
+//    	addSequential(drive);
     	//Center on tote
-    	addSequential(new CenterOnToteCommand());
-    	addSequential(new CenterOnToteCommand());
+//    	addSequential(center);
+//    	addSequential(center);
     	
     	//Pick up 2nd tote when centered
-//    	addParallel(new LiftToteCommand());
+//    	addParallel(lift);
     	//Move to next tote
-//    	addSequential(new DriveToNextToteCommand());
+//    	addSequential(drive);
     	//Center twice for verification
-//    	addSequential(new CenterOnToteCommand());
-//    	addSequential(new CenterOnToteCommand());
+//    	addSequential(center);
+//    	addSequential(center);
     	//Pick up last tote
-//    	addParallel(new LiftToteCommand());
+//    	addParallel(lift);
     	
     	//Move backwards into the auto zone
-//    	addSequential(new DriveBackwardsCommand());
+//    	addSequential(driveBack);
 //    	//Begin dropping totes
-//    	addParallel(new DropTotesCommand());
+//    	addParallel(drop);
 //    	//Move away from totes
-//    	addSequential(new DriveBackwardsCommand());
+//    	addSequential(driveBack);
     	
 
         // To run multiple commands at the same time,

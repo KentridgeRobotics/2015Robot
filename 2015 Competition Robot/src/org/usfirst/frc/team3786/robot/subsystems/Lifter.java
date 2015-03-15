@@ -67,33 +67,41 @@ public class Lifter extends Subsystem {
 		return rightLifterMotor.get();
 	}
 	
-	public static double getAUTO_CLEAR_POSITION()
-	{
-		return AUTO_CLEAR_POSITION;
-	}
-	
-	public static double getAUTO_GRAB_POSITION()
-	{
-		return AUTO_GRAB_POSITION;
-	}
-	
 	public static double getDOWN_POSITION()
 	{
 		return DOWN_POSITION;
 	}
 	
-	public static double getLOAD_CLEAR_POSITION()
+	public static double getAUTO_CLEAR_POSITION()
 	{
-		return LOAD_CLEAR_POSITION;
+		return AUTO_CLEAR_POSITION;
 	}
 	
-	public static double getLOAD_GRAB_POSITION()
-	{
-		return LOAD_GRAB_POSITION;
+	public static double getAUTO_GRAB_POSITION() {
+		return AUTO_GRAB_POSITION;
 	}
 
     public void initDefaultCommand() {
         setDefaultCommand(new TeleopLifterCommand());
     }
+    
+    public void autoStack()
+    {
+    	
+    }
+    
+    public void stack()
+    {
+    	while(getPosition() > LOAD_GRAB_POSITION)
+		{
+			moveToPosition(LOAD_GRAB_POSITION);
+		}
+		
+		while(getPosition() < LOAD_CLEAR_POSITION)
+		{
+			moveToPosition(LOAD_CLEAR_POSITION);
+		}
+    }
+
 }
 

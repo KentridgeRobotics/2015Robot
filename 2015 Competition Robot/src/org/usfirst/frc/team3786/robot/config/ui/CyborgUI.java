@@ -150,10 +150,8 @@ public class CyborgUI extends UIConfig {
 	}
 
 	@Override
-	public boolean getArmDropButton() {
+	public boolean getLifterStackButton() {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-	
 }

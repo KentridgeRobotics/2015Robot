@@ -104,7 +104,7 @@ public abstract class UIConfig {
 	public abstract boolean getArmToStepButton();
 	
 	/**
-	 * @return If the arm should move the drop amount
+	 * @return If the lifter should stack a tote
 	 */
-	public abstract boolean getArmDropButton();
+	public abstract boolean getLifterStackButton();
 }

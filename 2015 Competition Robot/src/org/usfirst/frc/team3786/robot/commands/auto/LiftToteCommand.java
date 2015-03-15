@@ -24,11 +24,11 @@ public class LiftToteCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Arm.getInstance().getPosition() < 8)
+    	if (Arm.getInstance().getPosition() < Arm.getPICK_UP_POSITION())
     	{
-    		Arm.getInstance().moveArm(8);
+    		Arm.getInstance().moveArm(Arm.getPICK_UP_POSITION());
     	}
-    	if (Arm.getInstance().getPosition() < Arm.getLIFT_POSITION())
+    	else if (Arm.getInstance().getPosition() < Arm.getLIFT_POSITION())
     	{
     		Arm.getInstance().moveArm(Arm.getLIFT_POSITION());
     	}
@@ -62,5 +62,6 @@ public class LiftToteCommand extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	System.out.println("Interrupted!");
     }
 }

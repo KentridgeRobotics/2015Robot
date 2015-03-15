@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3786.robot.commands;
 
+import org.usfirst.frc.team3786.robot.subsystems.Arm;
 import org.usfirst.frc.team3786.robot.subsystems.Lifter;
 import org.usfirst.frc.team3786.robot.subsystems.Wheels;
 
@@ -11,8 +12,8 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DropTotesCommand extends Command {
 	
     public DropTotesCommand() {
+    	requires(Arm.getInstance());
     	requires(Lifter.getInstance());
-    	requires(Wheels.getInstance());
     }
 
     // Called just before this Command runs the first time
@@ -21,6 +22,7 @@ public class DropTotesCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Arm.getInstance().moveArmToUpPosition();
 		Lifter.getInstance().moveToPosition(Lifter.getDOWN_POSITION());
     }
 

@@ -5,7 +5,6 @@ import org.usfirst.frc.team3786.robot.config.robot.RobotConfig;
 
 import edu.wpi.first.wpilibj.CANJaguar;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -16,9 +15,11 @@ public class Arm extends Subsystem {
 	
 	private CANJaguar armMotor;
 	
-	private static final double UP_POSITION = 1;
+	private static final double UP_POSITION = 113;
 	private static final double DOWN_POSITION = 0;
-	private static final double LIFT_POSITION = -113;
+	private static final double LIFT_POSITION = 113;
+	
+	private static final double PICK_UP_POSITION = 12;
 	
 	private static final double DROP_INCREMENT = 12;
 	private static final double STEP_POSITION = 60;
@@ -28,8 +29,6 @@ public class Arm extends Subsystem {
 		armMotor = new CANJaguar(RobotConfig.get().getARM_MOTOR_CHANNEL());
 
 		armMotor.setPositionMode(CANJaguar.kQuadEncoder, RobotConfig.get().getARM_ENCODER_CODES_PER_REV(), RobotConfig.get().getARM_P(), RobotConfig.get().getARM_I(), RobotConfig.get().getARM_D());
-		
-//		armMotor.disableSoftPositionLimits();
 		
 		armMotor.enableControl();
 	}
@@ -56,7 +55,7 @@ public class Arm extends Subsystem {
 		
 		System.out.println("Setting to: " + position);
 		
-		armMotor.set(position);
+		armMotor.set(-position);
 	}
 	
 	public void moveArmToUpPosition()
@@ -69,7 +68,7 @@ public class Arm extends Subsystem {
 	 */
 	public double getPosition()
 	{
-		return armMotor.getPosition() * 360.0;
+		return -(armMotor.getPosition() * 360.0);
 	}
 	
 	public static double getUP_POSITION()
@@ -97,6 +96,10 @@ public class Arm extends Subsystem {
 
 	public static double getSTEP_POSITION() {
 		return STEP_POSITION;
+	}
+
+	public static double getPICK_UP_POSITION() {
+		return PICK_UP_POSITION;
 	}
 }
 

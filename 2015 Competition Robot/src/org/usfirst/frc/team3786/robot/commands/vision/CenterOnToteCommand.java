@@ -13,12 +13,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class CenterOnToteCommand extends Command {
 
-	private static final double DESIRED_DISTANCE = 21.25;
-	
-	private static final double DISTANCE_TOLERANCE = 2;
-	
-	private double distance;
-	
 	private int lastDirection = 1;
 	
     public CenterOnToteCommand() {
@@ -35,18 +29,6 @@ public class CenterOnToteCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	distance = Vision.getInstance().getDistance();
-    	
-    	double yVal = 0;
-    	
-    	if (distance + DISTANCE_TOLERANCE <= DESIRED_DISTANCE)
-    	{
-    		yVal = .25; //Move back (this is in the positive Y dir)
-    	}
-    	else if (distance - DISTANCE_TOLERANCE >= DESIRED_DISTANCE)
-    	{
-    		yVal = -.25; //Move forward (this is in the negative Y dir)
-    	}
     	
     	int currentDir = Vision.getInstance().directionToCenter();
     	
@@ -54,11 +36,11 @@ public class CenterOnToteCommand extends Command {
     	
     	if (currentDir != lastDirection)
     	{
-    		Wheels.getInstance().drive(0.1 * currentDir, yVal, 0);
+    		Wheels.getInstance().drive(0.1 * currentDir, 0, 0);
     	}
     	else
     	{
-    		Wheels.getInstance().drive(0.15 * currentDir, yVal, 0);
+    		Wheels.getInstance().drive(0.15 * currentDir, 0, 0);
     	}
     	
     	lastDirection = currentDir;
