@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3786.robot.commands.auto;
 
 import org.usfirst.frc.team3786.robot.commands.DropTotesCommand;
+import org.usfirst.frc.team3786.robot.commands.auto.bailing.BailCommandGroup;
 import org.usfirst.frc.team3786.robot.commands.vision.CenterOnToteCommand;
 import org.usfirst.frc.team3786.robot.subsystems.Vision;
 import org.usfirst.frc.team3786.robot.subsystems.Wheels;
@@ -13,16 +14,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class AutonomousCommandGroup extends CommandGroup {
 	
-	LiftToteCommand lift = new LiftToteCommand();
-	DriveToNextToteCommand drive = new DriveToNextToteCommand();
+	private LiftToteCommand lift = new LiftToteCommand();
 	
-	DriveBackwardsCommand driveBack = new DriveBackwardsCommand();
+	private StackToteFromArmCommand stack = new StackToteFromArmCommand();
 	
-	DropTotesCommand drop = new DropTotesCommand();
+	private DriveToNextToteCommand drive = new DriveToNextToteCommand();
 	
-	CenterOnToteCommand center = new CenterOnToteCommand();
+	private DriveBackwardsCommand driveBack = new DriveBackwardsCommand();
 	
-    public  AutonomousCommandGroup(TimeKeeper tkc) {
+	private DropTotesCommand drop = new DropTotesCommand();
+	
+	private CenterOnToteCommand center = new CenterOnToteCommand();
+	
+    public  AutonomousCommandGroup(TimeKeeper tkc, BailCommandGroup bcg) {
     	
     	requires(Wheels.getInstance());
     	requires(Vision.getInstance());
@@ -35,10 +39,12 @@ public class AutonomousCommandGroup extends CommandGroup {
     	//Begin time keeping
     	new Thread(tkc).start(); //This instance will need to be kept elsewhere soon
     	
-    	addParallel(new TimeKeeperCommand(tkc, lift, drive, center));
+    	addParallel(new TimeKeeperCommand(tkc, this, bcg));//lift, stack, drive, center));
     	
     	//Pick up first tote
-    	addParallel(lift);
+    	addSequential(lift);
+    	
+    	addParallel(stack);
     	
     	//Move while picking up to rough area
 //    	addSequential(drive);

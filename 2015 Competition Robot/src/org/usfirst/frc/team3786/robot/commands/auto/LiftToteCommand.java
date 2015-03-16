@@ -32,18 +32,6 @@ public class LiftToteCommand extends Command {
     	{
     		Arm.getInstance().moveArm(Arm.getLIFT_POSITION());
     	}
-    	else if (Lifter.getInstance().getPosition() > Lifter.getAUTO_GRAB_POSITION())
-    	{
-    		Lifter.getInstance().moveToPosition(Lifter.getAUTO_GRAB_POSITION());
-    	}
-    	else if (Lifter.getInstance().getPosition() < Lifter.getAUTO_CLEAR_POSITION())
-    	{
-    		Lifter.getInstance().moveToPosition(Lifter.getAUTO_CLEAR_POSITION());
-    	}
-    	else if (Arm.getInstance().getPosition() > Arm.getDOWN_POSITION())
-    	{
-    		Arm.getInstance().moveArm(Arm.getDOWN_POSITION());
-    	}
     	else
     	{
     		isFinished = true;

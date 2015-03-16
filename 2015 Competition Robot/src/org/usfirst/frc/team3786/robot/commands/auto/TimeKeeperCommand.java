@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3786.robot.commands.auto;
 
+import org.usfirst.frc.team3786.robot.commands.auto.bailing.BailCommandGroup;
+
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -7,12 +9,17 @@ public class TimeKeeperCommand extends Command {
 
 	private TimeKeeper keeper;
 	
-	private Command[] toInterrupt;
+//	private Command[] toInterrupt;
 	
-	public TimeKeeperCommand(TimeKeeper tk, Command... toInterrupt)
+	private AutonomousCommandGroup acg;
+	private BailCommandGroup bcg;
+	
+	public TimeKeeperCommand(TimeKeeper tk, AutonomousCommandGroup acg, BailCommandGroup bcg)//Command... toInterrupt)
 	{
 		keeper = tk;
-		this.toInterrupt = toInterrupt;
+//		this.toInterrupt = toInterrupt;
+		this.acg = acg;
+		this.bcg = bcg;
 		System.out.println("Keeper constructed");
 	}
 	
@@ -29,15 +36,17 @@ public class TimeKeeperCommand extends Command {
 	}
 
 	protected void end() {
-		for (Command c : toInterrupt)
-		{
-			System.out.println("Interrupting: " + c.getName());
-			c.cancel();
-		}
+		acg.cancel();
+		bcg.start();
+//		for (Command c : toInterrupt)
+//		{
+//			System.out.println("Interrupting: " + c.getName());
+//			c.cancel();
+//		}
 	}
 
 	protected void interrupted() {
-		System.out.println("Keeper interrupt");
+		System.out.println("Keeper interrupted");
 	}
 
 }

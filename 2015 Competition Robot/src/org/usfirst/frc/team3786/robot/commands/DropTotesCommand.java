@@ -22,7 +22,9 @@ public class DropTotesCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	//Move arm out of the way just to be sure.
     	Arm.getInstance().moveArmToUpPosition();
+    	//Lower the Lifter to a point where it can release totes.
 		Lifter.getInstance().moveToPosition(Lifter.getDOWN_POSITION());
     }
 

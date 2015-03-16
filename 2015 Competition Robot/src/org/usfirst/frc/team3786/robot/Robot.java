@@ -3,6 +3,7 @@ package org.usfirst.frc.team3786.robot;
 
 import org.usfirst.frc.team3786.robot.commands.auto.AutonomousCommandGroup;
 import org.usfirst.frc.team3786.robot.commands.auto.TimeKeeper;
+import org.usfirst.frc.team3786.robot.commands.auto.bailing.BailCommandGroup;
 import org.usfirst.frc.team3786.robot.commands.teleop.TeleopArmCommand;
 import org.usfirst.frc.team3786.robot.commands.teleop.TeleopDriveCommand;
 import org.usfirst.frc.team3786.robot.commands.teleop.TeleopLifterCommand;
@@ -26,7 +27,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class Robot extends IterativeRobot {
 
 	TimeKeeper tkc = new TimeKeeper();
-    Command autonomousCommandGroup = new AutonomousCommandGroup(tkc);
+	BailCommandGroup bailCommandGroup = new BailCommandGroup();
+    Command autonomousCommandGroup = new AutonomousCommandGroup(tkc, bailCommandGroup);
 
     /**
      * This function is run when the robot is first started up and should be
@@ -36,7 +38,7 @@ public class Robot extends IterativeRobot {
 		
 		//Instantiate subsystems
 		Arm.getInstance();
-//		Lifter.getInstance();
+		Lifter.getInstance();
 		Wheels.getInstance();
     }
 	
@@ -72,6 +74,7 @@ public class Robot extends IterativeRobot {
         if (autonomousCommandGroup != null)
         {
         	autonomousCommandGroup.cancel();
+        	bailCommandGroup.cancel();
         	System.out.println("Auto Cancelled");
         }
         
