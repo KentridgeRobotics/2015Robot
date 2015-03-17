@@ -81,12 +81,12 @@ public class CompetitionRobotConfig extends RobotConfig {
 	}
 
 	@Override
-	public int getX_OMNI_WHEEL_ENCODER() {
+	public int getX_OMNI_WHEEL_ENCODER_A() {
 		return X_OMNI_WHEEL_ENCODER;
 	}
 
 	@Override
-	public int getY_OMNI_WHEEL_ENCODER() {
+	public int getY_OMNI_WHEEL_ENCODER_A() {
 		return Y_OMNI_WHEEL_ENCODER;
 	}
 
@@ -150,5 +150,16 @@ public class CompetitionRobotConfig extends RobotConfig {
 	@Override
 	public double getARM_D() {
 		return ARM_D;
+	}
+
+	@Override
+	public int getY_OMNI_WHEEL_ENCODER_B() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int getX_OMNI_WHEEL_ENCODER_B() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

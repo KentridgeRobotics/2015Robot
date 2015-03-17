@@ -107,4 +107,9 @@ public abstract class UIConfig {
 	 * @return If the lifter should stack a tote
 	 */
 	public abstract boolean getLifterStackButton();
+	
+	/**
+	 * @return If the lifter should stack a recycle bin
+	 */
+	public abstract boolean getLifterRecycleButton();
 }

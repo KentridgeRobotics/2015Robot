@@ -18,7 +18,6 @@ public class TeleopDriveCommand extends Command {
 	}
 
 	protected void execute() {
-		
 		if (SmartDashboard.getBoolean("resetGyro"))
 		{
 			Wheels.getInstance().resetGyro();

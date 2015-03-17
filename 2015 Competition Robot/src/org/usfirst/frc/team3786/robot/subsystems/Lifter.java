@@ -5,6 +5,7 @@ import org.usfirst.frc.team3786.robot.config.robot.RobotConfig;
 
 import edu.wpi.first.wpilibj.CANJaguar;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -16,11 +17,16 @@ public class Lifter extends Subsystem {
 	private CANJaguar leftLifterMotor;
 	private CANJaguar rightLifterMotor;
 	
-	private static final double AUTO_CLEAR_POSITION = 5;
-	private static final double AUTO_GRAB_POSITION = 4;
-	private static final double DOWN_POSITION = 0;
-	private static final double LOAD_CLEAR_POSITION = 3;
-	private static final double LOAD_GRAB_POSITION = 2;
+	private static final double AUTO_CLEAR_POSITION = -50;
+	private static final double AUTO_GRAB_POSITION = -35;
+	private static final double UP_POSITION = 0;
+	private static final double DOWN_POSITION = -268.5;
+	private static final double LOAD_CLEAR_POSITION = -169.85;
+	private static final double LOAD_GRAB_POSITION = -253.643;
+	private static final double RECYCLE_GRAB_POSITION = -35;
+	private static final double RECYCLE_CLEAR_POSITON = -50;
+	
+	private static final double TOLERANCE = 3;
 	
 	private static final int ENCODER_CODES_PER_REV = 7;
 
@@ -31,6 +37,8 @@ public class Lifter extends Subsystem {
 		
 		leftLifterMotor.setPositionMode(CANJaguar.kQuadEncoder, ENCODER_CODES_PER_REV, RobotConfig.get().getLIFTER_P(), RobotConfig.get().getLIFTER_I(), RobotConfig.get().getLIFTER_D());
 		rightLifterMotor.setPositionMode(CANJaguar.kQuadEncoder, ENCODER_CODES_PER_REV, RobotConfig.get().getLIFTER_P(), RobotConfig.get().getLIFTER_I(), RobotConfig.get().getLIFTER_D());
+		
+		rightLifterMotor.configSoftPositionLimits(UP_POSITION, DOWN_POSITION);
 		
 		leftLifterMotor.enableControl();
 		rightLifterMotor.enableControl();
@@ -64,7 +72,7 @@ public class Lifter extends Subsystem {
 	 */
 	public double getPosition()
 	{
-		return rightLifterMotor.get();
+		return rightLifterMotor.getPosition();
 	}
 	
 	public static double getDOWN_POSITION()
@@ -85,23 +93,45 @@ public class Lifter extends Subsystem {
         setDefaultCommand(new TeleopLifterCommand());
     }
     
-    public void autoStack()
-    {
-    	
-    }
-    
     public void stack()
     {
-    	while(getPosition() > LOAD_GRAB_POSITION)
+    	while(Math.abs(getPosition() - LOAD_GRAB_POSITION) > TOLERANCE)
 		{
+    		System.out.println("Grabbing... Off By: " + Math.abs(getPosition() - LOAD_GRAB_POSITION));
 			moveToPosition(LOAD_GRAB_POSITION);
 		}
 		
-		while(getPosition() < LOAD_CLEAR_POSITION)
+		while(Math.abs(getPosition() - LOAD_CLEAR_POSITION) > TOLERANCE)
 		{
+			System.out.println("Clearing...");
 			moveToPosition(LOAD_CLEAR_POSITION);
 		}
     }
+    
+    public void stackRecycle()
+    {
+    	while((Math.abs(getPosition()) - RECYCLE_GRAB_POSITION) > TOLERANCE)
+		{
+			moveToPosition(RECYCLE_GRAB_POSITION);
+		}
+		
+		while((Math.abs(getPosition()) - RECYCLE_CLEAR_POSITON) > TOLERANCE)
+		{
+			moveToPosition(RECYCLE_CLEAR_POSITON);
+		}
+    }
+
+	public static double getRECYCLE_GRAB_POSITION() {
+		return RECYCLE_GRAB_POSITION;
+	}
+
+	public static double getRECYCLE_CLEAR_POSITON() {
+		return RECYCLE_CLEAR_POSITON;
+	}
+
+	public static double getUP_POSITION() {
+		return UP_POSITION;
+	}
 
 }
 

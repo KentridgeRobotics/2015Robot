@@ -154,4 +154,10 @@ public class CyborgUI extends UIConfig {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public boolean getLifterRecycleButton() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

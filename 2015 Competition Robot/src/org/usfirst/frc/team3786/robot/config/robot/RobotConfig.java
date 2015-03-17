@@ -81,13 +81,23 @@ public abstract class RobotConfig {
 	 * Get the channel that the X value omni-wheel's encoder is on.
 	 * @return The encoder channel.
 	 */
-	public abstract int getX_OMNI_WHEEL_ENCODER();
+	public abstract int getX_OMNI_WHEEL_ENCODER_A();
 
 	/**
-	 * Get the channel that the Y value omni-wheel's encoder is on.
-	 * @return The encoder channel.
+	 * @return The B channel of the X omni-wheel
 	 */
-	public abstract int getY_OMNI_WHEEL_ENCODER();
+	public abstract int getX_OMNI_WHEEL_ENCODER_B();
+	
+	/**
+	 * Get the channel that the Y value omni-wheel's encoder is on.
+	 * @return The A channel.
+	 */
+	public abstract int getY_OMNI_WHEEL_ENCODER_A();
+	
+	/**
+	 * @return The B channel of the Y omni-wheel
+	 */
+	public abstract int getY_OMNI_WHEEL_ENCODER_B();
 
 	/**
 	 * @return The P value for the Lifter's PID.

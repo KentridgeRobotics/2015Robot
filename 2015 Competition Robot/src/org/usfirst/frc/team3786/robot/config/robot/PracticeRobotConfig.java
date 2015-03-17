@@ -14,8 +14,10 @@ public class PracticeRobotConfig extends RobotConfig {
 	
 	//Encoders
 	private static final int ARM_ENCODER_CODES_PER_REV = 360;
-	private static final int X_OMNI_WHEEL_ENCODER = 18;
-	private static final int Y_OMNI_WHEEL_ENCODER = 19;
+	private static final int X_OMNI_WHEEL_ENCODER = 4;
+	private static final int X_OMNI_WHEEL_ENCODER_B = 3;
+	private static final int Y_OMNI_WHEEL_ENCODER_A = 1;
+	private static final int Y_OMNI_WHEEL_ENCODER_B = 2;
 	
 	//Camera
 	private static final int LIGHTS_CHANNEL = 0;
@@ -31,7 +33,7 @@ public class PracticeRobotConfig extends RobotConfig {
 	private static final int GYRO_CHANNEL = 0;	
 	
 	//PID values
-	private static final double LIFTER_P = 10;
+	private static final double LIFTER_P = 5;
 	private static final double LIFTER_I = 0;
 	private static final double LIFTER_D = 0;
                                               //3 Tote	|	2 Tote	|	1 Tote	|	W/O tote 	| Quickly     
@@ -80,15 +82,25 @@ public class PracticeRobotConfig extends RobotConfig {
 	}
 
 	@Override
-	public int getX_OMNI_WHEEL_ENCODER() {
+	public int getX_OMNI_WHEEL_ENCODER_A() {
 		return X_OMNI_WHEEL_ENCODER;
+	}
+	
+	@Override
+	public int getX_OMNI_WHEEL_ENCODER_B() {
+		return X_OMNI_WHEEL_ENCODER_B;
 	}
 
 	@Override
-	public int getY_OMNI_WHEEL_ENCODER() {
-		return Y_OMNI_WHEEL_ENCODER;
+	public int getY_OMNI_WHEEL_ENCODER_A() {
+		return Y_OMNI_WHEEL_ENCODER_A;
 	}
 
+	@Override
+	public int getY_OMNI_WHEEL_ENCODER_B() {
+		return Y_OMNI_WHEEL_ENCODER_B;
+	}
+	
 	@Override
 	public double getLIFTER_P() {
 		return LIFTER_P;
@@ -150,4 +162,6 @@ public class PracticeRobotConfig extends RobotConfig {
 	public double getARM_D() {
 		return ARM_D;
 	}
+
+
 }

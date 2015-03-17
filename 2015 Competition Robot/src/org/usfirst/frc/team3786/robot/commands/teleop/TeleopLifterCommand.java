@@ -19,7 +19,7 @@ public class TeleopLifterCommand extends Command {
 		SmartDashboard.putNumber("Lifter Position", 0);
 	}
 	
-	private static final double INCREMENT = 0.5;
+	private static final double INCREMENT = 25;
 
 	protected void execute() {
 		
@@ -31,6 +31,13 @@ public class TeleopLifterCommand extends Command {
 		if (UIConfig.get().getLifterStackButton())
 		{
 			Lifter.getInstance().stack();
+			return;
+		}
+		
+		if (UIConfig.get().getLifterRecycleButton())
+		{
+			Lifter.getInstance().stackRecycle();
+			return;
 		}
 		
 		if (UIConfig.get().getLifterUpButton())

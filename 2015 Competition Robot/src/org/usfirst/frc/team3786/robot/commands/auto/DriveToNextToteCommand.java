@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveToNextToteCommand extends Command {
 
-	private final double distanceToTravel = 55;//10;
+	private final double distanceToTravel = 10;
 	private double initialPosition;
 	private double distanceTraveled;
 	
@@ -19,14 +19,14 @@ public class DriveToNextToteCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-//    	initialPosition = Wheels.getInstance().getX();
+    	initialPosition = Wheels.getInstance().getX();
     	distanceTraveled = 0;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-//    	distanceTraveled = Wheels.getInstance().getX() - initialPosition;
+    	distanceTraveled = Wheels.getInstance().getX() - initialPosition;
     	
     	if (distanceTraveled <= distanceToTravel / 10)
         {
@@ -52,8 +52,6 @@ public class DriveToNextToteCommand extends Command {
         {
         	Wheels.getInstance().drive(-.1, 0, 0);
         }
-    	
-    	distanceTraveled++;
     }
 
     // Make this return true when this Command no longer needs to run execute()

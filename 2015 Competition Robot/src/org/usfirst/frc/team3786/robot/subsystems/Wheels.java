@@ -19,7 +19,7 @@ public class Wheels extends Subsystem {
 	
 	private static final double DEAD_ZONE = 0.15;
 	private static final double ROTATION_DEAD_ZONE = 0.1;//.05;
-	private static final double ENCODER_DISTANCE_PER_PULSE = 1 / 360.0;
+	private static final double ENCODER_DISTANCE_PER_PULSE = (6 * Math.PI) / 360.0;
 	
 	private CANJaguar frontLeft;
 	private CANJaguar frontRight;
@@ -28,8 +28,8 @@ public class Wheels extends Subsystem {
 	
 	private Gyro gyro;
 	
-//	private Encoder xEncoder;
-//	private Encoder yEncoder;
+	private Encoder xEncoder;
+	private Encoder yEncoder;
 	
 	private double desiredAngle;
 	private double rotateSpeed;
@@ -57,10 +57,14 @@ public class Wheels extends Subsystem {
 		backRight.enableControl();
 		
 		gyro = new Gyro(RobotConfig.get().getGYRO_CHANNEL());
-//		xEncoder = new Encoder(0, 0, false, EncodingType.k4X); //TODO Update channels
-//		yEncoder = new Encoder(0, 0, false, EncodingType.k4X); //TODO Update channels
-//		
-//		xEncoder.setDistancePerPulse(ENCODER_DISTANCE_PER_PULSE);
+		xEncoder = new Encoder(RobotConfig.get().getX_OMNI_WHEEL_ENCODER_A(), RobotConfig.get().getX_OMNI_WHEEL_ENCODER_B(), false, EncodingType.k4X); //TODO Update channels
+		yEncoder = new Encoder(RobotConfig.get().getY_OMNI_WHEEL_ENCODER_A(), RobotConfig.get().getY_OMNI_WHEEL_ENCODER_B(), false, EncodingType.k4X); //TODO Update channels
+		
+		xEncoder.reset();
+		yEncoder.reset();
+		
+		xEncoder.setDistancePerPulse(ENCODER_DISTANCE_PER_PULSE);
+		yEncoder.setDistancePerPulse(ENCODER_DISTANCE_PER_PULSE);
 	}
 	
 	/**
@@ -117,21 +121,21 @@ public class Wheels extends Subsystem {
 	}
 	
 	//Get encoder values
-//	/**
-//	 * @return The X position (in TBD units) of the robot from initial starting position.
-//	 */
-//	public double getX()
-//	{
-//		return xEncoder.getDistance();
-//	}
-//	
-//	/**
-//	 * @return The Y position (in TBD units) of the robot from initial starting position.
-//	 */
-//	public double getY()
-//	{
-//		return yEncoder.getDistance();
-//	}
+	/**
+	 * @return The X position (in TBD units) of the robot from initial starting position.
+	 */
+	public double getX()
+	{
+		return xEncoder.getDistance();
+	}
+	
+	/**
+	 * @return The Y position (in TBD units) of the robot from initial starting position.
+	 */
+	public double getY()
+	{
+		return yEncoder.getDistance();
+	}
 	
 	
 	//Utility methods for drive
