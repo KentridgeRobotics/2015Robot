@@ -18,6 +18,8 @@ public class TeleopDriveCommand extends Command {
 	}
 
 	protected void execute() {
+		SmartDashboard.putNumber("X Encoder", Wheels.getInstance().getX());
+		SmartDashboard.putNumber("Y Encoder", Wheels.getInstance().getY());
 		if (SmartDashboard.getBoolean("resetGyro"))
 		{
 			Wheels.getInstance().resetGyro();

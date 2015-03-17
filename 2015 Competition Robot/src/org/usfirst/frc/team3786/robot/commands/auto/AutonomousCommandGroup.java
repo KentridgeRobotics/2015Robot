@@ -37,14 +37,14 @@ public class AutonomousCommandGroup extends CommandGroup {
         // these will run in order.
     	
     	//Begin time keeping
-    	new Thread(tkc).start(); //This instance will need to be kept elsewhere soon
+    	//new Thread(tkc).start(); //This instance will need to be kept elsewhere soon
     	
-    	addParallel(new TimeKeeperCommand(tkc, this, bcg));//lift, stack, drive, center));
+    	//addParallel(new TimeKeeperCommand(tkc, this, bcg));//lift, stack, drive, center));
     	
     	//Pick up first tote
     	addSequential(lift);
     	
-    	addParallel(stack);
+//    	addParallel(stack);
     	
     	//Move while picking up to rough area
 //    	addSequential(drive);

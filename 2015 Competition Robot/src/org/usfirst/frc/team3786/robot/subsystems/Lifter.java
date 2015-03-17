@@ -18,7 +18,7 @@ public class Lifter extends Subsystem {
 	private CANJaguar rightLifterMotor;
 	
 	private static final double AUTO_CLEAR_POSITION = -50;
-	private static final double AUTO_GRAB_POSITION = -35;
+	private static final double AUTO_GRAB_POSITION = -51;
 	private static final double UP_POSITION = 0;
 	private static final double DOWN_POSITION = -268.5;
 	private static final double LOAD_CLEAR_POSITION = -169.85;
@@ -38,7 +38,8 @@ public class Lifter extends Subsystem {
 		leftLifterMotor.setPositionMode(CANJaguar.kQuadEncoder, ENCODER_CODES_PER_REV, RobotConfig.get().getLIFTER_P(), RobotConfig.get().getLIFTER_I(), RobotConfig.get().getLIFTER_D());
 		rightLifterMotor.setPositionMode(CANJaguar.kQuadEncoder, ENCODER_CODES_PER_REV, RobotConfig.get().getLIFTER_P(), RobotConfig.get().getLIFTER_I(), RobotConfig.get().getLIFTER_D());
 		
-		rightLifterMotor.configSoftPositionLimits(UP_POSITION, DOWN_POSITION);
+//		rightLifterMotor.configSoftPositionLimits(UP_POSITION, DOWN_POSITION);
+		rightLifterMotor.disableSoftPositionLimits();
 		
 		leftLifterMotor.enableControl();
 		rightLifterMotor.enableControl();

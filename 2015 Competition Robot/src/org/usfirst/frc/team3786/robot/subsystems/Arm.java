@@ -24,6 +24,8 @@ public class Arm extends Subsystem {
 	private static final double DROP_INCREMENT = 12;
 	private static final double STEP_POSITION = 60;
 	
+	private static final double MOVEMENT_TOLERANCE = 4;
+	
 	private Arm()
 	{
 		armMotor = new CANJaguar(RobotConfig.get().getARM_MOTOR_CHANNEL());
@@ -100,6 +102,10 @@ public class Arm extends Subsystem {
 
 	public static double getPICK_UP_POSITION() {
 		return PICK_UP_POSITION;
+	}
+	
+	public static double getMOVEMENT_TOLERANCE() {
+		return MOVEMENT_TOLERANCE;
 	}
 }
 
