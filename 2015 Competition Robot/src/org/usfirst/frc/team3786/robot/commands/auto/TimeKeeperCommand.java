@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3786.robot.commands.auto;
 
 import org.usfirst.frc.team3786.robot.commands.auto.bailing.BailCommandGroup;
+import org.usfirst.frc.team3786.robot.commands.auto.types.FullAuto;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -11,10 +12,10 @@ public class TimeKeeperCommand extends Command {
 	
 //	private Command[] toInterrupt;
 	
-	private AutonomousCommandGroup acg;
+	private FullAuto acg;
 	private BailCommandGroup bcg;
 	
-	public TimeKeeperCommand(TimeKeeper tk, AutonomousCommandGroup acg, BailCommandGroup bcg)//Command... toInterrupt)
+	public TimeKeeperCommand(TimeKeeper tk, FullAuto acg, BailCommandGroup bcg)//Command... toInterrupt)
 	{
 		keeper = tk;
 //		this.toInterrupt = toInterrupt;

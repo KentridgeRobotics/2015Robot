@@ -1,6 +1,11 @@
-package org.usfirst.frc.team3786.robot.commands.auto;
+package org.usfirst.frc.team3786.robot.commands.auto.types;
 
 import org.usfirst.frc.team3786.robot.commands.DropTotesCommand;
+import org.usfirst.frc.team3786.robot.commands.auto.DriveBackwardsCommand;
+import org.usfirst.frc.team3786.robot.commands.auto.DriveToNextToteCommand;
+import org.usfirst.frc.team3786.robot.commands.auto.LiftToteCommand;
+import org.usfirst.frc.team3786.robot.commands.auto.StackToteFromArmCommand;
+import org.usfirst.frc.team3786.robot.commands.auto.TimeKeeper;
 import org.usfirst.frc.team3786.robot.commands.auto.bailing.BailCommandGroup;
 import org.usfirst.frc.team3786.robot.commands.vision.CenterOnToteCommand;
 import org.usfirst.frc.team3786.robot.subsystems.Vision;
@@ -12,7 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class AutonomousCommandGroup extends CommandGroup {
+public class FullAuto extends CommandGroup {
 	
 	private LiftToteCommand lift = new LiftToteCommand();
 	
@@ -26,7 +31,7 @@ public class AutonomousCommandGroup extends CommandGroup {
 	
 	private CenterOnToteCommand center = new CenterOnToteCommand();
 	
-    public  AutonomousCommandGroup(TimeKeeper tkc, BailCommandGroup bcg) {
+    public  FullAuto(TimeKeeper tkc, BailCommandGroup bcg) {
     	
     	requires(Wheels.getInstance());
     	requires(Vision.getInstance());
@@ -43,11 +48,12 @@ public class AutonomousCommandGroup extends CommandGroup {
     	
     	//Pick up first tote
     	addSequential(lift);
-    	
+    	System.out.println("Finished Lifting");
 //    	addParallel(stack);
     	
     	//Move while picking up to rough area
-//    	addSequential(drive);
+    	addSequential(drive);
+    	System.out.println("Finished Driving");
     	//Center on tote
 //    	addSequential(center);
 //    	addSequential(center);

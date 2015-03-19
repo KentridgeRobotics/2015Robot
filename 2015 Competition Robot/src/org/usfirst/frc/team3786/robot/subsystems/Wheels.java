@@ -19,7 +19,7 @@ public class Wheels extends Subsystem {
 	
 	private static final double DEAD_ZONE = 0.15;
 	private static final double ROTATION_DEAD_ZONE = 0.1;//.05;
-	private static final double ENCODER_DISTANCE_PER_PULSE = (6 * Math.PI) / 360.0;
+	private static final double ENCODER_DISTANCE_PER_PULSE = 1.1685 * ((6 * Math.PI) / 360.0);
 	
 	private CANJaguar frontLeft;
 	private CANJaguar frontRight;

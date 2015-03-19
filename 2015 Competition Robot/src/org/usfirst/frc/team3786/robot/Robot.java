@@ -1,9 +1,9 @@
 
 package org.usfirst.frc.team3786.robot;
 
-import org.usfirst.frc.team3786.robot.commands.auto.AutonomousCommandGroup;
 import org.usfirst.frc.team3786.robot.commands.auto.TimeKeeper;
 import org.usfirst.frc.team3786.robot.commands.auto.bailing.BailCommandGroup;
+import org.usfirst.frc.team3786.robot.commands.auto.types.FullAuto;
 import org.usfirst.frc.team3786.robot.commands.teleop.TeleopArmCommand;
 import org.usfirst.frc.team3786.robot.commands.teleop.TeleopDriveCommand;
 import org.usfirst.frc.team3786.robot.commands.teleop.TeleopLifterCommand;
@@ -28,7 +28,7 @@ public class Robot extends IterativeRobot {
 
 	TimeKeeper tkc = new TimeKeeper();
 	BailCommandGroup bailCommandGroup = new BailCommandGroup();
-    Command autonomousCommandGroup = new AutonomousCommandGroup(tkc, bailCommandGroup);
+    Command autonomousCommandGroup = new FullAuto(tkc, bailCommandGroup);
 
     /**
      * This function is run when the robot is first started up and should be

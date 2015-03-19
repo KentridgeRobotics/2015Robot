@@ -76,6 +76,11 @@ public class Lifter extends Subsystem {
 		return rightLifterMotor.getPosition();
 	}
 	
+	public double getLeftPosition()
+	{
+		return leftLifterMotor.getPosition();
+	}
+	
 	public static double getDOWN_POSITION()
 	{
 		return DOWN_POSITION;

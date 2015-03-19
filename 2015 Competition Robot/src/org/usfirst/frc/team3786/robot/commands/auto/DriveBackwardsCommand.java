@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveBackwardsCommand extends Command {
 
-	private final double distanceToTravel = 10;
+	private final double distanceToTravel = 107;
 	private double currentDistance;
 	
     public DriveBackwardsCommand() {
