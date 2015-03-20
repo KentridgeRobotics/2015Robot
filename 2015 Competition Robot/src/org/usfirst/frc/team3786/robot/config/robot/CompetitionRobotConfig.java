@@ -3,26 +3,25 @@ package org.usfirst.frc.team3786.robot.config.robot;
 
 public class CompetitionRobotConfig extends RobotConfig {
 
-	private static final int FRONT_RIGHT_MOTOR_CHANNEL = 24;
-	private static final int FRONT_LEFT_MOTOR_CHANNEL = 12;
-	private static final int BACK_RIGHT_MOTOR_CHANNEL = 22;
-	private static final int BACK_LEFT_MOTOR_CHANNEL = 9;
-	private static final int ARM_MOTOR_CHANNEL = 11;
-	private static final int LIFTER_MOTOR_CHANNEL_LEFT = 20;
-	private static final int LIFTER_MOTOR_CHANNEL_RIGHT = 13;
+	private static final int FRONT_RIGHT_MOTOR_CHANNEL = 16;
+	private static final int FRONT_LEFT_MOTOR_CHANNEL = 17;
+	private static final int BACK_RIGHT_MOTOR_CHANNEL = 5;
+	private static final int BACK_LEFT_MOTOR_CHANNEL = 23;
+	private static final int ARM_MOTOR_CHANNEL = 18;
+	private static final int LIFTER_MOTOR_CHANNEL_LEFT = 15;
+	private static final int LIFTER_MOTOR_CHANNEL_RIGHT = 14;
 	private static final int CHUTE_MOTOR_CHANNEL = 0;
 	
 	//Encoders
 	private static final int ARM_ENCODER_CHANNEL = 0;
-	private static final int X_OMNI_WHEEL_ENCODER = 18;
-	private static final int Y_OMNI_WHEEL_ENCODER = 19;
+	private static final int X_OMNI_WHEEL_ENCODER_A = 1;
+	private static final int X_OMNI_WHEEL_ENCODER_B = 2;
+	private static final int Y_OMNI_WHEEL_ENCODER_A = 3;
+	private static final int Y_OMNI_WHEEL_ENCODER_B = 4;
 	
 	//Camera
 	private static final int LIGHTS_CHANNEL = 0;
-	private static final int CAMERA_OFFSET = 0;
-	
-	//Tote detector
-	private static final int LASER = 21;
+	private static final int CAMERA_OFFSET = 20;
 	
 	//RG Feed Signal light
 	private static final int FEED_SIGNAL_LIGHT = 22;
@@ -31,13 +30,13 @@ public class CompetitionRobotConfig extends RobotConfig {
 	private static final int GYRO_CHANNEL = 0;	
 	
 	//PID values
-	private static final double LIFTER_P = 0;
+	private static final double LIFTER_P = 5;
 	private static final double LIFTER_I = 0;
 	private static final double LIFTER_D = 0;
-
-	private static final double ARM_P = 0;
-	private static final double ARM_I = 0;
-	private static final double ARM_D = 0;
+                                              //3 Tote	|	2 Tote	|	1 Tote	|	W/O tote 	| Quickly     
+	private static final double ARM_P = 2000; //	|				|	1000	|	4000  		|	2000
+	private static final double ARM_I = 0;    //	|				|	0		|	0			|	1
+	private static final double ARM_D = 2;    //	|				|	2
 
 	@Override
 	public int getFRONT_RIGHT_MOTOR_CHANNEL() {
@@ -82,12 +81,12 @@ public class CompetitionRobotConfig extends RobotConfig {
 
 	@Override
 	public int getX_OMNI_WHEEL_ENCODER_A() {
-		return X_OMNI_WHEEL_ENCODER;
+		return X_OMNI_WHEEL_ENCODER_A;
 	}
 
 	@Override
 	public int getY_OMNI_WHEEL_ENCODER_A() {
-		return Y_OMNI_WHEEL_ENCODER;
+		return Y_OMNI_WHEEL_ENCODER_A;
 	}
 
 	@Override
@@ -105,11 +104,6 @@ public class CompetitionRobotConfig extends RobotConfig {
 	public double getLIFTER_D()
 	{
 		return LIFTER_D;
-	}
-	
-	@Override
-	public int getLASER() {
-		return LASER;
 	}
 
 	@Override
@@ -154,12 +148,10 @@ public class CompetitionRobotConfig extends RobotConfig {
 
 	@Override
 	public int getY_OMNI_WHEEL_ENCODER_B() {
-		// TODO Auto-generated method stub
-		return 0;
+		return Y_OMNI_WHEEL_ENCODER_B;
 	}
 	@Override
 	public int getX_OMNI_WHEEL_ENCODER_B() {
-		// TODO Auto-generated method stub
-		return 0;
+		return X_OMNI_WHEEL_ENCODER_B;
 	}
 }

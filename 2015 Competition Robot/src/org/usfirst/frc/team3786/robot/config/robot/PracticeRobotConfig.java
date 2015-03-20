@@ -23,9 +23,6 @@ public class PracticeRobotConfig extends RobotConfig {
 	private static final int LIGHTS_CHANNEL = 0;
 	private static final double CAMERA_OFFSET = 20;
 	
-	//Tote detector
-	private static final int LASER = 21;
-	
 	//RG Feed Signal light
 	private static final int FEED_SIGNAL_LIGHT = 22;
 	
@@ -116,11 +113,6 @@ public class PracticeRobotConfig extends RobotConfig {
 	public double getLIFTER_D()
 	{
 		return LIFTER_D;
-	}
-	
-	@Override
-	public int getLASER() {
-		return LASER;
 	}
 
 	@Override

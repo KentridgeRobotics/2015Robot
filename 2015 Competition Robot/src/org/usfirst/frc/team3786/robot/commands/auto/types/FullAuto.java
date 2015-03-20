@@ -2,12 +2,15 @@ package org.usfirst.frc.team3786.robot.commands.auto.types;
 
 import org.usfirst.frc.team3786.robot.commands.DropTotesCommand;
 import org.usfirst.frc.team3786.robot.commands.auto.DriveBackwardsCommand;
+import org.usfirst.frc.team3786.robot.commands.auto.DriveForwardsCommand;
 import org.usfirst.frc.team3786.robot.commands.auto.DriveToNextToteCommand;
 import org.usfirst.frc.team3786.robot.commands.auto.LiftToteCommand;
+import org.usfirst.frc.team3786.robot.commands.auto.LowerArmCommand;
 import org.usfirst.frc.team3786.robot.commands.auto.StackToteFromArmCommand;
-import org.usfirst.frc.team3786.robot.commands.auto.TimeKeeper;
 import org.usfirst.frc.team3786.robot.commands.auto.bailing.BailCommandGroup;
+import org.usfirst.frc.team3786.robot.commands.auto.bailing.TimeKeeper;
 import org.usfirst.frc.team3786.robot.commands.vision.CenterOnToteCommand;
+import org.usfirst.frc.team3786.robot.commands.vision.RangeToToteCommand;
 import org.usfirst.frc.team3786.robot.subsystems.Vision;
 import org.usfirst.frc.team3786.robot.subsystems.Wheels;
 
@@ -18,18 +21,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class FullAuto extends CommandGroup {
-	
-	private LiftToteCommand lift = new LiftToteCommand();
-	
-	private StackToteFromArmCommand stack = new StackToteFromArmCommand();
-	
-	private DriveToNextToteCommand drive = new DriveToNextToteCommand();
-	
-	private DriveBackwardsCommand driveBack = new DriveBackwardsCommand();
-	
-	private DropTotesCommand drop = new DropTotesCommand();
-	
-	private CenterOnToteCommand center = new CenterOnToteCommand();
 	
     public  FullAuto(TimeKeeper tkc, BailCommandGroup bcg) {
     	
@@ -44,36 +35,50 @@ public class FullAuto extends CommandGroup {
     	//Begin time keeping
     	//new Thread(tkc).start(); //This instance will need to be kept elsewhere soon
     	
-    	//addParallel(new TimeKeeperCommand(tkc, this, bcg));//lift, stack, drive, center));
+    	//addParallel(new TimeKeeperCommand(tkc, this, bcg));
     	
     	//Pick up first tote
-    	addSequential(lift);
-    	System.out.println("Finished Lifting");
-//    	addParallel(stack);
+    	addSequential(new LiftToteCommand());
+    	
+    	addParallel(new StackToteFromArmCommand());
+    	addSequential(new DriveBackwardsCommand(10));
     	
     	//Move while picking up to rough area
-    	addSequential(drive);
-    	System.out.println("Finished Driving");
+    	addSequential(new DriveToNextToteCommand());
+    	
     	//Center on tote
-//    	addSequential(center);
-//    	addSequential(center);
+    	addSequential(new CenterOnToteCommand());
+    	addSequential(new CenterOnToteCommand());
+    	
+//    	addSequential(new RangeToToteCommand()); //Will most likely not work
     	
     	//Pick up 2nd tote when centered
-//    	addParallel(lift);
+    	addSequential(new LowerArmCommand());
+    	addSequential(new DriveForwardsCommand(10)); //Replaced if Ranging works
+    	addSequential(new LiftToteCommand());
+    	
+    	addParallel(new StackToteFromArmCommand());
+    	addSequential(new DriveBackwardsCommand(10));
+    	
     	//Move to next tote
-//    	addSequential(drive);
+    	addSequential(new DriveToNextToteCommand());
     	//Center twice for verification
-//    	addSequential(center);
-//    	addSequential(center);
-    	//Pick up last tote
-//    	addParallel(lift);
+    	addSequential(new CenterOnToteCommand());
+    	addSequential(new CenterOnToteCommand());
+    	
+//    	addSequential(new RangeToToteCommand()); //Will most likely not work
+    	
+//    	Pick up last tote
+    	addSequential(new LowerArmCommand());
+    	addSequential(new DriveForwardsCommand(10));
+    	addParallel(new LiftToteCommand());
     	
     	//Move backwards into the auto zone
-//    	addSequential(driveBack);
+    	addSequential(new DriveBackwardsCommand(96));
 //    	//Begin dropping totes
-//    	addParallel(drop);
+    	addParallel(new DropTotesCommand());
 //    	//Move away from totes
-//    	addSequential(driveBack);
+    	addSequential(new DriveBackwardsCommand(48));
     	
 
         // To run multiple commands at the same time,

@@ -200,21 +200,26 @@ public class Vision extends Subsystem {
 //			{
 ////				checkIfSingleL(particles.get(0));
 //			}
-			if (size > 1)
+			switch (size)
 			{
-				angleOracle(particles.get(0), particles.get(1));
-//				angleByArea(particles.get(0), particles.get(1));
-				return -centerInator(particles.get(0), particles.get(1));
-			}
-			else if (size > 2)
-			{
-				particles.sort(null);
-				
-				return 0;
-			}
-			else
-			{
-				return 0;
+//				case 1:
+//				{
+////					angleOracle(particles.get(0), particles.get(1));
+//	//				angleByArea(particles.get(0), particles.get(1));
+////					return -centerInator(particles.get(0), particles.get(1));
+//				}
+				case 2:
+				{
+					particles.sort(null);
+
+					angleOracle(particles.get(0), particles.get(1));
+	//				angleByArea(particles.get(0), particles.get(1));
+					return -centerInator(particles.get(0), particles.get(1));
+				}
+				default:
+				{
+					return 0;
+				}
 			}
 		} else {
 			return 0;

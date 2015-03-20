@@ -17,8 +17,8 @@ public abstract class RobotConfig {
 	
 	static
 	{
-		instance = new PracticeRobotConfig();
-	//	instance = new CompetitionRobotConfig();
+//		instance = new PracticeRobotConfig();
+		instance = new CompetitionRobotConfig();
 	}
 	
 	/**
@@ -128,12 +128,6 @@ public abstract class RobotConfig {
 	 * @return The D value for the Arm's PID.
 	 */
 	public abstract double getARM_D();
-
-	/**
-	 * Get the channel that the laser is on.
-	 * @return The laser channel.
-	 */
-	public abstract int getLASER();
 
 	/**
 	 * Get the channel that the feed signal light is on.

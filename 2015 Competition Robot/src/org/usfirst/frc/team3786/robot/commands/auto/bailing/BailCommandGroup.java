@@ -9,7 +9,6 @@ public class BailCommandGroup extends CommandGroup{
 	public BailCommandGroup()
 	{
 		//NEEDS testing
-		addSequential(new DriveBackwardsCommand());
-		addSequential(new DriveBackwardsCommand());
+		addSequential(new DriveBackwardsCommand(107)); //TODO: Test Distance
 	}
 }

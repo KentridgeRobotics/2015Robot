@@ -10,32 +10,38 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveBackwardsCommand extends Command {
 
-	private final double distanceToTravel = 107;
-	private double currentDistance;
+	private double distanceToTravel;//= 54; //107
+	private double startDistance;
 	
-    public DriveBackwardsCommand() {
+	private boolean isFinished;
+	
+    public DriveBackwardsCommand(double distanceToTravel) {
         requires(Wheels.getInstance());
+        this.distanceToTravel = distanceToTravel;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	currentDistance = 0; 
-    	
+    	startDistance = Wheels.getInstance().getY();
+    	isFinished = false;
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {    		
-    	Wheels.getInstance().drive(0, 1, 0);
+    protected void execute() {
+    	if ((Wheels.getInstance().getY() - startDistance) < distanceToTravel)
+		{
+			Wheels.getInstance().drive(0, -1, 0);
+		}
+		else
+		{
+			isFinished = true;
+		}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	//Should end after reaching distanceToTravel
-    	if(currentDistance >= distanceToTravel)
-    	{
-    		return true;
-    	}
-    	return false;
+    	return isFinished;
     }
 
     // Called once after isFinished returns true

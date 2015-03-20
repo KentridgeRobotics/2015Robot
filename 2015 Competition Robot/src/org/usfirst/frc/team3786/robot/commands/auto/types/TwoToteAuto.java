@@ -37,11 +37,11 @@ public class TwoToteAuto extends CommandGroup {
     	addParallel(new StackToteFromArmCommand());
     	
     	//Move backwards into the auto zone
-    	addSequential(new DriveBackwardsCommand());
+    	addSequential(new DriveBackwardsCommand(96)); //TODO: TEST Distances
 //    	//Begin dropping totes
     	addParallel(new DropTotesCommand());
 //    	//Move away from totes
-    	addSequential(new DriveBackwardsCommand());
+    	addSequential(new DriveBackwardsCommand(48)); //TODO: Test distances
 	}
 	
 }

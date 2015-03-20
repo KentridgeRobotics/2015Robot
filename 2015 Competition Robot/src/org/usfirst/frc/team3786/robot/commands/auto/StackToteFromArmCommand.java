@@ -25,18 +25,11 @@ public class StackToteFromArmCommand extends Command
     	{
     		Lifter.getInstance().moveToPosition(Lifter.getAUTO_CLEAR_POSITION());
     	}
-    	else if (Arm.getInstance().getPosition() > Arm.getPICK_UP_POSITION())
-    	{
-    		Arm.getInstance().moveArm(Arm.getPICK_UP_POSITION());
-    	}
-    	else if (Arm.getInstance().getPosition() > Arm.getDOWN_POSITION())
-    	{
-    		Arm.getInstance().moveArm(Arm.getDOWN_POSITION());
-    	}
     	else
     	{
     		isFinished = true;
     	}
+
 	}
 
 	@Override

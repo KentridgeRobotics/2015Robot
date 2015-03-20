@@ -4,6 +4,7 @@ import org.usfirst.frc.team3786.robot.subsystems.Vision;
 import org.usfirst.frc.team3786.robot.subsystems.Wheels;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RangeToToteCommand extends Command {
 
@@ -26,6 +27,8 @@ public class RangeToToteCommand extends Command {
 
 	protected void execute() {
     	distance = Vision.getInstance().getDistance();
+    	
+    	SmartDashboard.putNumber("Ultrasonic found: ", distance);
     	
     	double yVal = 0;
     	

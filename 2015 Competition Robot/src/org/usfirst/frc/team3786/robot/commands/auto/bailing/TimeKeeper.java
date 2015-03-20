@@ -1,8 +1,6 @@
-package org.usfirst.frc.team3786.robot.commands.auto;
+package org.usfirst.frc.team3786.robot.commands.auto.bailing;
 
 public class TimeKeeper implements Runnable {
-
-	private static final int SECONDS_UNTIL_BAIL = 12;
 	
 	private long initialSystemTime;
 	
@@ -12,10 +10,10 @@ public class TimeKeeper implements Runnable {
 
 	@Override
 	public void run() {
-		if ((System.currentTimeMillis() - initialSystemTime) >= SECONDS_UNTIL_BAIL * 1000)
-		{
-			return;
-		}
+//		if ((System.currentTimeMillis() - initialSystemTime) >= SECONDS_UNTIL_BAIL * 1000)
+//		{
+//			return;
+//		}
 	}
 	
 	public double getTimeInSeconds()

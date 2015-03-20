@@ -1,12 +1,14 @@
-package org.usfirst.frc.team3786.robot.commands.auto;
+package org.usfirst.frc.team3786.robot.commands.auto.bailing;
 
-import org.usfirst.frc.team3786.robot.commands.auto.bailing.BailCommandGroup;
 import org.usfirst.frc.team3786.robot.commands.auto.types.FullAuto;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TimeKeeperCommand extends Command {
+	
+
+	private static final int SECONDS_UNTIL_BAIL = 12;
 
 	private TimeKeeper keeper;
 	
@@ -33,7 +35,7 @@ public class TimeKeeperCommand extends Command {
 	}
 
 	protected boolean isFinished() {
-		return keeper.getTimeInSeconds() >= 12;
+		return keeper.getTimeInSeconds() >= SECONDS_UNTIL_BAIL;
 	}
 
 	protected void end() {

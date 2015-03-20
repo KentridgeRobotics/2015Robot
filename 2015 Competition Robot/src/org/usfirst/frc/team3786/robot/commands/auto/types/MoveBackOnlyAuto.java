@@ -8,7 +8,7 @@ public class MoveBackOnlyAuto extends CommandGroup {
 
 	public MoveBackOnlyAuto()
 	{
-		addSequential(new DriveBackwardsCommand());
+		addSequential(new DriveBackwardsCommand(107)); //Distance untested
 	}
 	
 }
