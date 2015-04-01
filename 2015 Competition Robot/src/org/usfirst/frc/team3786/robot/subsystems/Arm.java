@@ -15,14 +15,14 @@ public class Arm extends Subsystem {
 	
 	private CANJaguar armMotor;
 	
-	private static final double UP_POSITION = 113;
-	private static final double DOWN_POSITION = 0;
-	private static final double LIFT_POSITION = 113;
+	private static final double UP_POSITION = 0;
+	private static final double DOWN_POSITION = 113;
+	private static final double LIFT_POSITION = 0;
 	
-	private static final double PICK_UP_POSITION = 12;
+	private static final double PICK_UP_POSITION = 113 - 12;
 	
 	private static final double DROP_INCREMENT = 12;
-	private static final double STEP_POSITION = 60;
+	private static final double STEP_POSITION = 113 - 60;
 	
 	private static final double MOVEMENT_TOLERANCE = 4;
 	
@@ -31,6 +31,8 @@ public class Arm extends Subsystem {
 		armMotor = new CANJaguar(RobotConfig.get().getARM_MOTOR_CHANNEL());
 
 		armMotor.setPositionMode(CANJaguar.kQuadEncoder, RobotConfig.get().getARM_ENCODER_CODES_PER_REV(), RobotConfig.get().getARM_P(), RobotConfig.get().getARM_I(), RobotConfig.get().getARM_D());
+		
+//		armMotor.setSpeedMode(CANJaguar.kQuadEncoder, RobotConfig.get().getARM_ENCODER_CODES_PER_REV(), RobotConfig.get().getARM_P(), RobotConfig.get().getARM_I(), RobotConfig.get().getARM_D());
 		
 		armMotor.enableControl();
 	}
@@ -53,6 +55,7 @@ public class Arm extends Subsystem {
 	 */
 	public void moveArm(double position)
 	{
+//		System.out.println("Position in Deg set to: " + position);
 		position /= 360.0;
 		
 		System.out.println("Setting to: " + position);
@@ -70,6 +73,8 @@ public class Arm extends Subsystem {
 	 */
 	public double getPosition()
 	{
+		System.out.println("Current Position: " + armMotor.getPosition());
+		
 		return -(armMotor.getPosition() * 360.0);
 	}
 	

@@ -22,7 +22,7 @@ public class Lifter extends Subsystem {
 	private static final double UP_POSITION = 0;
 	private static final double DOWN_POSITION = -268.5;
 	private static final double LOAD_CLEAR_POSITION = -169.85;
-	private static final double LOAD_GRAB_POSITION = -253.643;
+	private static final double LOAD_GRAB_POSITION = -278;
 	private static final double RECYCLE_GRAB_POSITION = -35;
 	private static final double RECYCLE_CLEAR_POSITON = -50;
 	

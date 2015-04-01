@@ -27,11 +27,6 @@ public class FullAuto extends CommandGroup {
     	requires(Wheels.getInstance());
     	requires(Vision.getInstance());
     	
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
-    	
     	//Begin time keeping
     	//new Thread(tkc).start(); //This instance will need to be kept elsewhere soon
     	
@@ -44,7 +39,7 @@ public class FullAuto extends CommandGroup {
     	addSequential(new DriveBackwardsCommand(10));
     	
     	//Move while picking up to rough area
-    	addSequential(new DriveToNextToteCommand());
+    	addSequential(new DriveToNextToteCommand(81));
     	
     	//Center on tote
     	addSequential(new CenterOnToteCommand());
@@ -61,7 +56,7 @@ public class FullAuto extends CommandGroup {
     	addSequential(new DriveBackwardsCommand(10));
     	
     	//Move to next tote
-    	addSequential(new DriveToNextToteCommand());
+    	addSequential(new DriveToNextToteCommand(81));
     	//Center twice for verification
     	addSequential(new CenterOnToteCommand());
     	addSequential(new CenterOnToteCommand());
@@ -79,19 +74,6 @@ public class FullAuto extends CommandGroup {
     	addParallel(new DropTotesCommand());
 //    	//Move away from totes
     	addSequential(new DriveBackwardsCommand(48));
-    	
-
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
-
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
     }
     
     @Override

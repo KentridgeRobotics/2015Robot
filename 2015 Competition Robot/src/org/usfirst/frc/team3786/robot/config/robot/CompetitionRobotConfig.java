@@ -13,7 +13,7 @@ public class CompetitionRobotConfig extends RobotConfig {
 	private static final int CHUTE_MOTOR_CHANNEL = 0;
 	
 	//Encoders
-	private static final int ARM_ENCODER_CHANNEL = 0;
+	private static final int ARM_ENCODER_CODES_PER_REV = 360;
 	private static final int X_OMNI_WHEEL_ENCODER_A = 1;
 	private static final int X_OMNI_WHEEL_ENCODER_B = 2;
 	private static final int Y_OMNI_WHEEL_ENCODER_A = 3;
@@ -36,7 +36,7 @@ public class CompetitionRobotConfig extends RobotConfig {
                                               //3 Tote	|	2 Tote	|	1 Tote	|	W/O tote 	| Quickly     
 	private static final double ARM_P = 2000; //	|				|	1000	|	4000  		|	2000
 	private static final double ARM_I = 0;    //	|				|	0		|	0			|	1
-	private static final double ARM_D = 2;    //	|				|	2
+	private static final double ARM_D = 4;    //	|				|	2
 
 	@Override
 	public int getFRONT_RIGHT_MOTOR_CHANNEL() {
@@ -128,7 +128,7 @@ public class CompetitionRobotConfig extends RobotConfig {
 
 	@Override
 	public int getARM_ENCODER_CODES_PER_REV() {
-		return ARM_ENCODER_CHANNEL;
+		return ARM_ENCODER_CODES_PER_REV;
 	}
 
 	@Override

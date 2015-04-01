@@ -18,8 +18,14 @@ public class TeleopDriveCommand extends Command {
 	}
 
 	protected void execute() {
-		SmartDashboard.putNumber("X Encoder", Wheels.getInstance().getX());
-		SmartDashboard.putNumber("Y Encoder", Wheels.getInstance().getY());
+//		SmartDashboard.putNumber("X Encoder", Wheels.getInstance().getX());
+//		SmartDashboard.putNumber("Y Encoder", Wheels.getInstance().getY());
+		
+		if (UIConfig.get().getResetGyroButton())
+		{
+			Wheels.getInstance().resetGyro();
+		}
+		
 		if (SmartDashboard.getBoolean("resetGyro"))
 		{
 			Wheels.getInstance().resetGyro();
@@ -35,10 +41,10 @@ public class TeleopDriveCommand extends Command {
 			xVal = UIConfig.get().getAlternateDriveX();
 			yVal = UIConfig.get().getAlternateDriveY();
 			
-			System.out.println("Alt X: " + xVal);
-			System.out.println("Alt Y: " + yVal);
+//			System.out.println("Alt X: " + xVal);
+//			System.out.println("Alt Y: " + yVal);
 			
-			Wheels.getInstance().driveWithoutGyro(-xVal, -yVal, zVal); //TODO TEST
+			Wheels.getInstance().driveWithoutGyro(xVal, -yVal, zVal); //TODO TEST
 		}
 		else if (UIConfig.get().getLeftStationButton())
 		{
@@ -50,6 +56,7 @@ public class TeleopDriveCommand extends Command {
 		else
 		{
 			//Drive the robot based on UI (May need some work to avoid conflicts)
+			System.out.println("Driving: X: " + xVal + " Y: " + yVal + " Z: " + zVal);
 			Wheels.getInstance().drive(xVal, yVal, zVal);
 		}
 		
@@ -67,7 +74,7 @@ public class TeleopDriveCommand extends Command {
 		//Rotates the robot to the given angle from the UI
 		if (UIConfig.get().getAngleToRotateTo() != -1)
 		{
-			Wheels.getInstance().rotateToAngle(UIConfig.get().getAngleToRotateTo(), .35);
+			Wheels.getInstance().rotateToAngle(UIConfig.get().getAngleToRotateTo(), 1);
 		}
 	}
 

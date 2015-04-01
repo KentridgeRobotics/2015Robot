@@ -4,20 +4,20 @@ package org.usfirst.frc.team3786.robot.config.robot;
 public class PracticeRobotConfig extends RobotConfig {
 
 	private static final int FRONT_RIGHT_MOTOR_CHANNEL = 16;
-	private static final int FRONT_LEFT_MOTOR_CHANNEL = 14;
+	private static final int FRONT_LEFT_MOTOR_CHANNEL = 17;
 	private static final int BACK_RIGHT_MOTOR_CHANNEL = 5;
 	private static final int BACK_LEFT_MOTOR_CHANNEL = 23;
 	private static final int ARM_MOTOR_CHANNEL = 18;
-	private static final int LIFTER_MOTOR_CHANNEL_LEFT = 17;
-	private static final int LIFTER_MOTOR_CHANNEL_RIGHT = 15;
+	private static final int LIFTER_MOTOR_CHANNEL_LEFT = 15;
+	private static final int LIFTER_MOTOR_CHANNEL_RIGHT = 14;
 	private static final int CHUTE_MOTOR_CHANNEL = 0;
 	
 	//Encoders
 	private static final int ARM_ENCODER_CODES_PER_REV = 360;
-	private static final int X_OMNI_WHEEL_ENCODER = 4;
-	private static final int X_OMNI_WHEEL_ENCODER_B = 3;
-	private static final int Y_OMNI_WHEEL_ENCODER_A = 1;
-	private static final int Y_OMNI_WHEEL_ENCODER_B = 2;
+	private static final int X_OMNI_WHEEL_ENCODER_A = 1;
+	private static final int X_OMNI_WHEEL_ENCODER_B = 2;
+	private static final int Y_OMNI_WHEEL_ENCODER_A = 3;
+	private static final int Y_OMNI_WHEEL_ENCODER_B = 4;
 	
 	//Camera
 	private static final int LIGHTS_CHANNEL = 0;
@@ -80,7 +80,7 @@ public class PracticeRobotConfig extends RobotConfig {
 
 	@Override
 	public int getX_OMNI_WHEEL_ENCODER_A() {
-		return X_OMNI_WHEEL_ENCODER;
+		return X_OMNI_WHEEL_ENCODER_A;
 	}
 	
 	@Override

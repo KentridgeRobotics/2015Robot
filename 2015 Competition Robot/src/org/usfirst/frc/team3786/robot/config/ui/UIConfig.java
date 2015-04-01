@@ -112,4 +112,9 @@ public abstract class UIConfig {
 	 * @return If the lifter should stack a recycle bin
 	 */
 	public abstract boolean getLifterRecycleButton();
+	
+	/**
+	 * @return If the robot should go at half speed
+	 */
+	public abstract boolean getResetGyroButton();
 }

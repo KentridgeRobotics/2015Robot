@@ -2,6 +2,7 @@ package org.usfirst.frc.team3786.robot.subsystems;
 
 import org.usfirst.frc.team3786.robot.commands.teleop.TeleopDriveCommand;
 import org.usfirst.frc.team3786.robot.config.robot.RobotConfig;
+import org.usfirst.frc.team3786.robot.config.ui.UIConfig;
 
 import edu.wpi.first.wpilibj.CANJaguar;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
@@ -120,22 +121,22 @@ public class Wheels extends Subsystem {
 		backRight.set(factor);
 	}
 	
-	//Get encoder values
-	/**
-	 * @return The X position (in TBD units) of the robot from initial starting position.
-	 */
-	public double getX()
-	{
-		return xEncoder.getDistance();
-	}
-	
-	/**
-	 * @return The Y position (in TBD units) of the robot from initial starting position.
-	 */
-	public double getY()
-	{
-		return yEncoder.getDistance();
-	}
+//	//Get encoder values
+//	/**
+//	 * @return The X position (in TBD units) of the robot from initial starting position.
+//	 */
+//	public double getX()
+//	{
+//		return xEncoder.getDistance();
+//	}
+//	
+//	/**
+//	 * @return The Y position (in TBD units) of the robot from initial starting position.
+//	 */
+//	public double getY()
+//	{
+//		return yEncoder.getDistance();
+//	}
 	
 	
 	//Utility methods for drive
@@ -148,6 +149,9 @@ public class Wheels extends Subsystem {
 	 */
 	public void drive(double x, double y, double z)
 	{
+		
+//		System.out.println("Driving with gyro");
+		
 		double theta = Math.toRadians(gyro.getAngle());
         
         double cosineTheta = Math.cos(theta);
@@ -189,8 +193,10 @@ public class Wheels extends Subsystem {
 	        SmartDashboard.putNumber("Z Value", z);
         }
         
-        //Invert z value
+        //Invert z and y values
         z *= -1;
+        x *= .75;
+        y *= .75;
         
         SmartDashboard.putNumber("Gyro", gyro.getAngle());
 		double backLeftFactor = (x * (sineTheta + cosineTheta)) + (y * (cosineTheta - sineTheta)) - z;
@@ -208,6 +214,8 @@ public class Wheels extends Subsystem {
 	
 	public void driveWithoutGyro(double x, double y, double z)
 	{
+//		System.out.println("Driving without gyro");
+		
 		double theta = 0;
         
         double cosineTheta = Math.cos(theta);
@@ -249,8 +257,10 @@ public class Wheels extends Subsystem {
 	        SmartDashboard.putNumber("Z Value", z);
         }
         
-        //Invert z value
+        //Invert z value and reduce
         z *= -1;
+        x *= .4;
+        y *= .4;
         
         SmartDashboard.putNumber("Gyro", gyro.getAngle());
 		double backLeftFactor = (x * (sineTheta + cosineTheta)) + (y * (cosineTheta - sineTheta)) - z;

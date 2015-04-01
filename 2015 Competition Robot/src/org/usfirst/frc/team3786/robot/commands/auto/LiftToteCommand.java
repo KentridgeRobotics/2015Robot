@@ -26,7 +26,6 @@ public class LiftToteCommand extends Command {
     protected void execute() {
     	if (Arm.getPICK_UP_POSITION() - Arm.getInstance().getPosition() > Arm.getMOVEMENT_TOLERANCE())
     	{
-    		System.out.println("Arm off by: " + (Arm.getPICK_UP_POSITION() - Arm.getInstance().getPosition()));
     		Arm.getInstance().moveArm(Arm.getPICK_UP_POSITION());
     	}
     	else if (Arm.getLIFT_POSITION() - Arm.getInstance().getPosition() > Arm.getMOVEMENT_TOLERANCE())

@@ -22,7 +22,7 @@ public class TwoToteAuto extends CommandGroup {
     	addParallel(new StackToteFromArmCommand());
     	
     	//Move while picking up to rough area
-    	addSequential(new DriveToNextToteCommand());
+    	addSequential(new DriveToNextToteCommand(81));
     	System.out.println("Finished Driving");
     	//Center on tote
     	addSequential(new CenterOnToteCommand());

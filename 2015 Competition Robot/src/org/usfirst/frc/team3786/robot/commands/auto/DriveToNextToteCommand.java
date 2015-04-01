@@ -9,23 +9,25 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveToNextToteCommand extends Command {
 
-	private double distanceToTravel = 81;
+	private double distanceToTravel; //TODO: Determine distance
 	private double initialPosition;
 	private double distanceTraveled;
 	
-	private static final double MAX_SPEED = -.5;
-	private double rampUpDistance = 24;
-	private double rampDownDistance = 48;
+	private static final double MAX_SPEED = -.5; //This is negative to control direction
+	private double rampUpDistance = 12;
+	private double rampDownDistance = 24;
 	
-    public DriveToNextToteCommand() {
+    public DriveToNextToteCommand(double distanceToTravel) {
         requires(Wheels.getInstance());
+        
+        this.distanceToTravel = distanceToTravel;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	initialPosition = Wheels.getInstance().getX();
+//    	initialPosition = Wheels.getInstance().getX();
     	distanceTraveled = 0;
-    	if (distanceToTravel < 48)
+    	if (distanceToTravel < rampUpDistance)
     	{
     		rampUpDistance = distanceToTravel / 6;
     		rampDownDistance = (distanceToTravel / 6) * 5;
@@ -35,11 +37,11 @@ public class DriveToNextToteCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	distanceTraveled = Wheels.getInstance().getX() - initialPosition;
+//    	distanceTraveled = Wheels.getInstance().getX() - initialPosition;
     	
     	System.out.println("Initial position: " + initialPosition);
     	
-    	System.out.println("X position: " + Wheels.getInstance().getX());
+//    	System.out.println("X position: " + Wheels.getInstance().getX());
     	
     	if (distanceTraveled <= distanceToTravel / 4)
     	{

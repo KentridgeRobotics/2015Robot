@@ -160,4 +160,10 @@ public class CyborgUI extends UIConfig {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public boolean getResetGyroButton() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

@@ -50,6 +50,7 @@ public class TeleopLifterCommand extends Command {
 		}
 		
 		SmartDashboard.putNumber("Lifter Position", Lifter.getInstance().getPosition());
+		SmartDashboard.putNumber("Left Lifter Position: ", Lifter.getInstance().getLeftPosition());
 	}
 
 	protected boolean isFinished() {
