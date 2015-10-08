@@ -1,7 +1,7 @@
 package org.usfirst.frc.team3786.robot.config.robot;
 
 
-public class CompetitionRobotConfig extends RobotConfig {
+public class PracticeRobotConfig extends RobotConfig {
 
 	private static final int FRONT_RIGHT_MOTOR_CHANNEL = 16;
 	private static final int FRONT_LEFT_MOTOR_CHANNEL = 17;
@@ -21,7 +21,7 @@ public class CompetitionRobotConfig extends RobotConfig {
 	
 	//Camera
 	private static final int LIGHTS_CHANNEL = 0;
-	private static final int CAMERA_OFFSET = 20;
+	private static final double CAMERA_OFFSET = 20;
 	
 	//RG Feed Signal light
 	private static final int FEED_SIGNAL_LIGHT = 22;
@@ -36,8 +36,8 @@ public class CompetitionRobotConfig extends RobotConfig {
                                               //3 Tote	|	2 Tote	|	1 Tote	|	W/O tote 	| Quickly     
 	private static final double ARM_P = 2000; //	|				|	1000	|	4000  		|	2000
 	private static final double ARM_I = 0;    //	|				|	0		|	0			|	1
-	private static final double ARM_D = 4;    //	|				|	2
-
+	private static final double ARM_D = 2;    //	|				|	2
+	
 	@Override
 	public int getFRONT_RIGHT_MOTOR_CHANNEL() {
 		return FRONT_RIGHT_MOTOR_CHANNEL;
@@ -72,7 +72,6 @@ public class CompetitionRobotConfig extends RobotConfig {
 	public int getLIFTER_MOTOR_CHANNEL_RIGHT() {
 		return LIFTER_MOTOR_CHANNEL_RIGHT;
 	}
-
 	
 	@Override
 	public int getCHUTE_MOTOR_CHANNEL() {
@@ -83,12 +82,22 @@ public class CompetitionRobotConfig extends RobotConfig {
 	public int getX_OMNI_WHEEL_ENCODER_A() {
 		return X_OMNI_WHEEL_ENCODER_A;
 	}
+	
+	@Override
+	public int getX_OMNI_WHEEL_ENCODER_B() {
+		return X_OMNI_WHEEL_ENCODER_B;
+	}
 
 	@Override
 	public int getY_OMNI_WHEEL_ENCODER_A() {
 		return Y_OMNI_WHEEL_ENCODER_A;
 	}
 
+	@Override
+	public int getY_OMNI_WHEEL_ENCODER_B() {
+		return Y_OMNI_WHEEL_ENCODER_B;
+	}
+	
 	@Override
 	public double getLIFTER_P() {
 		return LIFTER_P;
@@ -146,12 +155,5 @@ public class CompetitionRobotConfig extends RobotConfig {
 		return ARM_D;
 	}
 
-	@Override
-	public int getY_OMNI_WHEEL_ENCODER_B() {
-		return Y_OMNI_WHEEL_ENCODER_B;
-	}
-	@Override
-	public int getX_OMNI_WHEEL_ENCODER_B() {
-		return X_OMNI_WHEEL_ENCODER_B;
-	}
+
 }
