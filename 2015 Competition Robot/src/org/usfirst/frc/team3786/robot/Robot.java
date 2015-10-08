@@ -1,6 +1,21 @@
 
 package org.usfirst.frc.team3786.robot;
 
+import org.usfirst.frc.team3786.robot.commands.auto.bailing.BailCommandGroup;
+import org.usfirst.frc.team3786.robot.commands.auto.bailing.TimeKeeper;
+import org.usfirst.frc.team3786.robot.commands.auto.types.DoNothingAuto;
+import org.usfirst.frc.team3786.robot.commands.auto.types.FullAuto;
+import org.usfirst.frc.team3786.robot.commands.auto.types.GrabRecyclingBinOnlyAuto;
+import org.usfirst.frc.team3786.robot.commands.auto.types.GrabToteAndMoveBackAuto;
+import org.usfirst.frc.team3786.robot.commands.auto.types.MoveBackOnlyAuto;
+import org.usfirst.frc.team3786.robot.commands.teleop.TeleopArmCommand;
+import org.usfirst.frc.team3786.robot.commands.teleop.TeleopDriveCommand;
+import org.usfirst.frc.team3786.robot.commands.teleop.TeleopLifterCommand;
+import org.usfirst.frc.team3786.robot.subsystems.Arm;
+import org.usfirst.frc.team3786.robot.subsystems.Lifter;
+import org.usfirst.frc.team3786.robot.subsystems.Vision;
+import org.usfirst.frc.team3786.robot.subsystems.Wheels;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -15,17 +30,20 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Robot extends IterativeRobot {
 
-	public static OI oi;
-
-    Command autonomousCommand;
+	TimeKeeper tkc = new TimeKeeper();
+	BailCommandGroup bailCommandGroup = new BailCommandGroup();
+    Command autonomousCommandGroup = /*new GrabRecyclingBinOnlyAuto();*/new DoNothingAuto();/*new MoveBackOnlyAuto();new GrabToteAndMoveBackAuto();///new FullAuto(tkc, bailCommandGroup);*/
 
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
-		oi = new OI();
-        // instantiate the command used for the autonomous period
+		
+		//Instantiate subsystems
+		Arm.getInstance();
+		Lifter.getInstance();
+		Wheels.getInstance();
     }
 	
 	public void disabledPeriodic() {
@@ -33,8 +51,13 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-        // schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
+    	
+        // schedule the autonomous command group
+        if (autonomousCommandGroup != null)
+        {
+        	tkc.reset();
+        	autonomousCommandGroup.start();	
+        }
     }
 
     /**
@@ -49,7 +72,21 @@ public class Robot extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        if (autonomousCommand != null) autonomousCommand.cancel();
+    	
+    	System.out.println("Teleop init");
+    	System.out.println("Auto Command Group: " + autonomousCommandGroup);
+        if (autonomousCommandGroup != null)
+        {
+        	autonomousCommandGroup.cancel();
+        	bailCommandGroup.cancel();
+        	System.out.println("Auto Cancelled");
+        }
+        
+//        Vision.getInstance().setLights(false);
+        
+        Scheduler.getInstance().add(new TeleopDriveCommand());
+        Scheduler.getInstance().add(new TeleopArmCommand());
+        Scheduler.getInstance().add(new TeleopLifterCommand());
     }
 
     /**
@@ -57,7 +94,7 @@ public class Robot extends IterativeRobot {
      * You can use it to reset subsystems before shutting down.
      */
     public void disabledInit(){
-
+    	Wheels.getInstance().stop();
     }
 
     /**
